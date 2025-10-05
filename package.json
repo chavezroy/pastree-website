@@ -6,8 +6,8 @@
   "homepage": "https://pastr.ee",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -15,7 +15,8 @@
     "next": "15.5.4",
     "picocolors": "^1.1.1",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "source-map-js": "^1.2.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
