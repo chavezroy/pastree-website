@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastree Settings</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="pastree-styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="settings-container">
+        <!-- Header -->
+        <div class="settings-header">
+            <h1>Pastree</h1>
+            <div class="header-controls">
+                <button type="button" title="Minimize">
+                    <i class="bi bi-dash"></i>
+                </button>
+                <button type="button" title="Close">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Body -->
+        <div class="settings-body">
+            <!-- Left Sidebar -->
+            <div class="settings-sidebar">
+                <ul class="nav nav-pills flex-column" id="settings-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link w-100 active" id="general-tab" data-bs-toggle="pill" data-bs-target="#general-tab-pane" type="button" role="tab" aria-controls="general-tab-pane" aria-selected="true">
+                            General
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link w-100" id="notifications-tab" data-bs-toggle="pill" data-bs-target="#notifications-tab-pane" type="button" role="tab" aria-controls="notifications-tab-pane" aria-selected="false">
+                            Notifications
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link w-100" id="hotkeys-tab" data-bs-toggle="pill" data-bs-target="#hotkeys-tab-pane" type="button" role="tab" aria-controls="hotkeys-tab-pane" aria-selected="false">
+                            Hotkeys
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link w-100" id="advanced-tab" data-bs-toggle="pill" data-bs-target="#advanced-tab-pane" type="button" role="tab" aria-controls="advanced-tab-pane" aria-selected="false">
+                            Advanced
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link w-100" id="icons-tab" data-bs-toggle="pill" data-bs-target="#icons-tab-pane" type="button" role="tab" aria-controls="icons-tab-pane" aria-selected="false">
+                            Icons
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Right Content Area -->
+            <div class="settings-content">
+                <div class="tab-content" id="settings-tab-content">
+                    <!-- General Tab -->
+                    <div class="tab-pane fade show active" id="general-tab-pane" role="tabpanel" aria-labelledby="general-tab">
+                        <!-- Security Section -->
+                        <div class="section-content">
+                            <div class="section-header">
+                                <span>Security</span>
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="logout-browsers">
+                                <label class="form-check-label" for="logout-browsers">
+                                    Log out when all browsers are closed
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="logout-inactivity">
+                                <label class="form-check-label" for="logout-inactivity">
+                                    Log out after this many minutes of inactivity
+                                    <input type="number" class="form-control inline-input" value="60" min="1">
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- General Section -->
+                        <div class="section-content">
+                            <div class="section-header">
+                                <span>General</span>
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="open-sites">Open sites in...</label>
+                                <select class="form-select" id="open-sites">
+                                    <option value="new-tab" selected>New tab</option>
+                                    <option value="current-tab">Current tab</option>
+                                    <option value="new-window">New window</option>
+                                </select>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="extension-dialog">
+                                <label class="form-check-label" for="extension-dialog">
+                                    Open extension pages (like this one) in new dialog
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="auto-fill" checked>
+                                <label class="form-check-label" for="auto-fill">
+                                    Automatically fill login information
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="show-fill-options" checked>
+                                <label class="form-check-label" for="show-fill-options">
+                                    Show fill options automatically
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="show-vault">
+                                <label class="form-check-label" for="show-vault">
+                                    Show vault after login
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Appearance Section -->
+                        <div class="section-content">
+                            <div class="section-header">
+                                <span>Appearance</span>
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="hide-context-menu">
+                                <label class="form-check-label" for="hide-context-menu">
+                                    Hide Pastree options from context menu
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Form Fill Section -->
+                        <div class="section-content">
+                            <div class="section-header">
+                                <span>Form Fill</span>
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <!-- Empty section as per specification -->
+                        </div>
+                    </div>
+                    
+                    <!-- Notifications Tab -->
+                    <div class="tab-pane fade" id="notifications-tab-pane" role="tabpanel" aria-labelledby="notifications-tab">
+                        <div class="section-content">
+                            <div class="section-header">
+                                <span>Notifications</span>
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="toolbar-notifications" checked>
+                                <label class="form-check-label" for="toolbar-notifications">
+                                    Show notifications via browser toolbar icon
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="secure-passwords">
+                                <label class="form-check-label" for="secure-passwords">
+                                    Offer to generate secure passwords
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="form-fill-notifications">
+                                <label class="form-check-label" for="form-fill-notifications">
+                                    Show Form Fill notifications
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="click-notifications">
+                                <label class="form-check-label" for="click-notifications">
+                                    Show certain notifications only after click
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="save-site-notification" checked>
+                                <label class="form-check-label" for="save-site-notification">
+                                    Show save site notification bar
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="change-password-notification" checked>
+                                <label class="form-check-label" for="change-password-notification">
+                                    Show change password notification bar
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="save-addresses" checked>
+                                <label class="form-check-label" for="save-addresses">
+                                    Offer to save addresses
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fill-addresses" checked>
+                                <label class="form-check-label" for="fill-addresses">
+                                    Offer to fill addresses
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="save-payment-cards" checked>
+                                <label class="form-check-label" for="save-payment-cards">
+                                    Offer to save payment card info
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="fill-payment-cards" checked>
+                                <label class="form-check-label" for="fill-payment-cards">
+                                    Offer to fill payment card info
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="autofill-icon" checked>
+                                <label class="form-check-label" for="autofill-icon">
+                                    Show autofill icon in fields
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="matching-sites-count" checked>
+                                <label class="form-check-label" for="matching-sites-count">
+                                    Show number of matching sites in toolbar
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hotkeys Tab -->
+                    <div class="tab-pane fade" id="hotkeys-tab-pane" role="tabpanel" aria-labelledby="hotkeys-tab">
+                        <div class="section-content">
+                            <div class="section-header">
+                                <span>HotKeys</span>
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <div class="hotkey-row">
+                                <label>Generate Secure Password:</label>
+                                <input type="text" class="form-control" placeholder="Enter hotkey">
+                            </div>
+                            <div class="hotkey-row">
+                                <label>Recheck Page:</label>
+                                <input type="text" class="form-control" placeholder="Enter hotkey">
+                            </div>
+                            <div class="hotkey-row">
+                                <label>Site Search:</label>
+                                <input type="text" class="form-control" value="Shift+Meta+L">
+                            </div>
+                            <div class="hotkey-row">
+                                <label>Next Matching Site (if multiple):</label>
+                                <input type="text" class="form-control" value="Meta+Page Up">
+                            </div>
+                            <div class="hotkey-row">
+                                <label>Previous Matching Site (if multiple):</label>
+                                <input type="text" class="form-control" value="Meta+Page Down">
+                            </div>
+                            <div class="hotkey-row">
+                                <label>Submit Form:</label>
+                                <input type="text" class="form-control" placeholder="Enter hotkey">
+                            </div>
+                            <div class="hotkey-row">
+                                <label>Open My Pastree Vault:</label>
+                                <input type="text" class="form-control" placeholder="Enter hotkey">
+                            </div>
+                            <div class="hotkey-row">
+                                <label>Save All Entered Data:</label>
+                                <input type="text" class="form-control" placeholder="Enter hotkey">
+                            </div>
+                            <div class="hotkey-row">
+                                <label>Log Out:</label>
+                                <input type="text" class="form-control" placeholder="Enter hotkey">
+                            </div>
+                            <div class="hotkey-row">
+                                <label>Fill In Default Form Fill:</label>
+                                <input type="text" class="form-control" placeholder="Enter hotkey">
+                            </div>
+                            <div class="hotkey-row">
+                                <label>Open Popover:</label>
+                                <input type="text" class="form-control" value="Meta+\">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Advanced Tab -->
+                    <div class="tab-pane fade" id="advanced-tab-pane" role="tabpanel" aria-labelledby="advanced-tab">
+                        <div class="section-content">
+                            <div class="section-header">
+                                <span>Advanced</span>
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="auto-login" checked>
+                                <label class="form-check-label" for="auto-login">
+                                    Log in to sites automatically within this many seconds since last login
+                                    <input type="number" class="form-control inline-input" value="25" min="1">
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="warn-insecure">
+                                <label class="form-check-label" for="warn-insecure">
+                                    Warn before filling insecure forms
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="in-field-popup">
+                                <label class="form-check-label" for="in-field-popup">
+                                    Enable in-field popup
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="respect-autocomplete">
+                                <label class="form-check-label" for="respect-autocomplete">
+                                    Respect AutoComplete=off: allow websites to disable Autofill
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="poll-server">
+                                <label class="form-check-label" for="poll-server">
+                                    Poll Server for account changes (mins)
+                                    <input type="number" class="form-control inline-input" value="15" min="1">
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="clear-clipboard" checked>
+                                <label class="form-check-label" for="clear-clipboard">
+                                    Clear clipboard after this many seconds
+                                    <input type="number" class="form-control inline-input" value="60" min="1">
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="recent-sites-length" checked>
+                                <label class="form-check-label" for="recent-sites-length">
+                                    Length of list of recently used sites
+                                    <input type="number" class="form-control inline-input" value="10" min="1">
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="search-secure-notes" checked>
+                                <label class="form-check-label" for="search-secure-notes">
+                                    Search within secure notes
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="login-dialog-startup">
+                                <label class="form-check-label" for="login-dialog-startup">
+                                    Open login dialog when browser starts
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="save-otp" checked>
+                                <label class="form-check-label" for="save-otp">
+                                    Save a disabled one-time password locally for account recovery
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="share-login-state" checked>
+                                <label class="form-check-label" for="share-login-state">
+                                    Share login state between browsers
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="new-login-screen" checked>
+                                <label class="form-check-label" for="new-login-screen">
+                                    Enable new login screen
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Icons Tab -->
+                    <div class="tab-pane fade" id="icons-tab-pane" role="tabpanel" aria-labelledby="icons-tab">
+                        <div class="section-content">
+                            <div class="section-header">
+                                <span>Icons</span>
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                            <div class="icon-option">
+                                <input type="radio" id="icon-red-dots" name="icon-choice" value="red-dots" checked>
+                                <div class="icon-placeholder" style="background-color: #dc3545; color: white;">
+                                    <i class="bi bi-three-dots"></i>
+                                </div>
+                                <label for="icon-red-dots">[Red Dots Icon]</label>
+                            </div>
+                            <div class="icon-option">
+                                <input type="radio" id="icon-gray-dots" name="icon-choice" value="gray-dots">
+                                <div class="icon-placeholder">
+                                    <i class="bi bi-three-dots"></i>
+                                </div>
+                                <label for="icon-gray-dots">[Gray Dots Icon]</label>
+                            </div>
+                            <div class="icon-option">
+                                <input type="radio" id="icon-red-lock" name="icon-choice" value="red-lock">
+                                <div class="icon-placeholder" style="background-color: #dc3545; color: white;">
+                                    <i class="bi bi-lock"></i>
+                                </div>
+                                <label for="icon-red-lock">[Red Lock Icon]</label>
+                            </div>
+                            <div class="icon-option">
+                                <input type="radio" id="icon-black-lock" name="icon-choice" value="black-lock">
+                                <div class="icon-placeholder" style="background-color: #212529; color: white;">
+                                    <i class="bi bi-lock"></i>
+                                </div>
+                                <label for="icon-black-lock">[Black Lock Icon]</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="settings-footer">
+            <button type="button" class="btn btn-outline-secondary btn-footer" id="restore-defaults-btn">
+                Restore 'General' Defaults
+            </button>
+            <div>
+                <button type="button" class="btn btn-secondary btn-footer me-2">Cancel</button>
+                <button type="button" class="btn btn-pastree btn-footer">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Dynamic "Restore Defaults" Button Text
+        document.addEventListener('DOMContentLoaded', function() {
+            const restoreBtn = document.getElementById('restore-defaults-btn');
+            const tabButtons = document.querySelectorAll('#settings-tabs .nav-link');
+            
+            // Initialize Bootstrap tabs manually (in case Bootstrap isn't fully loaded)
+            tabButtons.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active classes from all tabs and panes
+                    document.querySelectorAll('#settings-tabs .nav-link').forEach(t => {
+                        t.classList.remove('active');
+                        t.setAttribute('aria-selected', 'false');
+                    });
+                    document.querySelectorAll('.tab-pane').forEach(pane => {
+                        pane.classList.remove('show', 'active');
+                    });
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    this.setAttribute('aria-selected', 'true');
+                    
+                    // Show corresponding pane
+                    const targetPaneId = this.getAttribute('data-bs-target');
+                    const targetPane = document.querySelector(targetPaneId);
+                    if (targetPane) {
+                        targetPane.classList.add('show', 'active');
+                    }
+                    
+                    // Update restore button text
+                    const activeTabText = this.textContent.trim();
+                    restoreBtn.textContent = `Restore '${activeTabText}' Defaults`;
+                });
+            });
+            
+            // Handle icon selection visual feedback
+            const iconOptions = document.querySelectorAll('.icon-option');
+            iconOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                    
+                    // Update visual feedback
+                    iconOptions.forEach(opt => opt.classList.remove('border-primary'));
+                    this.classList.add('border-primary');
+                });
+            });
+            
+            // Set initial visual feedback for checked icon
+            const checkedIcon = document.querySelector('.icon-option input[type="radio"]:checked');
+            if (checkedIcon) {
+                checkedIcon.closest('.icon-option').classList.add('border-primary');
+            }
+        });
+    </script>
+</body>
+</html> 
