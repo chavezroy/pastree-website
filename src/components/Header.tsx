@@ -1,0 +1,131 @@
+'use client';
+
+import Link from 'next/link';
+import { useState } from 'react';
+
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <nav className="bg-pastree-dark text-white shadow-lg">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center py-4">
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <div className="w-32 h-8">
+              <svg className="w-full h-full" viewBox="0 0 134.71 27.22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <style>{`
+                    .cls-1 { fill: #ed8e5b; }
+                    .cls-2 { fill: #fff; }
+                  `}</style>
+                </defs>
+                <g>
+                  <path className="cls-2" d="M45.47,17.04v5.21h-4.33V6.68h6.47c1.88,0,3.31.47,4.3,1.42.99.95,1.48,2.21,1.48,3.79,0,.98-.22,1.86-.66,2.64-.44.78-1.1,1.39-1.97,1.84s-1.92.67-3.16.67h-2.13ZM49.02,11.89c0-1.14-.63-1.72-1.89-1.72h-1.65v3.45h1.65c1.26,0,1.89-.58,1.89-1.74Z" />
+                  <path className="cls-2" d="M64.92,19.66h-5.52l-.86,2.6h-4.55l5.7-15.51h4.99l5.68,15.51h-4.58l-.86-2.6ZM63.84,16.41l-1.67-5.06-1.69,5.06h3.37Z" />
+                  <path className="cls-2" d="M82.59,20.12c-.44.7-1.08,1.26-1.94,1.67-.85.41-1.87.62-3.06.62-1.8,0-3.29-.43-4.46-1.3s-1.8-2.1-1.9-3.7h4.6c.04.54.21.95.51,1.21.29.26.65.4,1.08.4.38,0,.68-.09.89-.29.21-.19.32-.46.32-.81,0-.47-.21-.83-.64-1.09s-1.1-.54-2.02-.85c-.98-.34-1.79-.67-2.43-.99s-1.19-.81-1.65-1.45c-.46-.65-.69-1.47-.69-2.49s.25-1.8.75-2.5c.5-.7,1.18-1.22,2.05-1.58s1.85-.54,2.95-.54c1.79,0,3.21.42,4.28,1.27s1.65,2.03,1.75,3.55h-4.64c-.06-.48-.21-.84-.45-1.08-.24-.23-.56-.35-.96-.35-.34,0-.6.09-.79.26s-.29.44-.29.79c0,.44.21.79.63,1.03s1.07.53,1.97.84c.98.35,1.8.7,2.44,1.03.65.34,1.2.83,1.67,1.47.47.65.7,1.48.7,2.51,0,.87-.22,1.65-.66,2.35Z" />
+                  <path className="cls-2" d="M96.87,6.68v3.45h-4.2v12.12h-4.31v-12.12h-4.16v-3.45h12.67Z" />
+                  <path className="cls-2" d="M106.22,22.26l-3.15-5.74h-.44v5.74h-4.33V6.68h6.84c1.25,0,2.31.22,3.18.65.87.43,1.53,1.03,1.97,1.79.44.76.66,1.62.66,2.57,0,1.08-.3,2.03-.9,2.83-.6.8-1.47,1.36-2.6,1.68l3.54,6.05h-4.77ZM102.63,13.61h2.13c1.2,0,1.8-.54,1.8-1.63,0-.51-.15-.92-.45-1.21-.3-.29-.75-.44-1.35-.44h-2.13v3.28Z" />
+                  <path className="cls-2" d="M117,10.14v2.57h5.04v3.28h-5.04v2.82h5.7v3.45h-10.03V6.68h10.03v3.45h-5.7Z" />
+                  <path className="cls-2" d="M129.01,10.14v2.57h5.04v3.28h-5.04v2.82h5.7v3.45h-10.03V6.68h10.03v3.45h-5.7Z" />
+                  <path className="cls-1" d="M5.38,8.63c1.78.47,2.32,1.54,2.19,2.74-.22.06-.46.11-.71.15-1.67.28-4.97-.97-5.01-.99.03.02,2.39,1.58,4.77,1.63.3,0,.57,0,.8-.04-.41,1.34-1.42,2.22-3.4,1.7-2.06-.54-4.02-3.84-4.02-3.84,0,0,3.32-1.9,5.38-1.36Z" />
+                  <path className="cls-1" d="M28.34,4.44C23.95-1.91,9.75-1.77,7.93,6.94c-.66,6.18-.16,12.46-.32,18.68.04.58-1.12,1.33-.82,1.54.3.21,3.63-.2,4.17-.17,1.2.08,1.75.21,2.93.1.25-.02.85.11.82-.2,0-.04-.28-.34-.31-.38-.2-.34-.7-1.03-.8-1.35-.22-.71-.18-2.71-.11-3.57,0-.1-2.59-1.85-3.02-3.47,0,0,1.43,1.44,4.38,2.25,4.56,1.27,10.7-.02,13.69-4.81,1.98-3.19,1.96-8.01-.19-11.12ZM27.51,9.48c-.06.22-.28.44-.36.6-.27.59-.28,3.78-.74,3.93-.48.15-.24-1.82-.41-1.65-2.07,2.09-1.35,3.11-1.91,3.36-.41.18-.67-.92-1.18-.65-.39.21-.96.81-1.32.9-.42.11-1,0-1.46.04-.04,0-.08.02-.12.02-.06.01-.12.03-.18.05-1.1.43-1.36,2.54-2.14,2.6-.68.05-.82-2.15-1.37-2.15-.22,0-.49.11-.72.12-1.05.08-1.58.82-2.02.1-.78-1.29-1.87-.78-2.57-1.5-.27-.28-.37-.74-.09-.95.04-.06.13-.1.3-.11,1.09-.09,1.56.6,2.39.97.87.39,1.75-.1,2.71-.01.65.06.85.37,1.74.3,2.65-.19,7.09-2.76,7.76-5.5.15-.6.2-1.16.19-1.7-.1-3.77-3.87-6.07-7.65-6.1-3.06-.02-7.01,1.48-7.75,4.8-.1.44-.14.85-.13,1.23.08,2.69,2.66,4.06,5.41,4.03,2.34-.03,6.69-1.57,6.62-4.43,0-.19-.03-.39-.07-.59-.69-3.06-5.65-3.07-7.65-1.4-.66.55-1,1.32-.95,2.01.06.7.51,1.33,1.43,1.61.87.26,2.43.06,3.12-.56.27-.24.39-.5.4-.75.03-.74-.89-1.33-1.58-.73-.25.22-.69.9-1.06.44-.1-.12-.14-.26-.14-.41,0-.14.04-.29.09-.43.68-1.59,4.27-.63,4.34.98,0,.11,0,.22-.03.33-.45,1.82-3.72,2.55-5.29,2.18-1.55-.37-2.56-1.48-2.55-2.76,0-.58.21-1.21.69-1.81.67-.86,2.2-1.83,3.31-2,.36-.06.77.03,1.12-.02.24-.04.43-.2.73-.23,1.95-.2,5.33,1.52,5.55,3.68.02.19.03.38.03.56-.02,2.71-2.4,4.47-4.84,5.25-2.05.66-5.73.62-7.55-.65-1.63-1.14-2.33-2.66-2.31-4.21.02-1.99,1.2-4.02,3.07-5.34.82-.58,2.67-1.34,3.65-1.51.57-.09,1.27.01,1.79-.07.92-.14,1.16-.36,2.21-.23,1.29.16,1.67.34,2.79.87.63.3,1.26.37,1.79.88.36.34.7.66,1.07,1,.52.46,1.48,1.86,1.53,2.55,0,0,0,0,0,0,0,0,0,0,0,0,.02.23-.07.46-.05.64.07.6.35,1.11.39,1.73.01.21,0,.42-.07.66Z" />
+                  <path className="cls-2" d="M24.64,2.91c.36.34.7.66,1.07,1,.52.46,1.48,1.86,1.53,2.55.02.24-.07.46-.05.64.09.8.57,1.44.32,2.38-.06.22-.28.44-.36.6-.27.59-.28,3.78-.74,3.93-.48.15-.24-1.82-.41-1.65-2.07,2.09-1.35,3.11-1.91,3.36-.41.18-.67-.92-1.18-.65-.39.21-.96.81-1.32.9-.42.11-1,0-1.46.04-1.36.12-1.59,2.61-2.43,2.67-.68.05-.82-2.15-1.37-2.15-.22,0-.49.11-.72.12-1.05.08-1.58.82-2.02.1-.78-1.29-1.87-.78-2.57-1.5-.35-.36-.42-1,.21-1.05,1.09-.09,1.56.6,2.39.97.87.39,1.75-.1,2.71-.01.65.06.85.37,1.74.3,2.65-.19,7.09-2.76,7.76-5.5,1.16-4.78-3.14-7.78-7.46-7.81-3.06-.02-7.01,1.48-7.75,4.8-.78,3.51,2.14,5.3,5.28,5.27,2.5-.03,7.28-1.78,6.55-5.03-.69-3.06-5.65-3.07-7.65-1.4-1.32,1.11-1.36,3.07.48,3.63.87.26,2.43.06,3.12-.56,1.08-.97-.26-2.29-1.17-1.49-.25.22-.69.9-1.06.44-.2-.25-.16-.56-.05-.83.72-1.69,4.75-.5,4.31,1.3s-3.72,2.55-5.29,2.18c-2.25-.54-3.37-2.62-1.86-4.56.67-.86,2.2-1.83,3.31-2,.36-.06.77.03,1.12-.02.24-.04.43-.2.73-.23,1.95-.2,5.33,1.52,5.55,3.68.32,3.02-2.22,4.96-4.81,5.8-2.05.66-5.73.62-7.55-.65-3.73-2.6-2.56-7.19.76-9.54.82-.58,2.67-1.34,3.65-1.51.57-.09,1.27.01,1.79-.07.92-.14,1.16-.36,2.21-.23,1.29.16,1.67.34,2.79.87.63.3,1.26.37,1.79.88Z" />
+                </g>
+              </svg>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <Link href="#features" className="text-white hover:text-pastree-orange transition-colors">
+              Features
+            </Link>
+            <Link href="#download" className="text-white hover:text-pastree-orange transition-colors">
+              Download
+            </Link>
+            <Link href="/support" className="text-white hover:text-pastree-orange transition-colors">
+              Support
+            </Link>
+            <Link href="/about" className="text-white hover:text-pastree-orange transition-colors">
+              About
+            </Link>
+          </div>
+
+          {/* Right side - Trust badge and Report Bug button */}
+          <div className="hidden md:flex items-center space-x-4">
+            <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+              <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+              100% Free & Secure
+            </span>
+            <Link 
+              href="/report-bug" 
+              className="border border-white text-white px-4 py-2 rounded text-sm hover:bg-white hover:text-pastree-dark transition-colors"
+            >
+              Report Bug
+            </Link>
+          </div>
+
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden py-4 border-t border-gray-600">
+            <div className="flex flex-col space-y-4">
+              <Link 
+                href="#features" 
+                className="text-white hover:text-pastree-orange transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Features
+              </Link>
+              <Link 
+                href="#download" 
+                className="text-white hover:text-pastree-orange transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Download
+              </Link>
+              <Link 
+                href="/support" 
+                className="text-white hover:text-pastree-orange transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Support
+              </Link>
+              <Link 
+                href="/about" 
+                className="text-white hover:text-pastree-orange transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </Link>
+              <div className="pt-4 border-t border-gray-600">
+                <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium block mb-3">
+                  <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                  100% Free & Secure
+                </span>
+                <Link 
+                  href="/report-bug" 
+                  className="border border-white text-white px-4 py-2 rounded text-sm hover:bg-white hover:text-pastree-dark transition-colors inline-block"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Report Bug
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+}
