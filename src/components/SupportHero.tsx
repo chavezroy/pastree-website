@@ -13,7 +13,7 @@ export default function SupportHero() {
   };
 
   return (
-    <section className="bg-orange-gradient text-white py-20">
+    <section className="bg-hero-gradient text-pastree-dark py-20">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">How can we help you?</h1>
         <p className="text-xl mb-12 max-w-2xl mx-auto">

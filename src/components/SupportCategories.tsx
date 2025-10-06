@@ -52,14 +52,14 @@ export default function SupportCategories() {
           {categories.map((category, index) => (
             <div 
               key={index}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 p-8 text-center h-full"
+              className="bg-white rounded-xl hover-shadow-pastree transition-all duration-300 transform hover:-translate-y-2 p-8 text-center h-full"
             >
               <div className="w-12 h-12 bg-pastree-orange rounded-xl flex items-center justify-center text-white mx-auto mb-6">
                 {category.icon}
               </div>
               <h3 className="text-xl font-bold mb-4">{category.title}</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">{category.description}</p>
-              <button className="bg-pastree-orange hover:bg-pastree-orange-hover text-white px-6 py-2 rounded-full font-semibold transition-colors">
+              <button className="border-2 border-gray-400 text-gray-500 hover:bg-white hover:text-pastree-orange px-6 py-2 rounded-full font-semibold transition-colors">
                 View Articles
               </button>
             </div>

@@ -60,7 +60,7 @@ export default function Header() {
             </span>
             <Link 
               href="/report-bug" 
-              className="border border-white text-white px-4 py-2 rounded text-sm hover:bg-white hover:text-pastree-dark transition-colors"
+              className="border border-gray-400 text-gray-400 px-4 py-2 rounded text-sm hover:bg-white hover:text-pastree-dark transition-colors"
             >
               Report Bug
             </Link>

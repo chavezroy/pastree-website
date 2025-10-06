@@ -13,14 +13,14 @@ export default function Home() {
       <DownloadSection />
       
       {/* Section Divider */}
-      <hr className="h-1 bg-gradient-to-r from-pastree-orange to-transparent border-0 my-16" />
+      <hr className="section-divider" />
       
       <FeaturesSection />
       <UserPersonasSection />
       <TrustSection />
       
       {/* Section Divider */}
-      <hr className="h-1 bg-gradient-to-r from-pastree-orange to-transparent border-0 my-16" />
+      <hr className="section-divider" />
       
       <FAQSection />
       <FinalCTASection />

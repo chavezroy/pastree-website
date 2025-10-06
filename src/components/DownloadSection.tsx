@@ -27,9 +27,7 @@ export default function DownloadSection() {
               className="w-full bg-orange-gradient hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-white rounded-xl p-6 flex items-center justify-center min-h-[80px]"
             >
               <div className="flex items-center">
-                <svg className="w-8 h-8 mr-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
+                <img src="/icons/chrome-icon.svg" alt="Chrome" width="48" height="48" style={{marginRight: '1rem'}} />
                 <div className="text-left">
                   <div className="font-bold text-lg">Chrome Extension</div>
                   <div className="text-sm opacity-90">Works with Chrome & Edge</div>
@@ -45,9 +43,7 @@ export default function DownloadSection() {
               className="w-full bg-orange-gradient hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-white rounded-xl p-6 flex items-center justify-center min-h-[80px]"
             >
               <div className="flex items-center">
-                <svg className="w-8 h-8 mr-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
+                <img src="/icons/firefox-icon.svg" alt="Firefox" width="48" height="48" style={{marginRight: '1rem'}} />
                 <div className="text-left">
                   <div className="font-bold text-lg">Firefox Add-on</div>
                   <div className="text-sm opacity-90">For Firefox browsers</div>

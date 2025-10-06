@@ -10,7 +10,7 @@ export default function SupportPage() {
       <SupportCategories />
       
       {/* Section Divider */}
-      <hr className="h-1 bg-gradient-to-r from-pastree-orange to-transparent border-0 my-16" />
+      <hr className="section-divider" />
       
       <SupportArticles />
       <ContactSupport />

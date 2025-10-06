@@ -133,6 +133,87 @@ body {
   background: var(--gradient-orange);
 }
 
+/* Reusable dark background utility - works for header, footer, and any element */
+.bg-pastree-dark {
+  background-color: #212529;
+  color: white;
+}
+
+.bg-pastree-dark a {
+  color: white;
+}
+
+.bg-pastree-dark a:hover {
+  color: #ed8e5b;
+}
+
+.bg-pastree-dark button {
+  color: white;
+}
+
+.bg-pastree-dark button:hover {
+  color: #ed8e5b;
+}
+
+/* Purple background utilities - works for buttons and any element */
+.bg-pastree-purple {
+  background-color: #907BA2;
+  color: white;
+}
+
+.bg-pastree-purple:hover {
+  background-color: #7e6d90;
+}
+
+.hover\:bg-pastree-purple-hover:hover {
+  background-color: #7e6d90;
+}
+
+/* Light background utility */
+.bg-pastree-light {
+  background-color: #f8f9fa;
+}
+
+/* Text color utilities */
+.text-pastree-orange {
+  color: #ed8e5b;
+}
+
+.text-pastree-dark {
+  color: #212529;
+}
+
+/* Border utilities */
+.border-pastree-orange {
+  border-color: #ed8e5b;
+}
+
+/* Hover utilities */
+.hover\:text-pastree-orange:hover {
+  color: #ed8e5b;
+}
+
+.hover\:bg-pastree-orange:hover {
+  background-color: #ed8e5b;
+}
+
+.hover\:bg-pastree-orange-hover:hover {
+  background-color: #e77c43;
+}
+
+/* Custom hover-only shadow utility - crash-proof pure CSS */
+.hover-shadow-pastree:hover {
+  box-shadow: 0 12px 30px rgba(237, 142, 91, 0.15);
+}
+
+/* Section divider utility - crash-proof pure CSS */
+.section-divider {
+  height: 0.25rem;
+  background: linear-gradient(to right, #ed8e5b, transparent);
+  border: none;
+  margin: 4rem 0;
+}
+
 /* Card utilities */
 .card {
   background: white;
