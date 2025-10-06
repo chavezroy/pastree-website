@@ -13,7 +13,7 @@ export default function SupportHero() {
   };
 
   return (
-    <section className="bg-hero-gradient text-pastree-dark py-20">
+    <section className="bg-hero-support-gradient text-pastree-dark py-20">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">How can we help you?</h1>
         <p className="text-xl mb-12 max-w-2xl mx-auto">
@@ -27,7 +27,7 @@ export default function SupportHero() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search for help articles, guides, and FAQs..."
-              className="w-full bg-white text-gray-900 px-6 py-4 pr-16 rounded-full text-lg shadow-lg focus:outline-none focus:ring-4 focus:ring-pastree-orange focus:ring-opacity-50"
+              className="w-full bg-white text-gray-900 px-6 py-4 pr-16 rounded-full text-lg shadow-lg focus-glow-orange"
             />
             <button
               type="submit"

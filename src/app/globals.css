@@ -9,9 +9,11 @@
   --color-pastree-light: #f8f9fa;
   --color-pastree-purple: #907BA2;
   --color-pastree-purple-hover: #7e6d90;
+  --gradient-purple: linear-gradient(135deg, #ED8E5B 50%, #907BA2);
   
   /* Background gradients */
   --gradient-hero: linear-gradient(261deg, #FFCF98 17.53%, #FFECE0 88.29%);
+  --gradient-hero-support: linear-gradient(81deg, #FFCF98 17.53%, #FFECE0 88.29%);
   --gradient-orange: linear-gradient(135deg, #ed8e5b, #f4a261);
   
   /* Spacing tokens */
@@ -41,6 +43,10 @@
 }
 
 html {
+  scroll-behavior: smooth;
+}
+
+html[data-scroll-behavior="smooth"] {
   scroll-behavior: smooth;
 }
 
@@ -129,6 +135,10 @@ body {
   background: var(--gradient-hero);
 }
 
+.bg-hero-support-gradient {
+  background: var(--gradient-hero-support);
+}
+
 .bg-orange-gradient {
   background: var(--gradient-orange);
 }
@@ -206,6 +216,21 @@ body {
   box-shadow: 0 12px 30px rgba(237, 142, 91, 0.15);
 }
 
+/* Focus utilities - Glowing orange effect */
+.focus-glow-orange:focus {
+  outline: none;
+  border-color: #ed8e5b;
+  box-shadow: 0 0 0 3px rgba(237, 142, 91, 0.25);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.focus-glow-orange-strong:focus {
+  outline: none;
+  border-color: #ed8e5b;
+  box-shadow: 0 0 0 4px rgba(237, 142, 91, 0.4);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
 /* Section divider utility - crash-proof pure CSS */
 .section-divider {
   height: 0.25rem;
@@ -242,6 +267,15 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.text-gradient-purple {
+  background: var(--gradient-purple);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* Fallback for browsers that don't support background-clip */
+  color: #9ED8E5;
 }
 
 .text-primary {

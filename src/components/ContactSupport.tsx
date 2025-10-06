@@ -1,18 +1,4 @@
-'use client';
-
 export default function ContactSupport() {
-  const handleEmailSupport = () => {
-    alert('Opening email support...');
-  };
-
-  const handleLiveChat = () => {
-    alert('Starting live chat...');
-  };
-
-  const handleReportBug = () => {
-    window.location.href = '/report-bug';
-  };
-
   const contactOptions = [
     {
       icon: (
@@ -24,7 +10,7 @@ export default function ContactSupport() {
       description: "Get personalized help via email",
       buttonText: "Send Email",
       buttonClass: "border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white",
-      onClick: handleEmailSupport
+      href: "mailto:support@pastr.ee?subject=Support Request"
     },
     {
       icon: (
@@ -36,7 +22,7 @@ export default function ContactSupport() {
       description: "Chat with our support team",
       buttonText: "Start Chat",
       buttonClass: "border-green-500 text-green-500 hover:bg-green-500 hover:text-white",
-      onClick: handleLiveChat
+      href: "mailto:support@pastr.ee?subject=Live Chat Request"
     },
     {
       icon: (
@@ -48,7 +34,7 @@ export default function ContactSupport() {
       description: "Found an issue? Let us know",
       buttonText: "Report Bug",
       buttonClass: "border-red-500 text-red-500 hover:bg-red-500 hover:text-white",
-      onClick: handleReportBug
+      href: "/report-bug"
     }
   ];
 
@@ -68,12 +54,12 @@ export default function ContactSupport() {
               </div>
               <h4 className="text-xl font-bold mb-4">{option.title}</h4>
               <p className="text-gray-600 mb-6">{option.description}</p>
-              <button 
-                onClick={option.onClick}
-                className={`w-full border-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 ${option.buttonClass}`}
+              <a 
+                href={option.href}
+                className={`w-full border-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 inline-block text-center ${option.buttonClass}`}
               >
                 {option.buttonText}
-              </button>
+              </a>
             </div>
           ))}
         </div>

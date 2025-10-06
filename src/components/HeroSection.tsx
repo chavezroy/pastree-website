@@ -27,12 +27,12 @@ export default function HeroSection() {
       {/* Background overlay */}
       <div className="absolute inset-0 z-10"></div>
       
-      <div className="container mx-auto px-4 relative z-20">
-        <div className="flex flex-col lg:flex-row items-center">
+      <div className="container mx-auto px-4 relative z-20 h-full">
+        <div className="flex flex-col lg:flex-row items-stretch h-full">
           {/* Left content */}
-          <div className="lg:w-1/2 mb-8 lg:mb-0 py-24">
+          <div className="lg:w-1/2 mb-0 py-5 md:py-16 lg:py-24 flex flex-col justify-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Every clipboard item lives in Pastree
+              Every clipboard item lives in <span className="text-gradient-purple">Pastree</span>
             </h1>
             <p className="text-xl mb-8 leading-relaxed">
               Organize your frequently used text into smart lists. Never lose important clipboard items again with the browser extension that remembers everything for you.
@@ -68,8 +68,8 @@ export default function HeroSection() {
           </div>
 
           {/* Right content - Context Menu Group SVG */}
-          <div className="lg:w-1/2 flex items-center justify-center">
-            <div className="w-full h-full pt-8">
+          <div className="lg:w-1/2 flex items-end justify-center h-full mt-auto lg:mt-0 min-h-[350px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[675px]">
+            <div className="w-full max-w-md md:max-w-none h-full pt-0 pl-8 pr-0 mx-auto md:mx-0">
               <img 
                 src="/icons/context-menu-group.svg" 
                 alt="Context Menu Group" 

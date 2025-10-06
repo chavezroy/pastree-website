@@ -40,7 +40,9 @@ export default function SupportArticles() {
   ];
 
   const handleArticleClick = (title: string) => {
-    alert(`Opening article: "${title}"`);
+    // For now, show a placeholder - in production, this would navigate to actual articles
+    console.log(`Opening article: "${title}"`);
+    // TODO: Implement actual article navigation
   };
 
   const handleTutorialClick = () => {
