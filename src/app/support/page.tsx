@@ -3,7 +3,38 @@ import SupportHero from '@/components/SupportHero';
 import SupportCategories from '@/components/SupportCategories';
 import { config } from '@/content/support/config';
 import { categories } from '@/content/support/categories';
-import { popularArticleLinks as popularArticles, recentUpdates } from '@/content/support/articles';
+import { popularArticleLinks as popularArticles, recentUpdates as recentUpdatesFallback } from '@/content/support/articles';
+
+async function getRecentUpdates() {
+  const headers: Record<string, string> = {
+    Accept: 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+  if (process.env.GITHUB_TOKEN) {
+    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  }
+
+  const isDev = process.env.NODE_ENV === 'development';
+  const fetchOptions = isDev
+    ? ({ headers, cache: 'no-store' as const })
+    : ({ headers, next: { revalidate: 3600 } as const });
+
+  const res = await fetch(
+    'https://api.github.com/repos/chavezroy/pastree-website/releases?per_page=5',
+    fetchOptions
+  );
+
+  if (!res.ok) return [] as Array<{ date: string; title: string; href: string }>;
+
+  const data = await res.json();
+  return (data as any[]).map((r) => ({
+    date: new Date(r.published_at).toLocaleDateString('en-US', {
+      month: 'short', day: 'numeric', year: 'numeric',
+    }),
+    title: r.name || r.tag_name,
+    href: r.html_url,
+  }));
+}
 
 // Lazy load heavy components
 const SupportArticles = dynamic(() => import('@/components/SupportArticles'), {
@@ -57,7 +88,10 @@ const ContactSupport = dynamic(() => import('@/components/ContactSupport'), {
   )
 });
 
-export default function SupportPage() {
+export default async function SupportPage() {
+  const fetched = await getRecentUpdates();
+  const recentUpdates = fetched && fetched.length > 0 ? fetched : recentUpdatesFallback;
+
   return (
     <div className="min-h-screen bg-pastree-light">
       <SupportHero title={config.hero.title} subtitle={config.hero.subtitle} />

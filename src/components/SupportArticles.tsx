@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 
 type Article = { title: string; description: string; href: string };
@@ -33,10 +34,10 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
             
             <div className="space-y-4">
               {popularArticles.map((article, index) => (
-                <button
+                <Link
                   key={index}
-                  onClick={() => handleArticleClick(article.href)}
-                  className="w-full text-left bg-white p-5 rounded-lg border-l-4 border-pastree-orange hover:bg-gray-50 transition-colors group"
+                  href={article.href}
+                  className="block bg-white p-5 rounded-lg border-l-4 border-pastree-orange hover:bg-gray-50 transition-colors group"
                 >
                   <div className="flex justify-between items-center">
                     <div>
@@ -49,7 +50,7 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
-                </button>
+                </Link>
               ))}
             </div>
           </div>
@@ -82,12 +83,25 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
               <h4 className="text-xl font-bold mb-6">Recent Updates</h4>
               <div className="space-y-4">
                 {recentUpdates.map((update, index) => (
-                  <div key={index} className="bg-white rounded-lg p-4 shadow-sm">
-                    <p className="text-sm text-gray-500 mb-1">{update.date}</p>
-                    <p className="font-medium hover:text-pastree-orange transition-colors cursor-pointer">
-                      {update.title}
-                    </p>
-                  </div>
+                  update.href ? (
+                    <a
+                      key={index}
+                      href={update.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block bg-white rounded-lg p-4 shadow-sm hover:bg-gray-50 transition-colors"
+                    >
+                      <p className="text-sm text-gray-500 mb-1">{update.date}</p>
+                      <p className="font-medium text-pastree-dark hover:text-pastree-orange">
+                        {update.title}
+                      </p>
+                    </a>
+                  ) : (
+                    <div key={index} className="bg-white rounded-lg p-4 shadow-sm">
+                      <p className="text-sm text-gray-500 mb-1">{update.date}</p>
+                      <p className="font-medium">{update.title}</p>
+                    </div>
+                  )
                 ))}
               </div>
             </div>
