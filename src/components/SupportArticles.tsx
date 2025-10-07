@@ -1,22 +1,49 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
 
-type Article = { title: string; description: string; href: string };
-type Update = { date: string; title: string; href?: string };
-type Tutorial = { title: string; summary: string; videoUrl?: string };
-
-type Props = {
-  popularArticles: Article[];
-  recentUpdates: Update[];
-  tutorial: Tutorial;
-};
-
-export default function SupportArticles({ popularArticles, recentUpdates, tutorial }: Props) {
+export default function SupportArticles() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Navigation now handled via Link components
+  const popularArticles = [
+    {
+      title: "How to install Pastree browser extension",
+      description: "Step-by-step installation guide for Chrome and Firefox"
+    },
+    {
+      title: "Creating and managing clipboard lists",
+      description: "Organize your frequently used text into categories"
+    },
+    {
+      title: "Keyboard shortcuts and hotkeys",
+      description: "Speed up your workflow with keyboard shortcuts"
+    },
+    {
+      title: "Troubleshooting clipboard sync issues",
+      description: "Fix problems with clipboard not working properly"
+    }
+  ];
+
+  const recentUpdates = [
+    {
+      date: "Dec 15, 2024",
+      title: "Pastree v1.1 - New list categories and improved UI"
+    },
+    {
+      date: "Nov 28, 2024", 
+      title: "Firefox extension now available"
+    },
+    {
+      date: "Nov 10, 2024",
+      title: "Enhanced security features and bug fixes"
+    }
+  ];
+
+  const handleArticleClick = (title: string) => {
+    // For now, show a placeholder - in production, this would navigate to actual articles
+    console.log(`Opening article: "${title}"`);
+    // TODO: Implement actual article navigation
+  };
 
   const handleTutorialClick = () => {
     setIsModalOpen(true);
@@ -32,10 +59,10 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
             
             <div className="space-y-4">
               {popularArticles.map((article, index) => (
-                <Link
+                <button
                   key={index}
-                  href={article.href}
-                  className="block bg-white p-5 rounded-lg border-l-4 border-pastree-orange hover:bg-gray-50 transition-colors group"
+                  onClick={() => handleArticleClick(article.title)}
+                  className="w-full text-left bg-white p-5 rounded-lg border-l-4 border-pastree-orange hover:bg-gray-50 transition-colors group"
                 >
                   <div className="flex justify-between items-center">
                     <div>
@@ -48,7 +75,7 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
-                </Link>
+                </button>
               ))}
             </div>
           </div>
@@ -63,13 +90,13 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
                 <svg className="w-6 h-6 text-pastree-orange mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <h4 className="text-xl font-bold">{tutorial.title}</h4>
+                <h4 className="text-xl font-bold">Quick Start Guide</h4>
               </div>
               <p className="text-gray-600 mb-6">
-                {tutorial.summary}
+                New to Pastree? Start here to learn the basics and get up and running in minutes.
               </p>
               <button 
-                    onClick={handleTutorialClick}
+                onClick={handleTutorialClick}
                 className="bg-pastree-orange hover:bg-pastree-orange-hover text-white px-6 py-3 rounded-full font-semibold transition-colors"
               >
                 Start Tutorial
@@ -81,25 +108,12 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
               <h4 className="text-xl font-bold mb-6">Recent Updates</h4>
               <div className="space-y-4">
                 {recentUpdates.map((update, index) => (
-                  update.href ? (
-                    <a
-                      key={index}
-                      href={update.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block bg-white rounded-lg p-4 shadow-sm hover:bg-gray-50 transition-colors"
-                    >
-                      <p className="text-sm text-gray-500 mb-1">{update.date}</p>
-                      <p className="font-medium text-pastree-dark hover:text-pastree-orange">
-                        {update.title}
-                      </p>
-                    </a>
-                  ) : (
-                    <div key={index} className="bg-white rounded-lg p-4 shadow-sm">
-                      <p className="text-sm text-gray-500 mb-1">{update.date}</p>
-                      <p className="font-medium">{update.title}</p>
-                    </div>
-                  )
+                  <div key={index} className="bg-white rounded-lg p-4 shadow-sm">
+                    <p className="text-sm text-gray-500 mb-1">{update.date}</p>
+                    <p className="font-medium hover:text-pastree-orange transition-colors cursor-pointer">
+                      {update.title}
+                    </p>
+                  </div>
                 ))}
               </div>
             </div>

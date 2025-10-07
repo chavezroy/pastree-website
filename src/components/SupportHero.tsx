@@ -2,9 +2,7 @@
 
 import { useState } from 'react';
 
-type Props = { title: string; subtitle: string };
-
-export default function SupportHero({ title, subtitle }: Props) {
+export default function SupportHero() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (e: React.FormEvent) => {
@@ -17,8 +15,10 @@ export default function SupportHero({ title, subtitle }: Props) {
   return (
     <section className="bg-hero-support-gradient text-pastree-dark py-20">
       <div className="container mx-auto px-4 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">{title}</h1>
-        <p className="text-xl mb-12 max-w-2xl mx-auto">{subtitle}</p>
+        <h1 className="text-4xl md:text-5xl font-bold mb-6">How can we help you?</h1>
+        <p className="text-xl mb-12 max-w-2xl mx-auto">
+          Search our knowledge base for answers, guides, and troubleshooting tips
+        </p>
         
         <div className="max-w-2xl mx-auto">
           <form onSubmit={handleSearch} className="relative">

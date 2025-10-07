@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import useScrollAnimation from '@/hooks/useScrollAnimation';
 
 export default function HeroSection() {
+  const [isDownloadClicked, setIsDownloadClicked] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   
   // Use a single intersection observer for the entire hero section
@@ -16,6 +17,7 @@ export default function HeroSection() {
   }, []);
 
   const handleDownloadClick = () => {
+    setIsDownloadClicked(true);
     const downloadSection = document.getElementById('download');
     if (downloadSection) {
       downloadSection.scrollIntoView({ behavior: 'smooth' });
@@ -106,7 +108,6 @@ export default function HeroSection() {
               }`}
               style={{ transitionDelay: '300ms' }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src="/icons/context-menu-group.svg" 
                 alt="Context Menu Group" 
@@ -114,6 +115,10 @@ export default function HeroSection() {
                 height="256"
                 className="w-full h-full object-contain float"
                 loading="lazy"
+                onError={(e) => {
+                  console.error('Failed to load context-menu-group.svg:', e);
+                  e.currentTarget.style.display = 'none';
+                }}
               />
             </div>
           </div>
