@@ -16,9 +16,7 @@ type Props = {
 export default function SupportArticles({ popularArticles, recentUpdates, tutorial }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleArticleClick = (href: string) => {
-    window.location.href = href;
-  };
+  // Navigation now handled via Link components
 
   const handleTutorialClick = () => {
     setIsModalOpen(true);

@@ -26,8 +26,15 @@ async function getRecentUpdates() {
 
   if (!res.ok) return [] as Array<{ date: string; title: string; href: string }>;
 
-  const data = await res.json();
-  return (data as any[]).map((r) => ({
+  type GithubRelease = {
+    published_at: string;
+    name?: string;
+    tag_name: string;
+    html_url: string;
+  };
+
+  const data: GithubRelease[] = await res.json();
+  return data.map((r) => ({
     date: new Date(r.published_at).toLocaleDateString('en-US', {
       month: 'short', day: 'numeric', year: 'numeric',
     }),
