@@ -1,289 +1,97 @@
 @import "tailwindcss";
 
-/* CSS Custom Properties for crash-proof theming */
-:root {
-  /* Color tokens - semantic naming */
+/* Custom CSS variables for Tailwind v4 */
+@theme {
   --color-pastree-orange: #ed8e5b;
   --color-pastree-orange-hover: #e77c43;
   --color-pastree-dark: #212529;
   --color-pastree-light: #f8f9fa;
   --color-pastree-purple: #907BA2;
   --color-pastree-purple-hover: #7e6d90;
-  --gradient-purple: linear-gradient(135deg, #ED8E5B 50%, #907BA2);
+  --color-scrollbar-track: #f1f1f1;
   
-  /* Background gradients */
-  --gradient-hero: linear-gradient(261deg, #FFCF98 17.53%, #FFECE0 88.29%);
-  --gradient-hero-support: linear-gradient(81deg, #FFCF98 17.53%, #FFECE0 88.29%);
-  --gradient-orange: linear-gradient(135deg, #ed8e5b, #f4a261);
+  --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   
-  /* Spacing tokens */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
+  --background-image-hero-gradient: linear-gradient(261deg, #FFCF98 17.53%, #FFECE0 88.29%);
+  --background-image-hero-support-gradient: linear-gradient(261deg, #FFCF98 17.53%, #FFECE0 88.29%);
+  --background-image-orange-gradient: linear-gradient(135deg, #ed8e5b, #f4a261);
+  --background-image-purple-gradient: linear-gradient(135deg, #ED8E5B 50%, #907BA2);
   
-  /* Typography tokens */
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  
-  /* Border radius tokens */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
-  
-  /* Shadow tokens */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --box-shadow-pastree: 0 12px 30px rgba(237, 142, 91, 0.15);
+  --box-shadow-focus-orange: 0 0 0 3px rgba(237, 142, 91, 0.25);
+  --box-shadow-focus-orange-strong: 0 0 0 4px rgba(237, 142, 91, 0.4);
 }
 
+/* Essential global styles */
 html {
   scroll-behavior: smooth;
 }
 
-html[data-scroll-behavior="smooth"] {
-  scroll-behavior: smooth;
-}
-
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-family-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar (can't be done with Tailwind) */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--color-scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ed8e5b;
+  background: var(--color-pastree-orange);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #e77c43;
+  background: var(--color-pastree-orange-hover);
 }
 
-/* Crash-proof utility classes using CSS variables */
-
-/* Button utilities */
-.btn-primary {
-  background-color: var(--color-pastree-orange);
-  color: white;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-base);
-  font-weight: 500;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: var(--color-pastree-orange-hover);
-  transform: translateY(-1px);
-}
-
-.btn-secondary {
-  background-color: var(--color-pastree-purple);
-  color: white;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-base);
-  font-weight: 500;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-secondary:hover {
-  background-color: var(--color-pastree-purple-hover);
-  transform: translateY(-1px);
-}
-
-.btn-outline {
-  background-color: transparent;
-  color: var(--color-pastree-orange);
-  border: 2px solid var(--color-pastree-orange);
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-base);
-  font-weight: 500;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.btn-outline:hover {
-  background-color: var(--color-pastree-orange);
-  color: white;
-}
-
-/* Background utilities */
-.bg-hero-gradient {
-  background: var(--gradient-hero);
-}
-
-.bg-hero-support-gradient {
-  background: var(--gradient-hero-support);
-}
-
-.bg-orange-gradient {
-  background: var(--gradient-orange);
-}
-
-/* Reusable dark background utility - works for header, footer, and any element */
-.bg-pastree-dark {
-  background-color: #212529;
-  color: white;
-}
-
-.bg-pastree-dark a {
-  color: white;
-}
-
-.bg-pastree-dark a:hover {
-  color: #ed8e5b;
-}
-
-.bg-pastree-dark button {
-  color: white;
-}
-
-.bg-pastree-dark button:hover {
-  color: #ed8e5b;
-}
-
-/* Purple background utilities - works for buttons and any element */
-.bg-pastree-purple {
-  background-color: #907BA2;
-  color: white;
-}
-
-.bg-pastree-purple:hover {
-  background-color: #7e6d90;
-}
-
-.hover\:bg-pastree-purple-hover:hover {
-  background-color: #7e6d90;
-}
-
-/* Light background utility */
-.bg-pastree-light {
-  background-color: #f8f9fa;
-}
-
-/* Text color utilities */
-.text-pastree-orange {
-  color: #ed8e5b;
-}
-
-.text-pastree-dark {
-  color: #212529;
-}
-
-/* Border utilities */
-.border-pastree-orange {
-  border-color: #ed8e5b;
-}
-
-/* Hover utilities */
-.hover\:text-pastree-orange:hover {
-  color: #ed8e5b;
-}
-
-.hover\:bg-pastree-orange:hover {
-  background-color: #ed8e5b;
-}
-
-.hover\:bg-pastree-orange-hover:hover {
-  background-color: #e77c43;
-}
-
-/* Custom hover-only shadow utility - crash-proof pure CSS */
-.hover-shadow-pastree:hover {
-  box-shadow: 0 12px 30px rgba(237, 142, 91, 0.15);
-}
-
-/* Focus utilities - Glowing orange effect */
-.focus-glow-orange:focus {
-  outline: none;
-  border-color: #ed8e5b;
-  box-shadow: 0 0 0 3px rgba(237, 142, 91, 0.25);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.focus-glow-orange-strong:focus {
-  outline: none;
-  border-color: #ed8e5b;
-  box-shadow: 0 0 0 4px rgba(237, 142, 91, 0.4);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Section divider utility - crash-proof pure CSS */
-.section-divider {
-  height: 0.25rem;
-  background: linear-gradient(to right, #ed8e5b, transparent);
-  border: none;
-  margin: 4rem 0;
-}
-
-/* Card utilities */
-.card {
-  background: white;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: var(--spacing-lg);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
-}
-
-.card-dark {
-  background: var(--color-pastree-dark);
-  color: white;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: var(--spacing-lg);
-}
-
-/* Text utilities */
+/* Custom utilities that Tailwind can't handle */
 .text-gradient {
-  background: var(--gradient-orange);
+  background: var(--background-image-orange-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-purple {
-  background: var(--gradient-purple);
+  background: var(--background-image-purple-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  /* Fallback for browsers that don't support background-clip */
-  color: #9ED8E5;
 }
 
-.text-primary {
-  color: var(--color-pastree-orange);
+/* Custom hover shadow utility */
+.hover-shadow-pastree:hover {
+  box-shadow: var(--box-shadow-pastree);
 }
 
-.text-secondary {
-  color: var(--color-pastree-purple);
+/* Focus utilities */
+.focus-glow-orange:focus {
+  outline: none;
+  border-color: var(--color-pastree-orange);
+  box-shadow: var(--box-shadow-focus-orange);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.focus-glow-orange-strong:focus {
+  outline: none;
+  border-color: var(--color-pastree-orange);
+  box-shadow: var(--box-shadow-focus-orange-strong);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Section divider utility */
+.section-divider {
+  height: 0.25rem;
+  background: linear-gradient(to right, var(--color-pastree-orange), transparent);
+  border: none;
+  margin: 4rem 0;
 }
 
 /* Animation utilities */
@@ -325,51 +133,4 @@ body {
   50% { transform: scale(1.05); }
   70% { transform: scale(0.9); }
   100% { transform: scale(1); opacity: 1; }
-}
-
-/* Container utilities */
-.container-custom {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-md);
-}
-
-@media (min-width: 768px) {
-  .container-custom {
-    padding: 0 var(--spacing-lg);
-  }
-}
-
-@media (min-width: 1024px) {
-  .container-custom {
-    padding: 0 var(--spacing-xl);
-  }
-}
-
-/* Grid utilities */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-md);
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-md);
-}
-
-@media (min-width: 768px) {
-  .grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
