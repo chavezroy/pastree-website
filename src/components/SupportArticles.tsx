@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-type Article = { title: string; description: string; slug: string };
+type Article = { title: string; description: string; href: string };
 type Update = { date: string; title: string; href?: string };
 type Tutorial = { title: string; summary: string; videoUrl?: string };
 
@@ -15,9 +15,8 @@ type Props = {
 export default function SupportArticles({ popularArticles, recentUpdates, tutorial }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleArticleClick = (slug: string) => {
-    // placeholder; future: navigate to /support/article/[slug]
-    console.log(`Open article: ${slug}`);
+  const handleArticleClick = (href: string) => {
+    window.location.href = href;
   };
 
   const handleTutorialClick = () => {
@@ -36,7 +35,7 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
               {popularArticles.map((article, index) => (
                 <button
                   key={index}
-                  onClick={() => handleArticleClick(article.title)}
+                  onClick={() => handleArticleClick(article.href)}
                   className="w-full text-left bg-white p-5 rounded-lg border-l-4 border-pastree-orange hover:bg-gray-50 transition-colors group"
                 >
                   <div className="flex justify-between items-center">

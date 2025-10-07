@@ -2,7 +2,7 @@ export type SupportCategory = {
   id: string;
   title: string;
   description: string;
-  iconKey: 'download' | 'usage' | 'settings' | 'troubleshoot';
+  iconKey: string;
   href: string;
 };
 
@@ -25,5 +25,8 @@ export type SupportConfig = {
   hero: { title: string; subtitle: string };
   tutorial: { title: string; summary: string; videoUrl?: string };
 };
+
+// Ensure this file is treated as a module at runtime even after type erasure
+export {};
 
 

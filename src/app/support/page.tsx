@@ -3,7 +3,7 @@ import SupportHero from '@/components/SupportHero';
 import SupportCategories from '@/components/SupportCategories';
 import { config } from '@/content/support/config';
 import { categories } from '@/content/support/categories';
-import { popularArticles, recentUpdates } from '@/content/support/articles';
+import { popularArticleLinks as popularArticles, recentUpdates } from '@/content/support/articles';
 
 // Lazy load heavy components
 const SupportArticles = dynamic(() => import('@/components/SupportArticles'), {

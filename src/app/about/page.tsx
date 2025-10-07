@@ -15,7 +15,7 @@ export default function AboutPage() {
                 <h2 className="text-2xl font-bold mb-6">Our Mission</h2>
                 <p className="text-gray-600 leading-relaxed">
                   To make clipboard management simple, secure, and accessible to everyone. 
-                  We're committed to keeping your data private while providing powerful tools 
+                  We&apos;re committed to keeping your data private while providing powerful tools 
                   to organize your digital workflow.
                 </p>
               </div>

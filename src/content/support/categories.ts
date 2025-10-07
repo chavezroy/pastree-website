@@ -2,7 +2,7 @@ import type { SupportCategory } from './types';
 
 export const categories: SupportCategory[] = [
   {
-    id: 'install',
+    id: 'installation',
     title: 'Installation & Setup',
     description: 'Download, install, and configure Pastree on your devices',
     iconKey: 'download',
