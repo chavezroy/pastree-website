@@ -43,7 +43,7 @@ export default function ContactSupport() {
       <div className="container mx-auto px-4 text-center">
         <h3 className="text-3xl font-bold mb-4">Still need help?</h3>
         <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-          Can't find what you're looking for? Our support team is here to help.
+          Can&apos;t find what you&apos;re looking for? Our support team is here to help.
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
