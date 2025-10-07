@@ -1,6 +1,9 @@
 import dynamic from 'next/dynamic';
 import SupportHero from '@/components/SupportHero';
 import SupportCategories from '@/components/SupportCategories';
+import { config } from '@/content/support/config';
+import { categories } from '@/content/support/categories';
+import { popularArticles, recentUpdates } from '@/content/support/articles';
 
 // Lazy load heavy components
 const SupportArticles = dynamic(() => import('@/components/SupportArticles'), {
@@ -57,13 +60,13 @@ const ContactSupport = dynamic(() => import('@/components/ContactSupport'), {
 export default function SupportPage() {
   return (
     <div className="min-h-screen bg-pastree-light">
-      <SupportHero />
-      <SupportCategories />
+      <SupportHero title={config.hero.title} subtitle={config.hero.subtitle} />
+      <SupportCategories categories={categories} />
       
       {/* Section Divider */}
       <hr className="section-divider" />
       
-      <SupportArticles />
+      <SupportArticles popularArticles={popularArticles} recentUpdates={recentUpdates} tutorial={config.tutorial} />
       <ContactSupport />
     </div>
   );

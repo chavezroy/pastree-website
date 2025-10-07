@@ -2,47 +2,22 @@
 
 import { useState } from 'react';
 
-export default function SupportArticles() {
+type Article = { title: string; description: string; slug: string };
+type Update = { date: string; title: string; href?: string };
+type Tutorial = { title: string; summary: string; videoUrl?: string };
+
+type Props = {
+  popularArticles: Article[];
+  recentUpdates: Update[];
+  tutorial: Tutorial;
+};
+
+export default function SupportArticles({ popularArticles, recentUpdates, tutorial }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const popularArticles = [
-    {
-      title: "How to install Pastree browser extension",
-      description: "Step-by-step installation guide for Chrome and Firefox"
-    },
-    {
-      title: "Creating and managing clipboard lists",
-      description: "Organize your frequently used text into categories"
-    },
-    {
-      title: "Keyboard shortcuts and hotkeys",
-      description: "Speed up your workflow with keyboard shortcuts"
-    },
-    {
-      title: "Troubleshooting clipboard sync issues",
-      description: "Fix problems with clipboard not working properly"
-    }
-  ];
-
-  const recentUpdates = [
-    {
-      date: "Dec 15, 2024",
-      title: "Pastree v1.1 - New list categories and improved UI"
-    },
-    {
-      date: "Nov 28, 2024", 
-      title: "Firefox extension now available"
-    },
-    {
-      date: "Nov 10, 2024",
-      title: "Enhanced security features and bug fixes"
-    }
-  ];
-
-  const handleArticleClick = (title: string) => {
-    // For now, show a placeholder - in production, this would navigate to actual articles
-    console.log(`Opening article: "${title}"`);
-    // TODO: Implement actual article navigation
+  const handleArticleClick = (slug: string) => {
+    // placeholder; future: navigate to /support/article/[slug]
+    console.log(`Open article: ${slug}`);
   };
 
   const handleTutorialClick = () => {
@@ -90,13 +65,13 @@ export default function SupportArticles() {
                 <svg className="w-6 h-6 text-pastree-orange mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <h4 className="text-xl font-bold">Quick Start Guide</h4>
+                <h4 className="text-xl font-bold">{tutorial.title}</h4>
               </div>
               <p className="text-gray-600 mb-6">
-                New to Pastree? Start here to learn the basics and get up and running in minutes.
+                {tutorial.summary}
               </p>
               <button 
-                onClick={handleTutorialClick}
+                    onClick={handleTutorialClick}
                 className="bg-pastree-orange hover:bg-pastree-orange-hover text-white px-6 py-3 rounded-full font-semibold transition-colors"
               >
                 Start Tutorial
