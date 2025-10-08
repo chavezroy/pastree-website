@@ -35,7 +35,7 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
                 <Link
                   key={index}
                   href={article.href}
-                  className="block bg-white p-5 rounded-lg border-l-4 border-pastree-orange hover:bg-gray-50 transition-colors group"
+                  className="block bg-white p-5 rounded-lg border-l-4 border-pastree-orange hover:bg-white transition-all duration-300 group hover:shadow-lg hover:-translate-y-1"
                 >
                   <div className="flex justify-between items-center">
                     <div>
@@ -44,7 +44,7 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
                       </h4>
                       <p className="text-gray-600 text-sm">{article.description}</p>
                     </div>
-                    <svg className="w-5 h-5 text-gray-400 group-hover:text-pastree-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-gray-400 group-hover:text-pastree-orange transition-all duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
@@ -87,7 +87,7 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
                       href={update.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block bg-white rounded-lg p-4 shadow-sm hover:bg-gray-50 transition-colors"
+                      className="block bg-white rounded-lg p-4 shadow-sm hover:bg-white transition-colors"
                     >
                       <p className="text-sm text-gray-500 mb-1">{update.date}</p>
                       <p className="font-medium text-pastree-dark hover:text-pastree-orange">

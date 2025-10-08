@@ -14,9 +14,9 @@ export default function SupportCategories({ categories }: Props) {
           {categories.map((category, index) => (
             <div 
               key={index}
-              className="bg-white rounded-xl hover-shadow-pastree transition-all duration-300 transform hover:-translate-y-2 p-8 text-center h-full"
+              className="bg-white rounded-xl hover-shadow-pastree transition-all duration-300 transform hover:-translate-y-2 p-8 text-center h-full group"
             >
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center text-gray-500 mx-auto mb-6">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center text-gray-500 group-hover:text-pastree-orange transition-all duration-700 ease-out mx-auto mb-6 group-hover:scale-125 group-hover:-translate-y-3 group-hover:rotate-3">
                 {supportIcons[category.iconKey]}
               </div>
               <h3 className="text-xl font-bold mb-4">{category.title}</h3>

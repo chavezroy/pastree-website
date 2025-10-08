@@ -54,9 +54,9 @@ export default function FeaturesSection() {
             key={index}
             className="bg-white rounded-xl p-8 hover-shadow-pastree transition-all duration-300 transform hover:-translate-y-2 text-center h-full group"
           >
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-gray-500 group-hover:text-pastree-orange transition-all duration-700 ease-out mx-auto mb-6 group-hover:scale-125 group-hover:-translate-y-3 group-hover:rotate-3">
-  {feature.icon}
-</div>
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-gray-500 group-hover:text-pastree-orange transition-all duration-700 ease-out mx-auto mb-6 group-hover:scale-125 group-hover:-translate-y-3 group-hover:rotate-3">
+                {feature.icon}
+              </div>
             <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
             <p className="text-gray-600 leading-relaxed">{feature.description}</p>
           </div>

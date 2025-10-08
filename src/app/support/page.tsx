@@ -105,7 +105,7 @@ export default async function SupportPage() {
       <SupportCategories categories={categories} />
       
       {/* Section Divider */}
-      <hr className="section-divider" />
+      <hr className="section-divider opacity-15" />
       
       <SupportArticles popularArticles={popularArticles} recentUpdates={recentUpdates} tutorial={config.tutorial} />
       <ContactSupport />
