@@ -60,9 +60,7 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
             {/* Quick Start Guide Card */}
             <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
               <div className="flex items-center mb-4">
-                <svg className="w-6 h-6 text-pastree-orange mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+               
                 <h4 className="text-xl font-bold">{tutorial.title}</h4>
               </div>
               <p className="text-gray-600 mb-6">

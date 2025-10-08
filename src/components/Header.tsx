@@ -38,7 +38,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="#features" className="text-white hover:text-pastree-orange transition-colors">
+            <Link href="features" className="text-white hover:text-pastree-orange transition-colors">
               Features
             </Link>
             <Link href="#download" className="text-white hover:text-pastree-orange transition-colors">

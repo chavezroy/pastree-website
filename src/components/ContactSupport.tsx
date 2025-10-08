@@ -9,7 +9,7 @@ export default function ContactSupport() {
       title: "Email Support",
       description: "Get personalized help via email",
       buttonText: "Send Email",
-      buttonClass: "border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white",
+      buttonClass: "border-pastree-purple text-pastree-purple hover:bg-white hover:text-pastree-orange",
       href: "mailto:support@pastr.ee?subject=Support Request"
     },
     {
@@ -21,7 +21,7 @@ export default function ContactSupport() {
       title: "Report Bug",
       description: "Found an issue? Let us know",
       buttonText: "Report Bug",
-      buttonClass: "border-red-500 text-red-500 hover:bg-red-500 hover:text-white",
+      buttonClass: "border-pastree-purple text-pastree-purple hover:bg-white hover:text-pastree-orange",
       href: "/report-bug"
     }
   ];
@@ -37,14 +37,14 @@ export default function ContactSupport() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {contactOptions.map((option, index) => (
             <div key={index} className="bg-white rounded-xl shadow-lg p-8 h-full hover-shadow-pastree transition-all duration-300 transform hover:-translate-y-2 group">
-              <div className={`text-pastree-dark mb-6 flex justify-center group-hover:scale-125 group-hover:-translate-y-3 group-hover:rotate-3 group-hover:text-pastree-orange transition-all duration-700 ease-out`}>
+              <div className={`text-orange-600/30 mb-6 flex justify-center group-hover:scale-125 group-hover:-translate-y-3 group-hover:rotate-3 group-hover:text-pastree-orange transition-all duration-700 ease-out`}>
                 {option.icon}
               </div>
               <h4 className="text-xl font-bold mb-4">{option.title}</h4>
               <p className="text-gray-600 mb-6">{option.description}</p>
               <a 
                 href={option.href}
-                className={`w-full border-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 inline-block text-center ${option.buttonClass}`}
+                className={`w-full border-2 border-pastree-purple text-pastree-purple hover:bg-white/50 hover:text-pastree-orange px-6 py-3 rounded-full font-semibold transition-all duration-300 inline-block text-center ${option.buttonClass}`}
               >
                 {option.buttonText}
               </a>
