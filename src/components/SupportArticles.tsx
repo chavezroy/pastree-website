@@ -28,7 +28,7 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Popular Articles */}
           <div>
-            <h3 className="text-2xl font-bold mb-8">Popular Articles</h3>
+            <h3 className="text-2xl mb-8">Popular Articles</h3>
             
             <div className="space-y-4">
               {popularArticles.map((article, index) => (
@@ -55,7 +55,7 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
 
           {/* Getting Started & Recent Updates */}
           <div>
-            <h3 className="text-2xl font-bold mb-8">Getting Started</h3>
+            <h3 className="text-2xl mb-8">Getting Started</h3>
             
             {/* Quick Start Guide Card */}
             <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
@@ -78,7 +78,7 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
 
             {/* Recent Updates */}
             <div>
-              <h4 className="text-xl font-bold mb-6">Recent Updates</h4>
+              <h4 className="text-xl mb-6">Recent Updates</h4>
               <div className="space-y-4">
                 {recentUpdates.map((update, index) => (
                   update.href ? (

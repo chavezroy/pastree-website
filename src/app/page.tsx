@@ -18,7 +18,7 @@ export default function Home() {
       
       {/* Section Divider */}
       <AnimatedSection animation="scale-in" delay={200} threshold={0.3}>
-        <hr className="section-divider" />
+        <hr className="section-divider opacity-15" />
       </AnimatedSection>
       
       <AnimatedSection animation="fade-in-up" delay={300} threshold={0.2}>
@@ -35,7 +35,7 @@ export default function Home() {
       
       {/* Section Divider */}
       <AnimatedSection animation="scale-in" delay={600} threshold={0.3}>
-        <hr className="section-divider" />
+        <hr className="section-divider opacity-15" />
       </AnimatedSection>
       
       <AnimatedSection animation="fade-in-up" delay={700} threshold={0.2}>
