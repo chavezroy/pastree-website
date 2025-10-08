@@ -3,34 +3,29 @@
 import { useState } from 'react';
 
 export default function ReportBugPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    browser: '',
-    version: '',
-    description: '',
-    steps: ''
-  });
+  const [description, setDescription] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Bug report submitted! Thank you for helping us improve Pastree.');
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      browser: '',
-      version: '',
-      description: '',
-      steps: ''
-    });
+    
+    if (description.trim().length < 10) {
+      alert('Please provide more details about the issue (at least 10 characters).');
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    // Simulate submission
+    setTimeout(() => {
+      alert('Thank you for your bug report! We\'ll review it and get back to you if we need more information.');
+      setDescription('');
+      setIsSubmitting(false);
+    }, 2000);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDescription(e.target.value);
   };
 
   return (
@@ -45,116 +40,63 @@ export default function ReportBugPage() {
           </div>
 
           <div className="bg-white rounded-xl shadow-lg p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pastree-orange focus:border-transparent"
-                    placeholder="Enter your name"
-                  />
-                </div>
+            <p className="text-center mb-4 text-gray-600">
+              Please share details that can help us understand the issue.
+            </p>
+            
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-6">
+              <small className="text-blue-700 flex items-center">
+                <span className="mr-2">🔒</span>
+                Security tip: Never share personal information.
+              </small>
+            </div>
 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pastree-orange focus:border-transparent"
-                    placeholder="Enter your email"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="browser" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Browser
-                  </label>
-                  <select
-                    id="browser"
-                    name="browser"
-                    value={formData.browser}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pastree-orange focus:border-transparent"
-                  >
-                    <option value="">Select your browser</option>
-                    <option value="chrome">Chrome</option>
-                    <option value="firefox">Firefox</option>
-                    <option value="edge">Edge</option>
-                    <option value="safari">Safari</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="version" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Pastree Version
-                  </label>
-                  <input
-                    type="text"
-                    id="version"
-                    name="version"
-                    value={formData.version}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pastree-orange focus:border-transparent"
-                    placeholder="e.g., 1.1.0"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Bug Description
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label htmlFor="bug-description" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Describe the issue you're experiencing:
                 </label>
                 <textarea
-                  id="description"
-                  name="description"
-                  value={formData.description}
+                  id="bug-description"
+                  name="bug-description"
+                  value={description}
                   onChange={handleChange}
                   required
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pastree-orange focus:border-transparent"
-                  placeholder="Describe the bug you encountered..."
+                  rows={8}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pastree-orange focus:border-transparent resize-vertical min-h-[200px]"
+                  placeholder="Please provide as much detail as possible about the issue, including:
+- What you were trying to do
+- What happened instead
+- Steps to reproduce the problem
+- Your browser and operating system
+- Any error messages you saw"
                 />
+                <small className="text-gray-500 float-end mt-1">
+                  {description.length} characters
+                </small>
               </div>
-
-              <div>
-                <label htmlFor="steps" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Steps to Reproduce
-                </label>
-                <textarea
-                  id="steps"
-                  name="steps"
-                  value={formData.steps}
-                  onChange={handleChange}
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pastree-orange focus:border-transparent"
-                  placeholder="1. Go to...&#10;2. Click on...&#10;3. See error..."
-                />
+              
+              <div className="text-center mt-8">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="bg-pastree-orange hover:bg-pastree-orange-hover text-white px-8 py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed min-w-[150px]"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <span className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
+                      Submit Report
+                    </>
+                  )}
+                </button>
               </div>
-
-              <button
-                type="submit"
-                className="w-full bg-pastree-orange hover:bg-pastree-orange-hover text-white py-4 rounded-lg font-semibold transition-colors"
-              >
-                Submit Bug Report
-              </button>
             </form>
           </div>
         </div>
