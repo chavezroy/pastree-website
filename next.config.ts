@@ -5,13 +5,13 @@ const nextConfig: NextConfig = {
     optimizeCss: true,
   },
   compiler: {
-    removeConsole: true, 
+    removeConsole: process.env.NODE_ENV === 'production', 
   },
   images: {
     formats: ['image/webp', 'image/avif'],
   },
   // Enable static optimization
-  output: 'standalone',
+  ...(process.env.NODE_ENV === 'production' && { output: 'standalone' }),
   // Optimize bundle splitting
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {

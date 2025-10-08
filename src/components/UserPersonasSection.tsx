@@ -2,7 +2,7 @@ export default function UserPersonasSection() {
   const personas = [
     {
       icon: (
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
         </svg>
       ),
@@ -16,7 +16,7 @@ export default function UserPersonasSection() {
     },
     {
       icon: (
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
         </svg>
       ),
@@ -40,7 +40,7 @@ export default function UserPersonasSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {personas.map((persona, index) => (
             <div key={index} className="bg-white rounded-xl shadow-lg p-8 h-full">
-              <div className="w-16 h-16 bg-orange-gradient rounded-2xl flex items-center justify-center text-white mb-6">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-gray mb-6">
                 {persona.icon}
               </div>
               <h3 className="text-2xl font-bold mb-6">{persona.title}</h3>
