@@ -54,13 +54,13 @@ export default function Header() {
 
           {/* Right side - Trust badge and Report Bug button */}
           <div className="hidden md:flex items-center space-x-4">
-            <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+            {/* <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
               <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-1"></span>
               100% Free & Secure
-            </span>
+            </span> */}
             <Link 
               href="/report-bug" 
-              className="border border-gray-400 text-gray-400 px-4 py-2 rounded text-sm hover:bg-white hover:text-pastree-dark transition-colors"
+              className="border border-pastree-purple text-pastree-purple px-4 py-2 rounded text-sm hover:bg-white hover:text-pastree-orange transition-colors"
             >
               Report Bug
             </Link>
