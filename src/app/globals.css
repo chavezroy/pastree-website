@@ -18,7 +18,7 @@
   --background-image-purple-gradient: linear-gradient(135deg, #ED8E5B 50%, #907BA2);
   
   --box-shadow-pastree: 0 12px 30px rgba(237, 142, 91, 0.15);
-  --box-shadow-focus-orange: 0 0 0 3px rgba(237, 142, 91, 0.25);
+  --box-shadow-focus-orange: 0 0 8px 8px rgba(237, 142, 91, 0.25);
   --box-shadow-focus-orange-strong: 0 0 0 4px rgba(237, 142, 91, 0.4);
 }
 

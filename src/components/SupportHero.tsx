@@ -90,6 +90,8 @@ export default function SupportHero({ title, subtitle }: Props) {
             <form onSubmit={handleSearch} className="relative">
               <input
                 ref={inputRef}
+                id="support-search"
+                name="search"
                 type="text"
                 value={searchState.query}
                 onChange={handleInputChange}
@@ -97,9 +99,10 @@ export default function SupportHero({ title, subtitle }: Props) {
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
                 placeholder="Search for help articles, guides, and FAQs..."
-                className={`w-full bg-white text-gray-900 px-6 py-4 pr-16 rounded-full text-lg shadow-lg transition-all duration-200 ${
-                  isFocused ? 'focus-glow-orange-strong' : 'focus-glow-orange'
-                }`}
+                aria-label="Search support articles and help guides"
+                aria-describedby="search-help"
+                className={`w-full bg-white border border-transparent text-gray-900 px-6 py-4 pr-16 rounded-full text-lg shadow-lg transition-all duration-200 ${isFocused ? 'focus-glow-orange' : 'focus-glow-orange'
+                  }`}
                 autoComplete="off"
                 spellCheck="false"
               />
