@@ -18,7 +18,7 @@ export default function HeroSection() {
   // Use a single intersection observer for the entire hero section
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation({ threshold: 0.1 });
   // Separate observer for title to control gradient animation
-  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation({ threshold: 0.2, triggerOnce: false });
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation({ threshold: 0.2, triggerOnce: true });
 
   useEffect(() => {
     setIsLoaded(true);
