@@ -48,7 +48,7 @@ export default function TrustSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {trustFeatures.map((feature, index) => (
             <div key={index} className="text-center">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-gray mx-auto mb-6">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-gray-500 mx-auto mb-6">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
