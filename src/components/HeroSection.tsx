@@ -2,9 +2,18 @@
 
 import { useEffect, useState } from 'react';
 import useScrollAnimation from '@/hooks/useScrollAnimation';
+import { useImageSlideshow } from '@/hooks/useImageSlideshow';
 
 export default function HeroSection() {
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Image slideshow for right column
+  const images = [
+    '/hero-pastree-context.png',
+    '/hero-pastree-popup-1.png'
+  ];
+  
+  const { currentImage, isTransitioning } = useImageSlideshow(images, 8000);
   
   // Use a single intersection observer for the entire hero section
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation({ threshold: 0.1 });
@@ -108,11 +117,13 @@ export default function HeroSection() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
-                src="/icons/context-menu-group.svg" 
-                alt="Context Menu Group" 
+                src={currentImage}
+                alt="Pastree Clipboard Manager" 
                 width="256" 
                 height="256"
-                className="w-full h-full object-contain float"
+                className={`w-full h-full object-contain float transition-opacity duration-1000 ${
+                  isTransitioning ? 'opacity-0' : 'opacity-100'
+                }`}
                 loading="lazy"
               />
             </div>
