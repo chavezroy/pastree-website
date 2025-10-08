@@ -9,7 +9,7 @@ import AnimatedSection from '@/components/AnimatedSection';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-pastree-light overflow-x-hidden">
+    <div className="min-h-screen bg-pastree-light overflow-hidden">
       <HeroSection />
       
       <AnimatedSection animation="fade-in-up" delay={100} threshold={0.2}>
