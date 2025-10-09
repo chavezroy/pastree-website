@@ -32,16 +32,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-/* Restore pointer cursor for buttons */
+
 button {
   cursor: pointer;
 }
 
-/* Or more specifically for interactive elements */
 button:not(:disabled) {
   cursor: pointer;
 }
-/* Custom scrollbar (can't be done with Tailwind) */
+
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -59,7 +59,7 @@ button:not(:disabled) {
   background: var(--color-pastree-orange-hover);
 }
 
-/* Custom utilities that Tailwind can't handle */
+/* Custom utilities */
 .text-gradient {
   background: var(--background-image-orange-gradient);
   -webkit-background-clip: text;
@@ -74,7 +74,6 @@ button:not(:disabled) {
   background-clip: text;
 }
 
-/* Custom hover shadow utility */
 .hover-shadow-pastree:hover {
   box-shadow: var(--box-shadow-pastree);
 }
@@ -140,6 +139,18 @@ button:not(:disabled) {
 
 @keyframes wiggle {
   0%, 100% {
+    transform: rotate(0deg) translate(-1px, 2px);
+  }
+  25% {
+    transform: rotate(5deg) translate(-1px, 2px);
+  }
+  75% {
+    transform: rotate(-5deg) translate(-1px, 2px);
+  }
+}
+
+@keyframes wiggle-center {
+  0%, 100% {
     transform: rotate(0deg);
   }
   25% {
@@ -150,34 +161,31 @@ button:not(:disabled) {
   }
 }
 
-/* Floating animation for decorative elements */
-.float {
-  animation: float 3s ease-in-out infinite;
+@keyframes fade-in-down {
+  0% { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  30% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
 
-.wiggle {
-  animation: wiggle 1s ease-in-out infinite;
-}
-
-/* Gradient text animation */
-.gradient-text-animated {
-  background: linear-gradient(-45deg, #ed8e5b, #907ba2, #ed8e5b, #907ba2);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 3s ease infinite;
-}
-
-/* Plays the gradientShift animation exactly 2 times when applied */
-.gradient-text-animated-2x {
-  background: linear-gradient(-45deg, #ed8e5b, #907ba2, #ed8e5b, #907ba2);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 3s ease 2;
-  animation-fill-mode: both;
+@keyframes button-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes gradientShift {
@@ -190,6 +198,157 @@ button:not(:disabled) {
   100% {
     background-position: 0% 50%;
   }
+}
+
+
+
+@keyframes pulse-scale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes question-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes circle-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+@keyframes fade-in-down-support {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  17% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Animation classes */
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.wiggle {
+  animation: wiggle 1s ease-in-out infinite;
+}
+
+.gradient-text-animated {
+  background: linear-gradient(-45deg, #ed8e5b, #907ba2, #ed8e5b, #907ba2);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease infinite;
+}
+
+.gradient-text-animated-2x {
+  background: linear-gradient(-45deg, #ed8e5b, #907ba2, #ed8e5b, #907ba2);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease 2;
+  animation-fill-mode: both;
+}
+
+/* Group hover animations */
+.group:hover .question-mark {
+  animation: pulse-scale 1.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.group:hover .circle {
+  animation: circle-pulse 2s ease-in-out infinite;
+}
+
+.group:hover .question-icon {
+  animation: question-bounce 2s ease-in-out infinite;
+}
+
+.group:hover .download-icon,
+.download-group:hover .download-icon {
+  animation: wiggle-center 2s ease-in-out infinite;
+}
+
+.group:hover .usage-icon {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.group:hover .usage-check {
+  animation: wiggle 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  transform-origin: center;
+  transform: translate(-1px, 2px);
+}
+
+.group:hover .usage-check-ping {
+  animation: wiggle 4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation-delay: 2s;
+}
+
+.group:hover .email-icon {
+  animation: wiggle 1.5s ease-in-out infinite;
+}
+
+.group:hover .bug-icon {
+  animation: wiggle 1.5s ease-in-out infinite;
+}
+
+.group:hover .how-it-works-icon {
+  animation: wiggle-center 1.5s ease-in-out infinite;
+}
+
+/* Download button specific animations */
+.group:hover .download-arrow,
+.download-group:hover .download-arrow {
+  animation: fade-in-down 2s ease-in-out infinite;
+}
+
+.download-group:hover .gradient-button::before,
+.gradient-button:hover::before {
+  opacity: 1;
+  animation: button-gradient 3s ease infinite;
+}
+
+/* Button styles */
+.gradient-button {
+  background-color: #907BA2;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.gradient-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(-75deg, #907BA2, #9066b7, #907BA2, #8453a3);
+  background-size: 500%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+/* Icon containers */
+.download-icon-container {
+  transition: all 0.3s ease;
+}
+
+.download-button:hover .download-icon-container {
+  transform: scale(1.25) translateY(-3px) rotate(3deg);
+}
+
+.usage-check, .usage-check-ping {
+  transform: translate(-1px, 2px);
 }
 
 /* Reduced motion support */
@@ -206,4 +365,30 @@ button:not(:disabled) {
   .hover-rotate {
     transition: none;
   }
+}
+/* Support categories specific download arrow animation */
+.support-categories.group:hover .download-arrow {
+  animation: fade-in-down-support 4.5s ease-in-out infinite, orange-flash 1s ease-in-out 2s;
+}
+.group:hover .rotate {
+  animation: spin 15s linear infinite;
+}
+
+@keyframes orange-flash {
+  0% {
+    fill: #ed8e5b;
+    stroke: #ed8e5b;
+  }
+  20% {
+    fill: #ffddc2;
+    stroke: #ffddc2;
+  }
+  100% {
+    fill: #ed8e5b;
+    stroke: #ed8e5b;
+  }
+}
+.orange-flash {
+  background: linear-gradient(135deg, #ed8e5b, #ffddc2);
+  animation: orange-flash 3s ease-in-out infinite;
 }

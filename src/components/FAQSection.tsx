@@ -38,9 +38,13 @@ export default function FAQSection() {
         <div className="max-w-4xl mx-auto">
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+              <div key={index} className="bg-white rounded-lg shadow-sm overflow-hidden">
                 <button
-                  className="w-full px-6 py-4 text-left font-semibold text-lg hover:bg-gray-50 transition-colors flex justify-between items-center"
+                  className={`w-full px-6 py-4 text-left font-semibold text-lg transition-all duration-500 flex justify-between items-center ${
+                    openFAQ === index 
+                      ? 'bg-pastree-orange/5 text-pastree-orange' 
+                      : 'hover:bg-pastree-orange/5 hover:text-pastree-orange'
+                  }`}
                   onClick={() => toggleFAQ(index)}
                 >
                   <span>{faq.question}</span>
@@ -55,11 +59,13 @@ export default function FAQSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                {openFAQ === index && (
-                  <div className="px-6 pb-4">
+                <div
+                  className={`overflow-hidden transition-all duration-700 ${openFAQ === index ? 'max-h-96 opacity-100 ease-[cubic-bezier(0.34,1.56,0.64,1)]' : 'max-h-0 opacity-0 ease-in'}`}
+                >
+                  <div className="px-6 pb-4 my-4">
                     <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
                   </div>
-                )}
+                </div>
               </div>
             ))}
           </div>
