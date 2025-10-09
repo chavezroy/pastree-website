@@ -20,22 +20,27 @@ export default function FinalCTASection() {
           Join thousands of users who have streamlined their workflow with Pastree
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button 
-            onClick={handleDownloadClick}
-            className="bg-pastree-orange hover:bg-pastree-orange-hover text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center"
-          >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            Download Free
-          </button>
+        <button 
+                onClick={handleDownloadClick}
+                className="text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center download-group download-button gradient-button group"
+              >
+                <div className="download-icon-container w-5 h-5 mr-2">
+                <svg className="w-5 h-5 mr-2 download-icon" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                  <path className="download-arrow" strokeLinecap="round" strokeLinejoin="round" d="M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                  <path className="download-box" strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5" />
+                </svg>
+                </div>
+                Download Free
+              </button>
           <Link 
             href="/support"
-            className="border-2 border-pastree-orange text-pastree-orange hover:bg-pastree-orange hover:text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 flex items-center justify-center"
+            className="border-2 border-pastree-purple text-pastree-purple hover:bg-white/50 hover:text-pastree-orange px-8 py-4 rounded-full font-semibold transition-all duration-300 flex items-center justify-center how-it-works-button group"
           >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <div className="w-5 h-5 mr-2 group-hover:scale-125 transition-all duration-700 ease-out">
+            <svg className="w-5 h-5 mr-2 how-it-works-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
+            </div>
             Get Support
           </Link>
         </div>
