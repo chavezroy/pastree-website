@@ -54,7 +54,7 @@ export default function ReportBugPage() {
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label htmlFor="bug-description" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Describe the issue you're experiencing:
+                  Describe the issue {"you're"} experiencing:
                 </label>
                 <textarea
                   id="bug-description"

@@ -92,7 +92,7 @@ export default function SupportHero({ title, subtitle }: Props) {
   return (
     <section 
       ref={heroRef}
-      className="bg-hero-support-gradient text-pastree-dark py-20 relative overflow-hidden"
+      className="bg-hero-support-gradient text-pastree-dark py-20 relative"
     >
       {/* Background overlay with subtle animation */}
       <div className="absolute inset-0 z-10">
