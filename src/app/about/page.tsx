@@ -1,16 +1,46 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import useScrollAnimation from '@/hooks/useScrollAnimation';
 import AnimatedSection from '@/components/AnimatedSection';
 
 export default function AboutPage() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Use intersection observer for animations
+  const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation({ threshold: 0.1 });
+  const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation({ threshold: 0.2, triggerOnce: true });
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
   return (
     <div className="min-h-screen bg-pastree-light">
       {/* Hero Section */}
-      <section className="bg-hero-support-gradient text-pastree-dark py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">About Pastree</h1>
-          <p className="text-xl mb-12 max-w-2xl mx-auto">
-            Built with purpose. Effortless clipboard management 
-            that is secure, and completely free.
-          </p>
+      <section 
+        ref={heroRef}
+        className="bg-hero-support-gradient text-pastree-dark py-20 relative overflow-hidden"
+      >
+        {/* Background overlay with subtle animation */}
+        <div className="absolute inset-0 z-10">
+          <div className={`absolute inset-0 bg-gradient-to-br from-orange-100/20 to-purple-100/20 transition-opacity duration-2000 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`} />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-20 text-center">
+          <div 
+            ref={contentRef}
+            className={`transition-all duration-1000 ${
+              heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">About Pastree</h1>
+            <p className="text-xl mb-12 max-w-2xl mx-auto">
+              Built with purpose. Effortless clipboard management 
+              that is secure, and completely free.
+            </p>
+          </div>
         </div>
       </section>
 

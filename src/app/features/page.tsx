@@ -1,7 +1,19 @@
+'use client';
+import { useEffect, useState } from 'react';
+import useScrollAnimation from '@/hooks/useScrollAnimation';
 import AnimatedSection from '@/components/AnimatedSection';
 import DownloadSection from '@/components/DownloadSection';
 
 export default function FeaturesPage() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Use intersection observer for animations
+  const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation({ threshold: 0.1 });
+  const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation({ threshold: 0.2, triggerOnce: true });
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
   const features = [
     {
       icon: (
@@ -119,17 +131,35 @@ export default function FeaturesPage() {
   return (
     <div className="min-h-screen bg-pastree-light">
       {/* Hero Section */}
-      <section className="bg-hero-support-gradient text-pastree-dark py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Features</h1>
-          <p className="text-xl mb-12 max-w-3xl mx-auto">
-            Organize and manage your clipboard history with ease. Pastree automatically saves copied text, 
-            provides keyboard shortcuts for quick access, and lets you organize frequently used text into custom lists.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 text-lg">
-            <span className="bg-white/20 px-4 py-2 rounded-full">Perfect for Developers</span>
-            <span className="bg-white/20 px-4 py-2 rounded-full">Ideal for Writers</span>
-            <span className="bg-white/20 px-4 py-2 rounded-full">Productivity Enthusiasts</span>
+      <section
+        ref={heroRef}
+        className="bg-hero-support-gradient text-pastree-dark py-20 relative overflow-hidden"
+      >
+        {/* Background overlay with subtle animation */}
+        <div className="absolute inset-0 z-10">
+          <div className={`absolute inset-0 bg-gradient-to-br from-orange-100/20 to-purple-100/20 transition-opacity duration-2000 ${isLoaded ? 'opacity-100' : 'opacity-0'
+            }`} />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-20 text-center">
+          <div
+            ref={contentRef}
+            className={`transition-all duration-1000 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+          >
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Features</h1>
+            <p className="text-xl mb-12 max-w-3xl mx-auto">
+              Organize and manage your clipboard history with ease. Pastree automatically saves copied text,
+              provides keyboard shortcuts for quick access, and lets you organize frequently used text into custom lists.
+            </p>
+          </div>
+
+          <div
+            className={`flex flex-wrap justify-center gap-4 text-lg transition-all duration-1000 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+            style={{ transitionDelay: '200ms' }}
+          >
+            {/* Your spans with checkmarks */}
           </div>
         </div>
       </section>

@@ -36,7 +36,7 @@ export default function ContactSupport() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {contactOptions.map((option, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-lg p-8 h-full hover-shadow-pastree transition-all duration-300 transform hover:-translate-y-2 group">
+            <div key={index} className="bg-white rounded-xl p-8 h-full hover-shadow-pastree transition-all duration-300 transform hover:-translate-y-2 group">
               <div className={`text-orange-600/30 mb-6 flex justify-center group-hover:scale-125 group-hover:-translate-y-3 group-hover:rotate-3 group-hover:text-pastree-orange transition-all duration-700 ease-out`}>
                 {option.icon}
               </div>

@@ -58,7 +58,7 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
             <h3 className="text-2xl mb-8">Getting Started</h3>
             
             {/* Quick Start Guide Card */}
-            <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <div className="bg-white rounded-xl p-6 mb-8">
               <div className="flex items-center mb-4">
                
                 <h4 className="text-xl font-bold">{tutorial.title}</h4>
