@@ -335,7 +335,7 @@ Basic Clipboard Management
               <div id="creating-lists" className="bg-white rounded-xl p-10 mb-10 shadow-lg border-l-4 border-pastree-orange">
                 <h2 className="text-3xl font-bold mb-8 text-pastree-orange border-b-3 border-pastree-orange pb-4">
                 <svg fill="currentColor" className="mr-2 size-6 inline" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5"></path>
+                                <path fillRule="evenodd" d="M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5"></path>
                             </svg>Creating & Managing Lists
                 </h2>
                 
