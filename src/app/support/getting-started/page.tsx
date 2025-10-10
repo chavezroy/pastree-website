@@ -349,7 +349,7 @@ Basic Clipboard Management
                     </div>
                     <div>
                       <strong className="text-lg">Open the Lists Tab</strong><br />
-                      In the Pastree popup, click on the "Lists" tab to access the list management area.
+                      In the Pastree popup, click on the {"\"Lists\""} tab to access the list management area.
                     </div>
                   </li>
                   <li className="relative pl-20 pb-6 border-b border-gray-200">
@@ -358,7 +358,7 @@ Basic Clipboard Management
                     </div>
                     <div>
                       <strong className="text-lg">Create a New List</strong><br />
-                      Click the "+" button or "Create New List" to start creating your first list.
+                      Click the {"\"+\""} button or {"\"Create New List\""} to start creating your first list.
                     </div>
                   </li>
                   <li className="relative pl-20 pb-6 border-b border-gray-200">
@@ -367,7 +367,7 @@ Basic Clipboard Management
                     </div>
                     <div>
                       <strong className="text-lg">Name Your List</strong><br />
-                      Give your list a descriptive name like "Email Templates", "Addresses", or "Code Snippets".
+                      Give your list a descriptive name like {"\"Email Templates\""}, {"\"Addresses\""}, or {"\"Code Snippets\""}.
                     </div>
                   </li>
                   <li className="relative pl-20 pb-6 border-b border-gray-200">
@@ -376,7 +376,7 @@ Basic Clipboard Management
                     </div>
                     <div>
                       <strong className="text-lg">Add Items to Your List</strong><br />
-                      Click "Add Item" to create new entries. You can type directly or paste content from your clipboard history.
+                      Click {"\"Add Item\""} to create new entries. You can type directly or paste content from your clipboard history.
                     </div>
                   </li>
                   <li className="relative pl-20">
