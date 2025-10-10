@@ -1,12 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import useScrollAnimation from '@/hooks/useScrollAnimation';
 import ContactSupport from '@/components/ContactSupport';
 export const dynamic = 'force-dynamic';
 export default function FAQPage() {
   const [activeSection, setActiveSection] = useState('');
   const [openItems, setOpenItems] = useState<number[]>([]);
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Use intersection observer for animations
+  const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation({ threshold: 0.1 });
+  const { ref: contentRef } = useScrollAnimation({ threshold: 0.2, triggerOnce: true });
 
   const toggleItem = (index: number) => {
     setOpenItems(prev => 
@@ -22,6 +28,10 @@ export default function FAQPage() {
     // Simulate loading delay to show skeleton
     const timer = setTimeout(() => {
       setIsLoading(false);
+      // Start the animation after skeleton is done
+      setTimeout(() => {
+        setIsLoaded(true);
+      }, 200);
     }, 1000);
   
     return () => clearTimeout(timer);
@@ -215,15 +225,31 @@ export default function FAQPage() {
   return (
     <div className="min-h-screen bg-pastree-light">
       {/* Page Header */}
-      <header className="bg-hero-support-gradient text-pastree-dark py-20 text-center mb-12">
-        <div className="container mx-auto px-4">
-          <h1 className="text-5xl font-bold mb-5 text-pastree-purple">
-            
-            Frequently Asked Questions
-          </h1>
-          <p className="text-xl opacity-90 max-w-2xl mx-auto">
-            Find answers to common questions about Pastree. Can{"'"}t find what {"you're"} looking for? Contact our support team.
-          </p>
+      <header 
+        ref={heroRef}
+        className="bg-hero-support-gradient text-pastree-dark py-20 text-center mb-12 relative overflow-hidden"
+      >
+        {/* Background overlay with subtle animation */}
+        <div className="absolute inset-0 z-10">
+          <div className={`absolute inset-0 bg-gradient-to-br from-orange-100/20 to-purple-100/20 transition-opacity duration-2000 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`} />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-20">
+          <div
+            ref={contentRef}
+            className={`transition-all duration-1000 ${
+              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            <h1 className="text-5xl font-bold mb-5 text-pastree-purple">
+              Frequently Asked Questions
+            </h1>
+            <p className="text-xl opacity-90 max-w-2xl mx-auto">
+              Find answers to common questions about Pastree. Can{"'"}t find what {"you're"} looking for? Contact our support team.
+            </p>
+          </div>
         </div>
       </header>
 

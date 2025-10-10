@@ -35,7 +35,7 @@ export default function AboutPage() {
               heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">About Pastree</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-pastree-purple">About Pastree</h1>
             <p className="text-xl mb-12 max-w-2xl mx-auto">
               Built with purpose. Effortless clipboard management 
               that is secure, and completely free.

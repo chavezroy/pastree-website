@@ -147,7 +147,7 @@ export default function FeaturesPage() {
             className={`transition-all duration-1000 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Features</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-pastree-purple">Features</h1>
             <p className="text-xl mb-12 max-w-3xl mx-auto">
               Organize and manage your clipboard history with ease. Pastree automatically saves copied text,
               provides keyboard shortcuts for quick access, and lets you organize frequently used text into custom lists.

@@ -43,7 +43,7 @@ export default function Header() {
             <Link 
               href="/features" 
               className={`transition-colors ${
-                pathname === '/features' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+                pathname === '/features' ? 'text-pastree-orange' : 'text-white hover:text-pastree-orange'
               }`}
             >
               Features
@@ -55,7 +55,7 @@ export default function Header() {
             <Link 
               href="/about" 
               className={`transition-colors ${
-                pathname === '/about' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+                pathname === '/about' ? 'text-pastree-orange' : 'text-white hover:text-pastree-orange'
               }`}
             >
               About

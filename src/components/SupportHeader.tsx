@@ -42,17 +42,17 @@ export default function SupportHeader() {
           <div className="hidden md:flex items-center space-x-8">
             
             <Link href="/support" className={`transition-colors ${
-                pathname === '/support' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+                pathname === '/support' ? 'text-pastree-orange' : 'text-white hover:text-pastree-orange'
               }`}>
               Support
             </Link>
             <Link href="/support/getting-started" className={`transition-colors ${
-                pathname === '/support/getting-started' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+                pathname === '/support/getting-started' ? 'text-pastree-orange' : 'text-white hover:text-pastree-orange'
               }`}>
               Getting Started
             </Link>
             <Link href="/support/faqs" className={`transition-colors ${
-                pathname === '/support/faqs' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+                pathname === '/support/faqs' ? 'text-pastree-orange' : 'text-white hover:text-pastree-orange'
               }`}>
               FAQs
             </Link>
