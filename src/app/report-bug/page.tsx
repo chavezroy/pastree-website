@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import SupportHeader from '@/components/SupportHeader';
 
 export default function ReportBugPage() {
   const [description, setDescription] = useState('');
@@ -29,7 +30,9 @@ export default function ReportBugPage() {
   };
 
   return (
-    <div className="min-h-screen bg-pastree-light py-20">
+    <>
+      <SupportHeader />
+      <div className="min-h-screen bg-pastree-light py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
@@ -89,9 +92,9 @@ export default function ReportBugPage() {
                     </>
                   ) : (
                     <>
-                      <svg className="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                      </svg>
+                      <svg fill="currentColor" className="size-4 mr-2 inline align-text-bottom" viewBox="0 0 16 16">
+  <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+</svg>
                       Submit Report
                     </>
                   )}
@@ -102,5 +105,6 @@ export default function ReportBugPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

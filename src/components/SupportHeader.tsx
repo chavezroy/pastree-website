@@ -61,14 +61,15 @@ export default function SupportHeader() {
 
           {/* Right side - Support-specific elements */}
           <div className="hidden md:flex items-center space-x-4">
-            <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mr-1"></span>
-              Support Center
-            </span>
+         
             <Link 
-              href="/support/installation/complete-setup-guide" 
+              href="/report-bug" 
               className="bg-pastree-orange text-white px-4 py-2 rounded text-sm hover:bg-pastree-orange-hover transition-colors"
             >
+              <svg fill="currentColor" className="size-4 inline mr-2 align-text-bottom" viewBox="0 0 16 16">
+                <path d="M4.355.522a.5.5 0 0 1 .623.333l.291.956A5 5 0 0 1 8 1c1.007 0 1.946.298 2.731.811l.29-.956a.5.5 0 1 1 .957.29l-.41 1.352A5 5 0 0 1 13 6h.5a.5.5 0 0 0 .5-.5V5a.5.5 0 0 1 1 0v.5A1.5 1.5 0 0 1 13.5 7H13v1h1.5a.5.5 0 0 1 0 1H13v1h.5a1.5 1.5 0 0 1 1.5 1.5v.5a.5.5 0 1 1-1 0v-.5a.5.5 0 0 0-.5-.5H13a5 5 0 0 1-10 0h-.5a.5.5 0 0 0-.5.5v.5a.5.5 0 1 1-1 0v-.5A1.5 1.5 0 0 1 2.5 10H3V9H1.5a.5.5 0 0 1 0-1H3V7h-.5A1.5 1.5 0 0 1 1 5.5V5a.5.5 0 0 1 1 0v.5a.5.5 0 0 0 .5.5H3c0-1.364.547-2.601 1.432-3.503l-.41-1.352a.5.5 0 0 1 .333-.623M4 7v4a4 4 0 0 0 3.5 3.97V7zm4.5 0v7.97A4 4 0 0 0 12 11V7zM12 6a4 4 0 0 0-1.334-2.982A3.98 3.98 0 0 0 8 2a3.98 3.98 0 0 0-2.667 1.018A4 4 0 0 0 4 6z" />
+              </svg>
+
               Report Bug
             </Link>
           </div>
@@ -89,7 +90,7 @@ export default function SupportHeader() {
           <div className="md:hidden py-4 border-t border-gray-600">
             <div className="flex flex-col space-y-4">
               <Link 
-                href="/" 
+                href="/support" 
                 className={`transition-colors ${
                   pathname === '/support' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
                 }`}
@@ -98,7 +99,7 @@ export default function SupportHeader() {
                 Support
               </Link>
               <Link 
-                href="/support" 
+                href="/support/getting-started" 
                 className={`transition-colors ${
                   pathname === '/support/getting-started' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
                 }`}
@@ -107,7 +108,7 @@ export default function SupportHeader() {
                 Getting Started
               </Link>
               <Link 
-                href="/about" 
+                href="/support/faqs" 
                 className={`transition-colors ${
                   pathname === '/support/faqs' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
                 }`}
@@ -117,16 +118,16 @@ export default function SupportHeader() {
               </Link>
              
               <div className="pt-4 border-t border-gray-600">
-                <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium block mb-3">
-                  <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mr-1"></span>
-                  Support Center
-                </span>
+              
                 <Link 
-                  href="/support/installation/complete-setup-guide" 
+                  href="/report-bug" 
                   className="bg-pastree-orange text-white px-4 py-2 rounded text-sm hover:bg-pastree-orange-hover transition-colors inline-block"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Get Started
+                  <svg fill="currentColor" className="size-4 inline mr-2 align-text-bottom" viewBox="0 0 16 16">
+                    <path d="M4.355.522a.5.5 0 0 1 .623.333l.291.956A5 5 0 0 1 8 1c1.007 0 1.946.298 2.731.811l.29-.956a.5.5 0 1 1 .957.29l-.41 1.352A5 5 0 0 1 13 6h.5a.5.5 0 0 0 .5-.5V5a.5.5 0 0 1 1 0v.5A1.5 1.5 0 0 1 13.5 7H13v1h1.5a.5.5 0 0 1 0 1H13v1h.5a1.5 1.5 0 0 1 1.5 1.5v.5a.5.5 0 1 1-1 0v-.5a.5.5 0 0 0-.5-.5H13a5 5 0 0 1-10 0h-.5a.5.5 0 0 0-.5.5v.5a.5.5 0 1 1-1 0v-.5A1.5 1.5 0 0 1 2.5 10H3V9H1.5a.5.5 0 0 1 0-1H3V7h-.5A1.5 1.5 0 0 1 1 5.5V5a.5.5 0 0 1 1 0v.5a.5.5 0 0 0 .5.5H3c0-1.364.547-2.601 1.432-3.503l-.41-1.352a.5.5 0 0 1 .333-.623M4 7v4a4 4 0 0 0 3.5 3.97V7zm4.5 0v7.97A4 4 0 0 0 12 11V7zM12 6a4 4 0 0 0-1.334-2.982A3.98 3.98 0 0 0 8 2a3.98 3.98 0 0 0-2.667 1.018A4 4 0 0 0 4 6z" />
+                  </svg>
+                  Report Bug
                 </Link>
               </div>
             </div>

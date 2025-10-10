@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <nav className="bg-pastree-dark text-white shadow-lg">
@@ -38,14 +40,24 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="features" className="text-white hover:text-pastree-orange transition-colors">
+            <Link 
+              href="/features" 
+              className={`transition-colors ${
+                pathname === '/features' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+              }`}
+            >
               Features
             </Link>
-            <Link href="#download" className="text-white hover:text-pastree-orange transition-colors">
+            <Link href="/#download" className="text-white hover:text-pastree-orange transition-colors">
               Download
             </Link>
             
-            <Link href="/about" className="text-white hover:text-pastree-orange transition-colors">
+            <Link 
+              href="/about" 
+              className={`transition-colors ${
+                pathname === '/about' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+              }`}
+            >
               About
             </Link>
           </div>
@@ -80,8 +92,10 @@ export default function Header() {
           <div className="md:hidden py-4 border-t border-gray-600">
             <div className="flex flex-col space-y-4">
               <Link 
-                href="#features" 
-                className="text-white hover:text-pastree-orange transition-colors"
+                href="/features" 
+                className={`transition-colors ${
+                  pathname === '/features' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Features
@@ -96,7 +110,9 @@ export default function Header() {
               
               <Link 
                 href="/about" 
-                className="text-white hover:text-pastree-orange transition-colors"
+                className={`transition-colors ${
+                  pathname === '/about' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
