@@ -1,5 +1,33 @@
+'use client';
+
+import useScrollAnimation from '@/hooks/useScrollAnimation';
+
 export default function FeaturesSection() {
+  const { ref, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '0px 0px -400px 0px',
+    triggerOnce: true
+  });
+
   const features = [
+    {
+      icon: (
+        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+      title: "Quick Access",
+      description: "Right-click context menu and keyboard shortcuts for lightning-fast clipboard operations."
+    },
+    {
+      icon: (
+        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      ),
+      title: "Instant Search",
+      description: "Find any clipboard item instantly with powerful search capabilities."
+    },
     {
       icon: (
         <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -21,11 +49,12 @@ export default function FeaturesSection() {
     {
       icon: (
         <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M13 10V3L4 14h7v7l9-11h-7z" />
+         <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       ),
-      title: "Quick Access",
-      description: "Right-click context menu and keyboard shortcuts for lightning-fast clipboard operations."
+      title: "Customize Settings",
+      description: "Set hot keys, adjust retention period, and more."
     },
     {
       icon: (
@@ -40,26 +69,31 @@ export default function FeaturesSection() {
 
   return (
     <section id="features" className="py-20">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+      <div className="container mx-auto px-4 overflow-y-visible">
+        <div ref={ref} className="text-center mb-8 overflow-y-visible">
           <h2 className="text-3xl md:text-4xl mb-4">Eliminate clipboard frustration</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Streamline your workflow with intelligent clipboard management
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+<div 
+  className="flex gap-8 overflow-x-auto overflow-y-visible p-8 scrollbar-none relative scroll-fade-mask"
+>
           {features.map((feature, index) => (
-            <div 
-            key={index}
-            className="bg-white rounded-xl p-8 hover-shadow-pastree transition-all duration-300 transform hover:-translate-y-2 text-center h-full group"
-          >
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-gray-500 group-hover:text-pastree-orange transition-all duration-700 ease-out mx-auto mb-6 group-hover:scale-125 group-hover:-translate-y-3 group-hover:rotate-3">
+       <div 
+       key={index}
+       className={`bg-white rounded-xl p-8 hover-shadow-pastree text-center group flex-shrink-0 w-80 hover:-translate-y-2 transition-all duration-600 ease-out ${
+         isVisible ? 'translate-x-0 opacity-100' : 'translate-x-[200%] opacity-0'
+       }`}
+     >
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-orange-600/30 group-hover:text-pastree-orange transition-all duration-700 ease-out mx-auto mb-6 group-hover:scale-125 group-hover:-translate-y-3 group-hover:rotate-3">
                 {feature.icon}
               </div>
-            <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-            <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-          </div>
+              <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+            </div>
           ))}
         </div>
       </div>

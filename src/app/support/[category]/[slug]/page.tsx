@@ -85,6 +85,296 @@ Welcome to Pastree! Let's get you set up in just a few minutes.
 
 Ready to start organizing your clipboard? Check out our [usage guide](/support/usage/manage-lists)!
       `
+    },
+    'complete-setup-guide': {
+      title: 'Complete installation and setup guide',
+      updatedAt: '2024-12-16',
+      imageUrl: '/support/images/install-extension.png',
+      content: `
+# Complete Installation and Setup Guide
+
+Get Pastree up and running on your system with this comprehensive guide covering everything from installation to advanced configuration.
+
+## System Requirements
+
+### Supported Browsers
+- **Chrome**: Version 88 or higher
+- **Firefox**: Version 78 or higher
+- **Edge**: Version 88 or higher
+- **Safari**: Version 14 or higher (macOS 11+)
+
+### Operating Systems
+- **Windows**: 10 or higher
+- **macOS**: 10.15 or higher
+- **Linux**: Ubuntu 18.04+ or equivalent
+
+## Installation Methods
+
+### Method 1: Browser Extension Stores (Recommended)
+
+#### Chrome Installation
+1. **Open Chrome Web Store**
+   - Go to [Chrome Web Store](https://chrome.google.com/webstore)
+   - Search for "Pastree" or visit our direct link
+
+2. **Install Extension**
+   - Click "Add to Chrome"
+   - Review permissions carefully
+   - Click "Add extension" to confirm
+
+3. **Pin Extension**
+   - Click the puzzle piece icon in Chrome toolbar
+   - Find Pastree and click the pin icon
+   - Pastree icon will now appear in your toolbar
+
+#### Firefox Installation
+1. **Open Firefox Add-ons**
+   - Go to [Firefox Add-ons](https://addons.mozilla.org)
+   - Search for "Pastree"
+
+2. **Install Add-on**
+   - Click "Add to Firefox"
+   - Review permissions
+   - Click "Add" to confirm
+
+3. **Pin Add-on**
+   - Click the puzzle piece icon in Firefox toolbar
+   - Pin Pastree for easy access
+
+#### Edge Installation
+1. **Open Microsoft Edge Add-ons**
+   - Go to [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons)
+   - Search for "Pastree"
+
+2. **Install Extension**
+   - Click "Get" button
+   - Review permissions
+   - Click "Add extension"
+
+### Method 2: Manual Installation (Advanced Users)
+
+#### Chrome/Edge Manual Install
+1. **Download Extension File**
+   - Download the .crx file from our website
+   - Save to your Downloads folder
+
+2. **Enable Developer Mode**
+   - Go to chrome://extensions/
+   - Toggle "Developer mode" ON
+
+3. **Load Extension**
+   - Click "Load unpacked"
+   - Select the Pastree folder
+   - Extension will be installed
+
+#### Firefox Manual Install
+1. **Download XPI File**
+   - Download the .xpi file from our website
+
+2. **Install Temporarily**
+   - Go to about:addons
+   - Click gear icon → "Install Add-on From File"
+   - Select the .xpi file
+
+## Initial Setup
+
+### First Launch
+1. **Click Pastree Icon**
+   - Click the Pastree icon in your browser toolbar
+   - Welcome screen will appear
+
+2. **Accept Terms**
+   - Read and accept the Terms of Service
+   - Review Privacy Policy
+   - Click "Get Started"
+
+3. **Choose Setup Type**
+   - **Quick Setup**: Use default settings
+   - **Custom Setup**: Configure advanced options
+
+### Quick Setup (Recommended for Beginners)
+
+1. **Create Account (Optional)**
+   - Sign up with email for cloud sync
+   - Or skip to use local storage only
+
+2. **Set Basic Preferences**
+   - Choose your theme (Light/Dark)
+   - Set notification preferences
+   - Enable auto-save
+
+3. **Create First List**
+   - Name your first list (e.g., "Work Templates")
+   - Add a few sample items
+   - Test the copy/paste functionality
+
+### Custom Setup (Advanced Users)
+
+1. **Privacy Settings**
+   - **Local Only**: All data stays on your device
+   - **Cloud Sync**: Sync across devices (requires account)
+   - **Selective Sync**: Choose what to sync
+
+2. **Security Configuration**
+   - Enable data encryption
+   - Set auto-clear intervals
+   - Configure password protection
+
+3. **Performance Tuning**
+   - Set cache size limits
+   - Configure background sync
+   - Choose compression settings
+
+4. **Integration Settings**
+   - Enable browser integration features
+   - Set up API access
+   - Configure export formats
+
+## Essential Configuration
+
+### Keyboard Shortcuts
+Set up these essential shortcuts for maximum productivity:
+
+| Shortcut | Action | Description |
+|----------|--------|-------------|
+| \`Ctrl+Shift+P\` | Open Pastree | Quick access to main interface |
+| \`Ctrl+Shift+V\` | Paste from Pastree | Paste selected item |
+| \`Ctrl+Shift+A\` | Add to Pastree | Add current selection |
+| \`Ctrl+Shift+S\` | Search Pastree | Quick search |
+
+### Notification Settings
+Configure when and how you receive notifications:
+
+- **Desktop Notifications**: Enable/disable popup notifications
+- **Sound Alerts**: Audio feedback for actions
+- **Visual Indicators**: Status indicators in browser
+- **Email Alerts**: Important updates via email
+
+### Sync Configuration
+If using cloud sync, configure these settings:
+
+- **Sync Frequency**: Real-time, hourly, or manual
+- **Data Selection**: Choose what to sync
+- **Conflict Resolution**: How to handle data conflicts
+- **Offline Mode**: Behavior when offline
+
+## Creating Your First Lists
+
+### Basic List Creation
+1. **Open Pastree**
+   - Click the Pastree icon
+   - Click "New List" button
+
+2. **Configure List**
+   - Enter descriptive name
+   - Choose category (optional)
+   - Set privacy level
+
+3. **Add Items**
+   - Click "Add Item"
+   - Paste or type content
+   - Add tags for organization
+
+### Advanced List Organization
+- **Categories**: Group related lists
+- **Tags**: Cross-list organization
+- **Favorites**: Quick access items
+- **Templates**: Reusable content
+
+## Testing Your Installation
+
+### Basic Functionality Test
+1. **Copy Test**
+   - Copy some text from any website
+   - Check if it appears in Pastree
+
+2. **Paste Test**
+   - Open Pastree
+   - Click on an item
+   - Verify it pastes correctly
+
+3. **Search Test**
+   - Use the search function
+   - Verify results are accurate
+
+### Advanced Features Test
+1. **Keyboard Shortcuts**
+   - Test all configured shortcuts
+   - Verify they work in different contexts
+
+2. **Sync Test** (if enabled)
+   - Add item on one device
+   - Check if it appears on another
+
+3. **Performance Test**
+   - Add many items
+   - Check loading speed
+   - Monitor memory usage
+
+## Troubleshooting Common Issues
+
+### Installation Problems
+- **Permission Denied**: Check browser security settings
+- **Installation Fails**: Try incognito mode
+- **Extension Disabled**: Re-enable in browser settings
+
+### Functionality Issues
+- **Clipboard Not Working**: Check permissions
+- **Shortcuts Not Working**: Check for conflicts
+- **Sync Not Working**: Verify internet connection
+
+### Performance Issues
+- **Slow Loading**: Clear cache and restart
+- **High Memory Usage**: Reduce stored items
+- **Crashes**: Update browser and extension
+
+## Next Steps
+
+### Learn More
+- [Creating and managing lists](/support/usage/manage-lists)
+- [Keyboard shortcuts guide](/support/usage/keyboard-shortcuts)
+- [Settings and preferences](/support/settings/preferences)
+
+### Get Help
+- [Common issues and solutions](/support/troubleshooting/common-issues)
+- [Contact support](/support)
+- [Community forum](https://community.pastree.com)
+
+### Advanced Features
+- [API integration](/support/settings/api-access)
+- [Custom themes](/support/settings/themes)
+- [Automation rules](/support/usage/automation)
+
+## Security Best Practices
+
+### Data Protection
+- **Regular Backups**: Export your data regularly
+- **Strong Passwords**: Use unique, strong passwords
+- **Two-Factor Authentication**: Enable if available
+- **Regular Updates**: Keep Pastree and browser updated
+
+### Privacy Considerations
+- **Review Permissions**: Only grant necessary permissions
+- **Local Storage**: Consider using local-only mode
+- **Data Retention**: Set appropriate retention periods
+- **Clear Sensitive Data**: Regularly clear sensitive items
+
+## Support and Resources
+
+### Getting Help
+- **Documentation**: Comprehensive guides and tutorials
+- **Video Tutorials**: Step-by-step video guides
+- **Community Forum**: User discussions and tips
+- **Direct Support**: Email support for complex issues
+
+### Staying Updated
+- **Release Notes**: New features and improvements
+- **Security Updates**: Important security patches
+- **Feature Requests**: Suggest new functionality
+- **Beta Testing**: Try new features early
+
+Congratulations! You now have Pastree fully installed and configured. Start organizing your clipboard content and enjoy a more productive workflow!
+      `
     }
   },
   usage: {

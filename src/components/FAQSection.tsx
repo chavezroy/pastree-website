@@ -38,7 +38,9 @@ export default function FAQSection() {
         <div className="max-w-4xl mx-auto">
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-sm overflow-hidden">
+              <div key={index} className={`bg-white rounded-lg overflow-hidden transition-all duration-300 ${
+                openFAQ === index ? 'shadow-[var(--box-shadow-pastree)]' : 'shadow-md-light'
+              }`}>
                 <button
                   className={`w-full px-6 py-4 text-left font-semibold text-lg transition-all duration-500 flex justify-between items-center ${
                     openFAQ === index 

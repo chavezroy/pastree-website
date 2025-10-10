@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function Header() {
+export default function SupportHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -36,31 +36,31 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Support-focused */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="features" className="text-white hover:text-pastree-orange transition-colors">
-              Features
+            <Link href="/" className="text-white hover:text-pastree-orange transition-colors">
+              Home
             </Link>
-            <Link href="#download" className="text-white hover:text-pastree-orange transition-colors">
-              Download
+            <Link href="/support" className="text-pastree-orange font-medium">
+              Support
             </Link>
-            
             <Link href="/about" className="text-white hover:text-pastree-orange transition-colors">
               About
             </Link>
+          
           </div>
 
-          {/* Right side - Trust badge and Report Bug button */}
+          {/* Right side - Support-specific elements */}
           <div className="hidden md:flex items-center space-x-4">
-            {/* <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-              <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-              100% Free & Secure
-            </span> */}
+            <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mr-1"></span>
+              Support Center
+            </span>
             <Link 
-              href="/support" 
-              className="border border-pastree-purple text-pastree-purple px-4 py-2 rounded text-sm hover:bg-white hover:text-pastree-orange transition-colors"
+              href="/support/installation/complete-setup-guide" 
+              className="bg-pastree-orange text-white px-4 py-2 rounded text-sm hover:bg-pastree-orange-hover transition-colors"
             >
-              Get Support
+              Report Bug
             </Link>
           </div>
 
@@ -80,20 +80,19 @@ export default function Header() {
           <div className="md:hidden py-4 border-t border-gray-600">
             <div className="flex flex-col space-y-4">
               <Link 
-                href="#features" 
+                href="/" 
                 className="text-white hover:text-pastree-orange transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Features
+                Home
               </Link>
               <Link 
-                href="#download" 
-                className="text-white hover:text-pastree-orange transition-colors"
+                href="/support" 
+                className="text-pastree-orange font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Download
+                Support
               </Link>
-              
               <Link 
                 href="/about" 
                 className="text-white hover:text-pastree-orange transition-colors"
@@ -101,17 +100,24 @@ export default function Header() {
               >
                 About
               </Link>
+              <Link 
+                href="/report-bug" 
+                className="text-white hover:text-pastree-orange transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Report Bug
+              </Link>
               <div className="pt-4 border-t border-gray-600">
-                <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium block mb-3">
-                  <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                  100% Free & Secure
+                <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium block mb-3">
+                  <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mr-1"></span>
+                  Support Center
                 </span>
                 <Link 
-                  href="/support" 
-                  className="border border-white text-white px-4 py-2 rounded text-sm hover:bg-white hover:text-pastree-dark transition-colors inline-block"
+                  href="/support/installation/complete-setup-guide" 
+                  className="bg-pastree-orange text-white px-4 py-2 rounded text-sm hover:bg-pastree-orange-hover transition-colors inline-block"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Get Support
+                  Get Started
                 </Link>
               </div>
             </div>
