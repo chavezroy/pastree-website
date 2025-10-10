@@ -194,7 +194,7 @@ export default function GettingStartedPage() {
                 </h2>
                 
                 <h3 className="text-2xl font-semibold mb-6 text-pastree-dark">First Steps with Pastree</h3>
-                <p className="text-lg mb-8">Once you've installed Pastree, you'll see the extension icon in your browser toolbar. Here's how to get started:</p>
+                <p className="text-lg mb-8">Once you{"'"}ve installed Pastree, you{"'"}ll see the extension icon in your browser toolbar. Here{"'"}s how to get started:</p>
                 
                 <ol className="space-y-6">
                   <li className="relative pl-20 pb-6 border-b border-gray-200">
@@ -464,7 +464,7 @@ Basic Clipboard Management
 
                 <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-l-4 border-yellow-500 p-5 my-6 rounded-r-lg">
                   <i className="bi bi-exclamation-triangle text-yellow-600 text-xl mr-3"></i>
-                  <strong>Note:</strong> Some keyboard shortcuts may conflict with other browser extensions or system shortcuts. Choose combinations that don\'t interfere with your existing workflow.
+                  <strong>Note:</strong> Some keyboard shortcuts may conflict with other browser extensions or system shortcuts. Choose combinations that don{"'"}t interfere with your existing workflow.
                 </div>
               </div>
 

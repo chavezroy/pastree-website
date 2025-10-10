@@ -74,7 +74,7 @@ export default function FAQPage() {
         },
         {
           question: 'Which browsers are supported?',
-          answer: 'Pastree currently supports Chrome, Firefox, Edge, and other Chromium-based browsers. We\'re working on expanding support to Safari and other browsers in the future.'
+          answer: `Pastree currently supports Chrome, Firefox, Edge, and other Chromium-based browsers. We{"'"}re working on expanding support to Safari and other browsers in the future.`
         }
       ]
     },
@@ -85,7 +85,7 @@ export default function FAQPage() {
       items: [
         {
           question: 'How do I install Pastree?',
-          answer: 'You can install Pastree from the Chrome Web Store or Firefox Add-ons. Simply search for "Pastree" in your browser\'s extension store, click "Add to Browser", and follow the installation prompts.'
+          answer: `You can install Pastree from the Chrome Web Store or Firefox Add-ons. Simply search for "Pastree" in your browser{"'"}s extension store, click "Add to Browser", and follow the installation prompts.`
         },
         {
           question: 'Do I need to create an account?',
@@ -93,7 +93,7 @@ export default function FAQPage() {
         },
         {
           question: 'How do I access Pastree after installation?',
-          answer: 'After installation, you\'ll see the Pastree icon in your browser toolbar. Click it to open the extension popup where you can view your clipboard history and manage your lists.'
+          answer: `After installation, you{"'"}ll see the Pastree icon in your browser toolbar. Click it to open the extension popup where you can view your clipboard history and manage your lists.`
         },
         {
           question: 'Can I customize Pastree settings?',
@@ -130,16 +130,16 @@ export default function FAQPage() {
       icon: 'bi-wrench',
       items: [
         {
-          question: 'Pastree isn\'t capturing my copied content',
-          answer: 'Make sure Pastree is enabled and has the necessary permissions. Check if you\'re copying from a secure (HTTPS) page, as some browsers restrict clipboard access on HTTP pages. Try refreshing the page and copying again.'
+          question: `Pastree isn{"'"}t capturing my copied content`,
+          answer: `Make sure Pastree is enabled and has the necessary permissions. Check if you{"'"}re copying from a secure (HTTPS) page, as some browsers restrict clipboard access on HTTP pages. Try refreshing the page and copying again.`
         },
         {
           question: 'The extension icon disappeared from my toolbar',
-          answer: 'This usually happens when the extension is disabled or needs to be reinstalled. Go to your browser\'s extension management page and make sure Pastree is enabled. If it\'s missing, reinstall it from the store.'
+          answer: `This usually happens when the extension is disabled or needs to be reinstalled. Go to your browser{"'"}s extension management page and make sure Pastree is enabled. If it{"'"}s missing, reinstall it from the store.`
         },
         {
           question: 'My clipboard history is not syncing across devices',
-          answer: 'Syncing requires you to be signed in to the same account on all devices. Make sure you\'re logged in and have a stable internet connection. Check your sync settings in the Pastree options.'
+          answer: `Syncing requires you to be signed in to the same account on all devices. Make sure you{"'"}re logged in and have a stable internet connection. Check your sync settings in the Pastree options.`
         },
         {
           question: 'Pastree is using too much storage space',
@@ -225,7 +225,7 @@ export default function FAQPage() {
             Frequently Asked Questions
           </h1>
           <p className="text-xl opacity-90 max-w-2xl mx-auto">
-            Find answers to common questions about Pastree. Can\'t find what {"you're"} looking for? Contact our support team.
+            Find answers to common questions about Pastree. Can{"'"}t find what {"you're"} looking for? Contact our support team.
           </p>
         </div>
       </header>
