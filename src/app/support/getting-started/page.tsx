@@ -464,7 +464,7 @@ Basic Clipboard Management
 
                 <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-l-4 border-yellow-500 p-5 my-6 rounded-r-lg">
                   <i className="bi bi-exclamation-triangle text-yellow-600 text-xl mr-3"></i>
-                  <strong>Note:</strong> Some keyboard shortcuts may conflict with other browser extensions or system shortcuts. Choose combinations that don't interfere with your existing workflow.
+                  <strong>Note:</strong> Some keyboard shortcuts may conflict with other browser extensions or system shortcuts. Choose combinations that don\'t interfere with your existing workflow.
                 </div>
               </div>
 

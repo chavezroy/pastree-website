@@ -225,7 +225,7 @@ export default function FAQPage() {
             Frequently Asked Questions
           </h1>
           <p className="text-xl opacity-90 max-w-2xl mx-auto">
-            Find answers to common questions about Pastree. Can't find what you're looking for? Contact our support team.
+            Find answers to common questions about Pastree. Can\'t find what {"you're"} looking for? Contact our support team.
           </p>
         </div>
       </header>
