@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import ContactSupport from '@/components/ContactSupport';
 
 // Force dynamic rendering to show skeleton every time
 export const dynamic = 'force-dynamic';
@@ -17,6 +18,31 @@ export default function GettingStartedPage() {
     }, 1000);
 
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['getting-started', 'basic-clipboard', 'creating-lists', 'keyboard-shortcuts'];
+      const scrollPosition = window.scrollY + 100; // Offset for better UX
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const element = document.getElementById(sections[i]);
+        if (element && element.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll);
+    
+    // Check initial position
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -41,32 +67,6 @@ export default function GettingStartedPage() {
       });
     });
 
-    // Highlight active section in table of contents
-    const handleScroll = () => {
-      const sections = document.querySelectorAll('.guide-section');
-      const navLinks = document.querySelectorAll('.table-of-contents a');
-      
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = (section as HTMLElement).offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (window.pageYOffset >= sectionTop - 200) {
-          current = section.getAttribute('id') || '';
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-          link.classList.add('active');
-        }
-      });
-      
-      setActiveSection(current);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleNewsletterSubscribe = () => {
@@ -168,17 +168,16 @@ export default function GettingStartedPage() {
             <div className="lg:col-span-1">
               <div className="bg-white rounded-xl p-8 shadow-lg sticky top-5">
                 <h5 className="text-lg font-semibold mb-6 text-pastree-dark">
-                  <i className="bi bi-list-ul mr-2"></i>Table of Contents
+                  <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 inline-block mr-2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                  </svg>
+                  Table of Contents
                 </h5>
                 <ul className="space-y-2">
                   <li><a href="#getting-started" className={`block py-2 text-pastree-dark hover:text-pastree-orange transition-colors ${activeSection === 'getting-started' ? 'text-pastree-orange' : ''}`}>Getting Started</a></li>
                   <li><a href="#basic-clipboard" className={`block py-2 text-pastree-dark hover:text-pastree-orange transition-colors ${activeSection === 'basic-clipboard' ? 'text-pastree-orange' : ''}`}>Basic Clipboard Management</a></li>
                   <li><a href="#creating-lists" className={`block py-2 text-pastree-dark hover:text-pastree-orange transition-colors ${activeSection === 'creating-lists' ? 'text-pastree-orange' : ''}`}>Creating & Managing Lists</a></li>
-                  <li><a href="#organizing-content" className={`block py-2 text-pastree-dark hover:text-pastree-orange transition-colors ${activeSection === 'organizing-content' ? 'text-pastree-orange' : ''}`}>Organizing Your Content</a></li>
                   <li><a href="#keyboard-shortcuts" className={`block py-2 text-pastree-dark hover:text-pastree-orange transition-colors ${activeSection === 'keyboard-shortcuts' ? 'text-pastree-orange' : ''}`}>Keyboard Shortcuts</a></li>
-                  {/* <li><a href="#advanced-features" className={`block py-2 text-pastree-dark hover:text-pastree-orange transition-colors ${activeSection === 'advanced-features' ? 'text-pastree-orange' : ''}`}>Advanced Features</a></li>
-                  <li><a href="#sync-settings" className={`block py-2 text-pastree-dark hover:text-pastree-orange transition-colors ${activeSection === 'sync-settings' ? 'text-pastree-orange' : ''}`}>Sync & Settings</a></li>
-                  <li><a href="#tips-tricks" className={`block py-2 text-pastree-dark hover:text-pastree-orange transition-colors ${activeSection === 'tips-tricks' ? 'text-pastree-orange' : ''}`}>Tips & Tricks</a></li> */}
                 </ul>
               </div>
             </div>
@@ -188,7 +187,10 @@ export default function GettingStartedPage() {
               {/* Getting Started */}
               <div id="getting-started" className="bg-white rounded-xl p-10 mb-10 shadow-lg border-l-4 border-pastree-orange">
                 <h2 className="text-3xl font-bold mb-8 text-pastree-orange border-b-3 border-pastree-orange pb-4">
-                  <i className="bi bi-play-circle mr-2"></i>Getting Started
+                  <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 mr-2 inline">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25h6.75a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15" />
+                  </svg>Getting Started
                 </h2>
                 
                 <h3 className="text-2xl font-semibold mb-6 text-pastree-dark">First Steps with Pastree</h3>
@@ -242,7 +244,10 @@ export default function GettingStartedPage() {
               {/* Basic Clipboard Management */}
               <div id="basic-clipboard" className="bg-white rounded-xl p-10 mb-10 shadow-lg border-l-4 border-pastree-orange">
                 <h2 className="text-3xl font-bold mb-8 text-pastree-orange border-b-3 border-pastree-orange pb-4">
-                  <i className="bi bi-clipboard-data mr-2"></i>Basic Clipboard Management
+                <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"  className="size-6 mr-2 inline">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75" />
+</svg>
+Basic Clipboard Management
                 </h2>
                 
                 <h3 className="text-2xl font-semibold mb-6 text-pastree-dark">Understanding Your Clipboard History</h3>
@@ -250,24 +255,30 @@ export default function GettingStartedPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-10">
                   <div className="bg-white p-8 rounded-xl shadow-md text-center hover:transform hover:-translate-y-1 transition-transform">
-                    <div className="w-16 h-16 bg-pastree-orange text-white rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
-                      <i className="bi bi-clock-history"></i>
+                    <div className="w-16 h-16 text-pastree-orange rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
+                      <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                      </svg>
                     </div>
                     <h5 className="text-xl font-semibold mb-4">Recent Items</h5>
                     <p>Your most recently copied items appear at the top of the list for quick access.</p>
                   </div>
                   
                   <div className="bg-white p-8 rounded-xl shadow-md text-center hover:transform hover:-translate-y-1 transition-transform">
-                    <div className="w-16 h-16 bg-pastree-orange text-white rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
-                      <i className="bi bi-search"></i>
+                    <div className="w-16 h-16 text-pastree-orange rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
+                      <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                      </svg>
                     </div>
                     <h5 className="text-xl font-semibold mb-4">Search & Filter</h5>
                     <p>Use the search bar to quickly find specific text or content in your history.</p>
                   </div>
                   
                   <div className="bg-white p-8 rounded-xl shadow-md text-center hover:transform hover:-translate-y-1 transition-transform">
-                    <div className="w-16 h-16 bg-pastree-orange text-white rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
-                      <i className="bi bi-pin-angle"></i>
+                    <div className="w-16 h-16 text-pastree-orange rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
+                      <svg fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z" />
+                      </svg>
                     </div>
                     <h5 className="text-xl font-semibold mb-4">Pin Important Items</h5>
                     <p>Pin frequently used items to keep them at the top of your clipboard history.</p>
@@ -323,7 +334,9 @@ export default function GettingStartedPage() {
               {/* Creating Lists */}
               <div id="creating-lists" className="bg-white rounded-xl p-10 mb-10 shadow-lg border-l-4 border-pastree-orange">
                 <h2 className="text-3xl font-bold mb-8 text-pastree-orange border-b-3 border-pastree-orange pb-4">
-                  <i className="bi bi-list-task mr-2"></i>Creating & Managing Lists
+                <svg fill="currentColor" className="mr-2 size-6 inline" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5"></path>
+                            </svg>Creating & Managing Lists
                 </h2>
                 
                 <h3 className="text-2xl font-semibold mb-6 text-pastree-dark">What Are Pastree Lists?</h3>
@@ -387,7 +400,10 @@ export default function GettingStartedPage() {
               {/* Keyboard Shortcuts */}
               <div id="keyboard-shortcuts" className="bg-white rounded-xl p-10 mb-10 shadow-lg border-l-4 border-pastree-orange">
                 <h2 className="text-3xl font-bold mb-8 text-pastree-orange border-b-3 border-pastree-orange pb-4">
-                  <i className="bi bi-keyboard mr-2"></i>Keyboard Shortcuts
+                <svg fill="currentColor" className="mr-2 size-6 inline" viewBox="0 0 16 16">
+  <path d="M14 5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM2 4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/>
+  <path d="M13 10.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm0-2a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-5 0A.25.25 0 0 1 8.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 8 8.75zm2 0a.25.25 0 0 1 .25-.25h1.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-1.5a.25.25 0 0 1-.25-.25zm1 2a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-5-2A.25.25 0 0 1 6.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 6 8.75zm-2 0A.25.25 0 0 1 4.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 4 8.75zm-2 0A.25.25 0 0 1 2.25 8h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 2 8.75zm11-2a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-2 0a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm-2 0A.25.25 0 0 1 9.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 9 6.75zm-2 0A.25.25 0 0 1 7.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 7 6.75zm-2 0A.25.25 0 0 1 5.25 6h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5A.25.25 0 0 1 5 6.75zm-3 0A.25.25 0 0 1 2.25 6h1.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-1.5A.25.25 0 0 1 2 6.75zm0 4a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25zm2 0a.25.25 0 0 1 .25-.25h5.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-5.5a.25.25 0 0 1-.25-.25z"/>
+</svg>Keyboard Shortcuts
                 </h2>
                 
                 <h3 className="text-2xl font-semibold mb-6 text-pastree-dark">Essential Shortcuts</h3>
@@ -452,24 +468,7 @@ export default function GettingStartedPage() {
                 </div>
               </div>
 
-              {/* Quick Navigation */}
-              <div className="bg-gradient-to-r from-pastree-orange to-orange-400 text-white p-8 rounded-xl text-center my-10">
-                <h4 className="text-2xl font-bold mb-5">
-                  <i className="bi bi-compass mr-2"></i>What's Next?
-                </h4>
-                <p className="text-lg mb-8">Continue exploring Pastree with these helpful resources:</p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <Link href="/support/installation/complete-setup-guide" className="bg-white text-pastree-orange px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                    <i className="bi bi-download mr-2"></i>Installation Guide
-                  </Link>
-                  <Link href="/support" className="bg-white text-pastree-orange px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                    <i className="bi bi-question-circle mr-2"></i>FAQ
-                  </Link>
-                  <Link href="/support" className="bg-white text-pastree-orange px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                    <i className="bi bi-envelope mr-2"></i>Get Support
-                  </Link>
-                </div>
-              </div>
+              <ContactSupport />
             </div>
           </div>
         </div>

@@ -29,6 +29,31 @@ export default function FAQPage() {
   
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['general', 'installation', 'features', 'troubleshooting'];
+      const scrollPosition = window.scrollY + 100; // Offset for better UX
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const element = document.getElementById(sections[i]);
+        if (element && element.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll);
+    
+    // Check initial position
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   const faqSections = [
     {
       id: 'general',
@@ -196,7 +221,8 @@ export default function FAQPage() {
       <header className="bg-hero-support-gradient text-pastree-dark py-20 text-center mb-12">
         <div className="container mx-auto px-4">
           <h1 className="text-5xl font-bold mb-5 text-pastree-purple">
-            <i className="bi bi-question-circle mr-3"></i>Frequently Asked Questions
+            
+            Frequently Asked Questions
           </h1>
           <p className="text-xl opacity-90 max-w-2xl mx-auto">
             Find answers to common questions about Pastree. Can't find what you're looking for? Contact our support team.
@@ -212,9 +238,11 @@ export default function FAQPage() {
             <div className="lg:col-span-1">
               <div className="bg-white rounded-xl p-8 shadow-lg sticky top-5">
                 <h5 className="text-lg font-semibold mb-6 text-pastree-dark">
-                  <i className="bi bi-list-ul mr-2"></i>FAQ Categories
+                  <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 inline-block mr-2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                  </svg> FAQ Categories
                 </h5>
-                <ul className="space-y-2">
+                <ul className="text-pastree-dark">
                   {faqSections.map((section) => (
                     <li key={section.id}>
                       <a 
@@ -235,8 +263,31 @@ export default function FAQPage() {
             <div className="lg:col-span-3">
               {faqSections.map((section, sectionIndex) => (
                 <div key={section.id} id={section.id} className="bg-white rounded-xl p-10 mb-10 shadow-lg border-l-4 border-pastree-orange">
-                  <h2 className="text-3xl font-bold mb-8 text-pastree-orange border-b-3 border-pastree-orange pb-4">
-                    <i className={`bi ${section.icon} mr-2`}></i>{section.title}
+                  <h2 className="text-3xl font-bold mb-8 text-pastree-orange border-b-3 border-pastree-orange pb-4 flex items-center">
+                    {section.id === 'general' && (
+                      <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 mr-3">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                      </svg>
+                    )}
+                    {section.id === 'installation' && (
+                      <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 mr-3">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                      </svg>
+                    )}
+                    {section.id === 'features' && (
+                      <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 mr-3">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 0 1 0 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 0 1 0-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281Z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                      </svg>
+                    )}
+                    {section.id === 'troubleshooting' && (
+                      <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 mr-3">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75a4.5 4.5 0 0 1-4.884 4.484c-1.076-.091-2.264.071-2.95.904l-7.152 8.684a2.548 2.548 0 1 1-3.586-3.586l8.684-7.152c.833-.686.995-1.874.904-2.95a4.5 4.5 0 0 1 6.336-4.486l-3.276 3.276a3.004 3.004 0 0 0 2.25 2.25l3.276-3.276c.256.565.398 1.192.398 1.852Z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.867 19.125h.008v.008h-.008v-.008Z" />
+                    </svg>
+                    
+                    )}
+                    {section.title}
                   </h2>
                   
                   <div className="space-y-4">
@@ -249,7 +300,7 @@ export default function FAQPage() {
                             openFAQ === globalIndex ? 'shadow-[var(--box-shadow-pastree)]' : 'shadow-md-light'
                           }`}>
                           <button
-                            className={`w-full px-6 py-4 text-left font-semibold text-lg transition-all duration-500 flex justify-between items-center ${
+                            className={`w-full px-6 py-4 text-pastree-dark text-left font-semibold text-lg transition-all duration-500 flex justify-between items-center ${
                                 openFAQ === globalIndex 
                                   ? 'bg-pastree-orange/5 text-pastree-orange' 
                                   : 'hover:bg-pastree-orange/5 hover:text-pastree-orange'
