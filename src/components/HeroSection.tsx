@@ -59,7 +59,7 @@ export default function HeroSection() {
                 heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
             >
-              <h1 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <h1 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-pastree-purple">
                 Every clipboard item lives in{' '}
                 <span className={`text-gradient-purple ${titleVisible ? 'gradient-text-animated-2x' : ''}`}>Pastree</span>
               </h1>
@@ -76,7 +76,7 @@ export default function HeroSection() {
             >
               <button 
                 onClick={handleDownloadClick}
-                className="text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center download-group download-button gradient-button group"
+                className="text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center download-group download-button gradient-download-button group"
               >
                 <div className="download-icon-container w-5 h-5 mr-2">
                 <svg className="w-5 h-5 mr-2 download-icon" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">

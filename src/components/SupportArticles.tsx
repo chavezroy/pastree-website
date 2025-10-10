@@ -58,7 +58,7 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
             <h3 className="text-2xl mb-8">Getting Started</h3>
             
             {/* Quick Start Guide Card */}
-            <div className="bg-white rounded-xl p-6 mb-8">
+            <div className="bg-white rounded-xl p-6 mb-8 transition-all duration-300 group hover:shadow-lg hover:-translate-y-1">
               <div className="flex items-center mb-4">
                
                 <h4 className="text-xl font-bold">{tutorial.title}</h4>
@@ -85,10 +85,10 @@ export default function SupportArticles({ popularArticles, recentUpdates, tutori
                       href={update.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block bg-white rounded-lg p-4 shadow-sm hover:bg-white transition-colors"
+                      className="block bg-white rounded-lg p-4 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all group"
                     >
                       <p className="text-sm text-gray-500 mb-1">{update.date}</p>
-                      <p className="font-medium text-pastree-dark hover:text-pastree-orange">
+                      <p className="font-medium text-pastree-dark group-hover:text-pastree-orange">
                         {update.title}
                       </p>
                     </a>

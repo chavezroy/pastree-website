@@ -22,7 +22,7 @@ export default function FinalCTASection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <button 
                 onClick={handleDownloadClick}
-                className="text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center download-group download-button gradient-button group"
+                className="text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center download-group download-button gradient-download-button group"
               >
                 <div className="download-icon-container w-5 h-5 mr-2">
                 <svg className="w-5 h-5 mr-2 download-icon" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">

@@ -22,6 +22,19 @@
   --box-shadow-focus-orange-strong: 0 0 0 4px rgba(237, 142, 91, 0.4);
 }
 
+
+@layer base {
+  *:focus {
+    @apply outline-none ring-0;
+  }
+  
+  /* Or more specific */
+  a:focus,
+  button:focus {
+    @apply outline-none ring-0;
+  }
+}
+
 /* Essential global styles */
 html {
   scroll-behavior: smooth;
@@ -315,10 +328,21 @@ button:not(:disabled) {
   opacity: 1;
   animation: button-gradient 3s ease infinite;
 }
+.download-group:hover .gradient-download-button::before,
+.gradient-download-button:hover::before {
+  opacity: 1;
+  animation: button-gradient 3s ease 2;
+}
 
 /* Button styles */
 .gradient-button {
   background-color: #907BA2;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.gradient-download-button {
+  background-color: #ed8e5b;
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -332,6 +356,19 @@ button:not(:disabled) {
   right: 0;
   bottom: 0;
   background: linear-gradient(-75deg, #907BA2, #9066b7, #907BA2, #8453a3);
+  background-size: 500%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+.gradient-download-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(-75deg, #ed8e5b, #ff9f6c, #ed8e5b, #f99762);
   background-size: 500%;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -391,14 +428,4 @@ button:not(:disabled) {
 .orange-flash {
   background: linear-gradient(135deg, #ed8e5b, #ffddc2);
   animation: orange-flash 3s ease-in-out infinite;
-}
-/* Hide default focus ring globally */
-*:focus {
-  outline: none;
-}
-
-/* Or make it transparent */
-*:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
 }
