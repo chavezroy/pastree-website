@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function SupportHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <nav className="bg-pastree-dark text-white shadow-lg">
@@ -38,14 +40,21 @@ export default function SupportHeader() {
 
           {/* Desktop Navigation - Support-focused */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-white hover:text-pastree-orange transition-colors">
-              Home
-            </Link>
-            <Link href="/support" className="text-pastree-orange font-medium">
+            
+            <Link href="/support" className={`transition-colors ${
+                pathname === '/support' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+              }`}>
               Support
             </Link>
-            <Link href="/about" className="text-white hover:text-pastree-orange transition-colors">
-              About
+            <Link href="/support/getting-started" className={`transition-colors ${
+                pathname === '/support/getting-started' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+              }`}>
+              Getting Started
+            </Link>
+            <Link href="/support/faqs" className={`transition-colors ${
+                pathname === '/support/faqs' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+              }`}>
+              FAQs
             </Link>
           
           </div>
@@ -81,32 +90,32 @@ export default function SupportHeader() {
             <div className="flex flex-col space-y-4">
               <Link 
                 href="/" 
-                className="text-white hover:text-pastree-orange transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link 
-                href="/support" 
-                className="text-pastree-orange font-medium"
+                className={`transition-colors ${
+                  pathname === '/support' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Support
               </Link>
               <Link 
-                href="/about" 
-                className="text-white hover:text-pastree-orange transition-colors"
+                href="/support" 
+                className={`transition-colors ${
+                  pathname === '/support/getting-started' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                About
+                Getting Started
               </Link>
               <Link 
-                href="/report-bug" 
-                className="text-white hover:text-pastree-orange transition-colors"
+                href="/about" 
+                className={`transition-colors ${
+                  pathname === '/support/faqs' ? 'text-pastree-orange font-medium' : 'text-white hover:text-pastree-orange'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Report Bug
+                FAQs
               </Link>
+             
               <div className="pt-4 border-t border-gray-600">
                 <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium block mb-3">
                   <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mr-1"></span>
