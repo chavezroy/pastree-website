@@ -1,14 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import ContactSupport from '@/components/ContactSupport';
 export const dynamic = 'force-dynamic';
 export default function FAQPage() {
   const [activeSection, setActiveSection] = useState('');
   const [openItems, setOpenItems] = useState<number[]>([]);
-  const pathname = usePathname();
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
   const toggleItem = (index: number) => {

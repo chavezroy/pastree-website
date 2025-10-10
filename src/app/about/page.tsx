@@ -9,7 +9,7 @@ export default function AboutPage() {
   
   // Use intersection observer for animations
   const { ref: heroRef, isVisible: heroVisible } = useScrollAnimation({ threshold: 0.1 });
-  const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation({ threshold: 0.2, triggerOnce: true });
+  const { ref: contentRef } = useScrollAnimation({ threshold: 0.2, triggerOnce: true });
 
   useEffect(() => {
     setIsLoaded(true);

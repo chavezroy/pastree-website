@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import ContactSupport from '@/components/ContactSupport';
 
 // Force dynamic rendering to show skeleton every time
