@@ -6,8 +6,8 @@ import Header from './Header';
 export default function ConditionalHeader() {
   const pathname = usePathname();
   
-  // Don't render header for support pages and report-bug page (they have their own layout)
-  if (pathname.startsWith('/support') || pathname === '/report-bug') {
+  // Don't render header for support pages, report-bug page, and email-support page (they have their own layout)
+  if (pathname.startsWith('/support') || pathname === '/report-bug' || pathname === '/email-support') {
     return null;
   }
   

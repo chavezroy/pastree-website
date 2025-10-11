@@ -10,7 +10,7 @@ export default function ContactSupport() {
       description: "Get personalized help via email",
       buttonText: "Send Email",
       buttonClass: "border-pastree-purple text-pastree-purple hover:bg-white hover:text-pastree-orange",
-      href: "mailto:support@pastr.ee?subject=Support Request"
+      href: "/email-support"
     },
     {
       icon: (
