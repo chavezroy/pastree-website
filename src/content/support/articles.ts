@@ -10,6 +10,14 @@ export const popularArticles: SupportArticle[] = [
     updatedAt: '2024-12-15'
   },
   {
+    id: 'installation-setup',
+    categoryId: 'installation',
+    title: 'Complete Installation & Setup Guide',
+    description: 'Comprehensive installation and configuration guide with tips and best practices',
+    slug: 'installation-setup',
+    updatedAt: '2024-12-16'
+  },
+  {
     id: 'manage-lists',
     categoryId: 'usage',
     title: 'Creating and managing clipboard lists',

@@ -16,7 +16,7 @@ export default function FAQSection() {
     },
     {
       question: "Which browsers are supported?",
-      answer: "Pastree is available for Chrome, Firefox, and Edge browsers. The Chrome version also works on other Chromium-based browsers like Brave and Opera. We're working on Safari support for future releases."
+      answer: "Pastree is available for Chrome, Firefox, and Edge browsers. The Chrome version also works on other Chromium-based browsers like Brave and Opera. Safari support might be available for future releases if demand exists."
     },
     {
       question: "Is Pastree really free?",

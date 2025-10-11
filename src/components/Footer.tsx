@@ -77,11 +77,7 @@ export default function Footer() {
                   User Guide
                 </Link>
               </li>
-              <li>
-                <Link href="#" className="hover:text-pastree-orange transition-colors">
-                  Community
-                </Link>
-              </li>
+           
             </ul>
           </div>
 
@@ -104,11 +100,7 @@ export default function Footer() {
                   Edge
                 </Link>
               </li>
-              <li>
-                <Link href="#" className="hover:text-pastree-orange transition-colors">
-                  Safari (Coming)
-                </Link>
-              </li>
+            
             </ul>
           </div>
         </div>
