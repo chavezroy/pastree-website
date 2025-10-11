@@ -24,11 +24,11 @@ export default function DownloadSection() {
           <div className="flex-1 max-w-sm">
             <button 
               onClick={handleChromeDownload}
-              className="w-full bg-orange-gradient hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-white rounded-xl p-6 flex items-center justify-center min-h-[80px]"
+              className="w-full bg-orange-gradient hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-white rounded-xl p-6 flex items-center justify-center min-h-[80px] group"
             >
               <div className="flex items-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/icons/chrome-icon.svg" alt="Chrome" width={48} height={48} className="mr-4" />
+                <img src="/icons/chrome-icon.svg" alt="Chrome" width={48} height={48} className="mr-4 group-hover:text-pastree-orange transition-all duration-700 ease-out mx-auto group-hover:scale-125 group-hover:-translate-y-3 group-hover:rotate-3" />
                 <div className="text-left">
                   <div className="font-bold text-lg">Chrome Extension</div>
                   <div className="text-sm opacity-90">Works with Chrome & Edge</div>
@@ -41,11 +41,11 @@ export default function DownloadSection() {
           <div className="flex-1 max-w-sm">
             <button 
               onClick={handleFirefoxDownload}
-              className="w-full bg-orange-gradient hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-white rounded-xl p-6 flex items-center justify-center min-h-[80px]"
+              className="w-full bg-orange-gradient hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-white rounded-xl p-6 flex items-center justify-center min-h-[80px] group"
             >
               <div className="flex items-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/icons/firefox-icon.svg" alt="Firefox" width={48} height={48} className="mr-4" />
+                <img src="/icons/firefox-icon.svg" alt="Firefox" width={48} height={48} className="mr-4 group-hover:text-pastree-orange transition-all duration-700 ease-out mx-auto group-hover:scale-125 group-hover:-translate-y-3 group-hover:rotate-3" />
                 <div className="text-left">
                   <div className="font-bold text-lg">Firefox Add-on</div>
                   <div className="text-sm opacity-90">For Firefox browsers</div>

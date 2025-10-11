@@ -9,7 +9,19 @@ export default function InstallationPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   const { ref, isVisible } = useScrollAnimation();
+  const handleChromeDownload = () => {
+    const element = document.getElementById('chrome-install');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
+  const handleFirefoxDownload = () => {
+    const element = document.getElementById('firefox-install');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -184,26 +196,41 @@ export default function InstallationPage() {
                 Quick Start
               </h2>
               <p className="text-lg mb-8">Choose your browser below to get started with Pastree. Installation takes less than 2 minutes!</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-24">
-                <a
-                  href="#chrome-install"
-                  className="inline-block border-2 border-pastree-purple w-full sm:max-w-48 md:max-w-64 text-gray-500 hover:bg-white hover:text-pastree-orange px-6 py-2 rounded-full font-semibold transition-colors"
-                >
-                  <svg className="w-6 h-6 mr-3 inline-block" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                  </svg>
-                  Install for Chrome
-                </a>
-                <a
-                  href="#firefox-install"
-                  className="inline-block border-2 border-pastree-purple w-full sm:max-w-48 md:max-w-64 text-gray-500 hover:bg-white hover:text-pastree-orange px-6 py-2 rounded-full font-semibold transition-colors"
-                >
-                  <svg className="w-6 h-6 mr-3 inline-block" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                  </svg>
-                  Install for Firefox
-                </a>
+              <div className="flex flex-col md:flex-row justify-center gap-8 max-w-4xl mx-auto">
+          {/* Chrome Extension */}
+          <div className="flex-1 max-w-sm">
+            <button 
+              onClick={handleChromeDownload}
+              className="w-full bg-orange-gradient hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-white rounded-xl p-6 flex items-center justify-center min-h-[80px] group"
+            >
+              <div className="flex items-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/icons/chrome-icon.svg" alt="Chrome" width={48} height={48} className="mr-4 group-hover:text-pastree-orange transition-all duration-700 ease-out mx-auto group-hover:scale-125 group-hover:-translate-y-3 group-hover:rotate-3" />
+                <div className="text-left">
+                  <div className="font-bold text-lg">Chrome Extension</div>
+                  <div className="text-sm opacity-90">Works with Chrome & Edge</div>
+                </div>
               </div>
+            </button>
+          </div>
+
+          {/* Firefox Add-on */}
+          <div className="flex-1 max-w-sm">
+            <button 
+              onClick={handleFirefoxDownload}
+              className="w-full bg-orange-gradient hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-white rounded-xl p-6 flex items-center justify-center min-h-[80px] group"
+            >
+              <div className="flex items-center">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/icons/firefox-icon.svg" alt="Firefox" width={48} height={48} className="mr-4 group-hover:text-pastree-orange transition-all duration-700 ease-out mx-auto group-hover:scale-125 group-hover:-translate-y-3 group-hover:rotate-3" />
+                <div className="text-left">
+                  <div className="font-bold text-lg">Firefox Add-on</div>
+                  <div className="text-sm opacity-90">For Firefox browsers</div>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
             </div>
 
             {/* Chrome Installation */}
