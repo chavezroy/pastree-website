@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Pastree - Clipboard Manager for Chrome & Firefox",
     description: "Pastree is a clipboard manager for Chrome and Firefox that allows you to save and organize your clipboard history.",
-    images: ["/og-pastree.png"],
+    images: ["/og-pastree.jpg"],
     type: "website",
     url: "https://pastr.ee/",
     siteName: "Pastree",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pastree - Clipboard Manager for Chrome & Firefox",
     description: "Pastree is a clipboard manager for Chrome and Firefox that allows you to save and organize your clipboard history.",
-    images: ["/og-pastree.png"],
+    images: ["/og-pastree.jpg"],
     creator: "@pastree",
   },
   icons: {
