@@ -265,7 +265,7 @@ export default function InstallationPage() {
                     <div>
                       <h3 className="font-semibold text-lg mb-2">Visit the Chrome Web Store</h3>
                       <p className="text-gray-600">
-                        Click the "Available in Chrome Web Store" button above or search for "Pastree" in the Chrome Web Store.
+                        Click the &quot;Available in Chrome Web Store&quot; button above or search for &quot;Pastree&quot; in the Chrome Web Store.
                       </p>
                     </div>
                   </li>
@@ -276,7 +276,7 @@ export default function InstallationPage() {
                     <div>
                       <h3 className="font-semibold text-lg mb-2">Add to Chrome</h3>
                       <p className="text-gray-600">
-                        Click the blue "Add to Chrome" button on the Pastree extension page.
+                        Click the blue &quot;Add to Chrome&quot; button on the Pastree extension page.
                       </p>
                     </div>
                   </li>
@@ -287,7 +287,7 @@ export default function InstallationPage() {
                     <div>
                       <h3 className="font-semibold text-lg mb-2">Review Permissions</h3>
                       <p className="text-gray-600">
-                        A popup will appear showing the permissions Pastree needs. Review them and click "Add extension" to confirm.
+                        A popup will appear showing the permissions Pastree needs. Review them and click &quot;Add extension&quot; to confirm.
                       </p>
                     </div>
                   </li>
@@ -360,7 +360,7 @@ export default function InstallationPage() {
                     <div>
                       <h3 className="font-semibold text-lg mb-2">Visit Firefox Add-ons</h3>
                       <p className="text-gray-600">
-                        Click the "Get the Add-on" button above or search for "Pastree" on the Firefox Add-ons website.
+                        Click the &quot;Get the Add-on&quot; button above or search for &quot;Pastree&quot; on the Firefox Add-ons website.
                       </p>
                     </div>
                   </li>
@@ -371,7 +371,7 @@ export default function InstallationPage() {
                     <div>
                       <h3 className="font-semibold text-lg mb-2">Add to Firefox</h3>
                       <p className="text-gray-600">
-                        Click the blue "Add to Firefox" button on the Pastree add-on page.
+                        Click the blue &quot;Add to Firefox&quot; button on the Pastree add-on page.
                       </p>
                     </div>
                   </li>
@@ -382,7 +382,7 @@ export default function InstallationPage() {
                     <div>
                       <h3 className="font-semibold text-lg mb-2">Confirm Installation</h3>
                       <p className="text-gray-600">
-                        A permission dialog will appear. Review the permissions and click "Add" to install the extension.
+                        A permission dialog will appear. Review the permissions and click &quot;Add&quot; to install the extension.
                       </p>
                     </div>
                   </li>
@@ -393,7 +393,7 @@ export default function InstallationPage() {
                     <div>
                       <h3 className="font-semibold text-lg mb-2">Access the Extension</h3>
                       <p className="text-gray-600">
-                        The Pastree icon will appear in your Firefox toolbar. If you don&apos;t see it, click the menu button and select "Customize toolbar..."
+                        The Pastree icon will appear in your Firefox toolbar. If you don&apos;t see it, click the menu button and select &quot;Customize toolbar...&quot;
                       </p>
                     </div>
                   </li>

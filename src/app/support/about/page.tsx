@@ -1,4 +1,4 @@
-import SupportHeader from '@/components/SupportHeader';
+import Link from 'next/link';
 
 async function getLatestRelease() {
   const headers: Record<string, string> = {
@@ -74,9 +74,9 @@ export default async function AboutPage() {
                 })}
               </p>    
               <p className='my-4'>&copy; {new Date().getFullYear()}. All Rights Reserved.</p>
-              <p><a href="/support" className='text-pastree-orange inline-flex items-center gap-1 hover:underline'>Get Pastree support <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <p><Link href="/support" className='text-pastree-orange inline-flex items-center gap-1 hover:underline'>Get Pastree support <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg></a>
+                </svg></Link>
               </p>   
               </div>
               <div>

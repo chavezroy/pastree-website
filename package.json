@@ -9,7 +9,21 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "debug:build": "DEBUG=* next build 2>&1 | tee build-debug.log",
+    "debug:dev": "DEBUG=* next dev 2>&1 | tee dev-debug.log",
+    "debug:analyze": "ANALYZE=true next build",
+    "debug:type-check": "tsc --noEmit --pretty",
+    "debug:lint-detailed": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "debug:deps": "npm ls --depth=0",
+    "debug:outdated": "npm outdated",
+    "debug:audit": "npm audit --audit-level=moderate",
+    "debug:clean": "rm -rf .next node_modules/.cache build-debug.log dev-debug.log",
+    "debug:full-check": "npm run debug:type-check && npm run debug:lint-detailed && npm run debug:build",
+    "debug:memory": "node --max-old-space-size=4096 node_modules/.bin/next build",
+    "debug:verbose": "NODE_OPTIONS='--trace-warnings' next build --debug",
+    "debug:tailwind": "npx tailwindcss --input src/app/globals.css --output debug-output/tailwind-output.css --watch",
+    "debug:tailwind-build": "npx tailwindcss --input src/app/globals.css --output debug-output/tailwind-build.css"
   },
   "dependencies": {
     "critters": "^0.0.23",
