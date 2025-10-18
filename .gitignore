@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Debug files and logs
+debug-*.js
+debug-*.mjs
+debug-*.sh
+debug.sh
+DEBUG-README.md
+tailwindcss-*.log
+debug-output/
+
