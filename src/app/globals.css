@@ -460,3 +460,162 @@ button:not(:disabled) {
   mask-image: linear-gradient(to right, transparent 0%, black 20px, black calc(100% - 20px), transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20px, black calc(100% - 20px), transparent 100%);
 }
+
+
+
+.object-contain {
+  padding: 60px;
+}
+
+/* Hero Animation */
+/* Messaging container animations */
+.messaging {
+  animation: messagingFadeUp 1s ease-out forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.messagingImg {
+  animation: messagingImgFadeIn 1s ease-out forwards;
+  animation-delay: 1.0s;
+  opacity: 0;
+}
+
+/* Highlight animation for command and paste keys */
+.highlight-fx {
+  filter: drop-shadow(0 0 0px rgba(144, 123, 162, 0));
+  animation: highlightFadeIn 1s ease-in-out forwards;
+}
+
+.highlight-fx.commandkey {
+  animation: highlightFadeIn 1s ease-in-out forwards, highlightFadeOut 0.5s ease-in-out forwards;
+  animation-delay: 1.5s, 3.7s;
+}
+
+.highlight-fx.ckey {
+  animation: highlightFadeIn 1s ease-in-out forwards, highlightFadeOut 0.5s ease-in-out forwards;
+  animation-delay: 2.5s, 3.7s;
+}
+
+.highlight-fx path[stroke] {
+  stroke-opacity: 0;
+  animation: strokeFadeIn .5s ease-in-out forwards;
+}
+
+.highlight-fx.commandkey path[stroke] {
+  animation: strokeFadeIn .5s ease-in-out forwards, strokeFadeOut 0.5s ease-in-out forwards;
+  animation-delay: 2.0s, 3.7s;
+}
+
+.highlight-fx.ckey path[stroke] {
+  animation: strokeFadeIn .5s ease-in-out forwards, strokeFadeOut 0.5s ease-in-out forwards;
+  animation-delay: 3.0s, 3.7s;
+}
+
+/* Keyframe animations */
+@keyframes messagingFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes messagingImgFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes highlightFadeIn {
+  0% {
+    filter: drop-shadow(0 0 0px rgba(144, 123, 162, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 5px rgba(144, 123, 162, 0.3));
+  }
+  100% {
+    filter: drop-shadow(0 0 10px rgba(144, 123, 162, 1));
+  }
+}
+
+@keyframes strokeFadeIn {
+  0% {
+    stroke-opacity: 0;
+  }
+  50% {
+    stroke-opacity: 0.5;
+  }
+  100% {
+    stroke-opacity: 1;
+  }
+}
+
+@keyframes highlightFadeOut {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(144, 123, 162, 1));
+  }
+  100% {
+    filter: drop-shadow(0 0 0px rgba(144, 123, 162, 0));
+  }
+}
+
+@keyframes strokeFadeOut {
+  0% {
+    stroke-opacity: 1;
+  }
+  100% {
+    stroke-opacity: 0;
+  }
+}
+
+
+
+
+
+.orange-glow {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  /* background-size: 100% 100%;
+  background-position: 0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0;
+  background-image: 
+    radial-gradient(18% 28% at 24% 50%,#18182C 7%,#073AFF00 100%), 
+    radial-gradient(18% 28% at 18% 71%,#842d6e59 6%,#073AFF00 100%), 
+    radial-gradient(70% 53% at 36% 76%,#18182C 0,#073AFF00 100%), 
+    radial-gradient(42% 53% at 15% 94%,#1a1435 7%,#073AFF00 100%), 
+    radial-gradient(42% 53% at 34% 72%,#222 7%,#073AFF00 100%), 
+    radial-gradient(18% 28% at 35% 87%,#5f427b 7%,#073AFF00 100%), 
+    radial-gradient(31% 43% at 7% 98%,#1f2f33 24%,#073AFF00 100%), 
+    radial-gradient(21% 37% at 72% 23%,#eab6719c 24%,#073AFF00 100%), 
+    radial-gradient(35% 56% at 91% 74%,#20015ef5 9%,#073AFF00 100%), 
+    radial-gradient(74% 86% at 67% 38%,#ff9341f5 24%,#073AFF00 100%), 
+    linear-gradient(125deg,#18182C 1%,rgb(70, 48, 122) 100%); */
+  overflow: hidden;
+  z-index: 0;
+}
+
+.orange-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at center, rgba(255, 147, 65, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at center, rgba(132, 45, 110, 0.3) 0%, transparent 60%),
+    radial-gradient(circle at center, rgba(255, 200, 100, 0.2) 0%, transparent 40%);
+  animation: gradientShift 15s ease-in-out infinite, pulse 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+

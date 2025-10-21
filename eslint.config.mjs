@@ -22,6 +22,8 @@ const eslintConfig = [
       "debug-*.js",
       "debug-*.mjs",
       "next-env.d.ts",
+      "**/*.min.js",
+      "**/*.bundle.js",
     ],
   },
 ];
