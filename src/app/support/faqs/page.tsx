@@ -231,7 +231,7 @@ export default function FAQPage() {
       >
         {/* Background overlay with subtle animation */}
         <div className="absolute inset-0 z-10">
-          <div className={`absolute inset-0 bg-gradient-to-br from-orange-100/20 to-purple-100/20 transition-opacity duration-2000 ${
+          <div className={`absolute inset-0 bg-linear-to-br from-orange-100/20 to-purple-100/20 transition-opacity duration-2000 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`} />
         </div>
@@ -320,7 +320,7 @@ export default function FAQPage() {
                       
                       return (
                         <div key={itemIndex} className={`bg-white rounded-lg overflow-hidden transition-all duration-300 ${
-                            openFAQ === globalIndex ? 'shadow-[var(--box-shadow-pastree)]' : 'shadow-md-light'
+                            openFAQ === globalIndex ? 'shadow-(--box-shadow-pastree)' : 'shadow-md-light'
                           }`}>
                           <button
                             className={`w-full px-6 py-4 text-pastree-dark text-left font-semibold text-lg transition-all duration-500 flex justify-between items-center ${

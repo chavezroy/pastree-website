@@ -67,7 +67,7 @@ export default function PrivacyPage() {
       >
         {/* Background overlay with subtle animation */}
         <div className="absolute inset-0 z-10">
-          <div className={`absolute inset-0 bg-gradient-to-br from-orange-100/20 to-purple-100/20 transition-opacity duration-2000 ${
+          <div className={`absolute inset-0 bg-linear-to-br from-orange-100/20 to-purple-100/20 transition-opacity duration-2000 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`} />
         </div>
@@ -122,7 +122,7 @@ export default function PrivacyPage() {
                 <div className="bg-white rounded-xl shadow-lg p-8 md:p-12">
                 <div className="prose prose-lg max-w-none">
                   <p className="text-gray-600 mb-8">
-                    <strong>Last updated</strong>: October 18, 2025
+                    <strong>Last updated</strong>: October 21, 2025
                   </p>
 
                   <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg mb-8">
@@ -277,7 +277,7 @@ export default function PrivacyPage() {
 
                   <hr className="my-8 border-gray-200" />
                   <p className="text-gray-500 italic">
-                    This privacy policy is effective as of October 18, 2025 and applies to all versions of the Pastree browser extension.
+                    This privacy policy is effective as of October 21, 2025 and applies to all versions of the Pastree browser extension.
                   </p>
                 </div>
                 </div>

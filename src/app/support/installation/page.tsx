@@ -48,7 +48,7 @@ export default function InstallationPage() {
         <section className="bg-hero-support-gradient text-pastree-dark py-20 relative">
           {/* Background overlay */}
           <div className="absolute inset-0 z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-100/20 to-purple-100/20 opacity-0" />
+            <div className="absolute inset-0 bg-linear-to-br from-orange-100/20 to-purple-100/20 opacity-0" />
           </div>
 
           <div className="container mx-auto px-4 relative z-20 text-center">
@@ -64,7 +64,7 @@ export default function InstallationPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               {/* Quick Start Section Skeleton */}
-              <div className="bg-gradient-to-r from-gray-200 to-gray-300 rounded-xl p-12 text-center mb-12 animate-pulse">
+              <div className="bg-linear-to-r from-gray-200 to-gray-300 rounded-xl p-12 text-center mb-12 animate-pulse">
                 <div className="h-8 bg-gray-300 rounded mb-4 max-w-xs mx-auto"></div>
                 <div className="h-6 bg-gray-300 rounded mb-8 max-w-md mx-auto"></div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -163,7 +163,7 @@ export default function InstallationPage() {
       <section className="bg-hero-support-gradient text-pastree-dark py-20 relative">
         {/* Background overlay */}
         <div className="absolute inset-0 z-10">
-          <div className={`absolute inset-0 bg-gradient-to-br from-orange-100/20 to-purple-100/20 transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'
+          <div className={`absolute inset-0 bg-linear-to-br from-orange-100/20 to-purple-100/20 transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'
             }`} />
         </div>
 
@@ -251,7 +251,7 @@ export default function InstallationPage() {
                     <img
                       src="/chrome-badge.png"
                       alt="Available in the Chrome Web Store"
-                      className="h-16 border-1 border-gray-200 rounded-sm"
+                      className="h-16 border border-gray-200 rounded-sm"
                     />
                     </a>
                   </div>
@@ -259,7 +259,7 @@ export default function InstallationPage() {
 
                 <ol className="space-y-6">
                   <li className="flex items-start mb-14">
-                    <div className="flex-shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                    <div className="shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
                       1
                     </div>
                     <div>
@@ -270,7 +270,7 @@ export default function InstallationPage() {
                     </div>
                   </li>
                   <li className="flex items-start mb-14">
-                    <div className="flex-shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                    <div className="shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
                       2
                     </div>
                     <div>
@@ -281,7 +281,7 @@ export default function InstallationPage() {
                     </div>
                   </li>
                   <li className="flex items-start mb-14">
-                    <div className="flex-shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                    <div className="shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
                       3
                     </div>
                     <div>
@@ -292,7 +292,7 @@ export default function InstallationPage() {
                     </div>
                   </li>
                   <li className="flex items-start mb-14">
-                    <div className="flex-shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                    <div className="shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
                       4
                     </div>
                     <div>
@@ -303,7 +303,7 @@ export default function InstallationPage() {
                     </div>
                   </li>
                   <li className="flex items-start mb-14">
-                    <div className="flex-shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                    <div className="shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
                       5
                     </div>
                     <div>
@@ -317,7 +317,7 @@ export default function InstallationPage() {
 
                 <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg mt-8">
                   <div className="flex items-start">
-                    <svg className="w-6 h-6 text-blue-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-6 h-6 text-blue-500 mr-3 mt-1 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                     </svg>
                     <div>
@@ -354,7 +354,7 @@ export default function InstallationPage() {
 
                 <ol className="space-y-6">
                   <li className="flex items-start mb-14">
-                    <div className="flex-shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                    <div className="shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
                       1
                     </div>
                     <div>
@@ -365,7 +365,7 @@ export default function InstallationPage() {
                     </div>
                   </li>
                   <li className="flex items-start mb-14">
-                    <div className="flex-shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                    <div className="shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
                       2
                     </div>
                     <div>
@@ -376,7 +376,7 @@ export default function InstallationPage() {
                     </div>
                   </li>
                   <li className="flex items-start mb-14">
-                    <div className="flex-shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                    <div className="shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
                       3
                     </div>
                     <div>
@@ -387,7 +387,7 @@ export default function InstallationPage() {
                     </div>
                   </li>
                   <li className="flex items-start mb-14">
-                    <div className="flex-shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                    <div className="shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
                       4
                     </div>
                     <div>
@@ -398,7 +398,7 @@ export default function InstallationPage() {
                     </div>
                   </li>
                   <li className="flex items-start mb-14">
-                    <div className="flex-shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                    <div className="shrink-0 w-12 h-12 bg-pastree-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
                       5
                     </div>
                     <div>
@@ -412,7 +412,7 @@ export default function InstallationPage() {
 
                 <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg mt-8">
                   <div className="flex items-start">
-                    <svg className="w-6 h-6 text-blue-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-6 h-6 text-blue-500 mr-3 mt-1 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                     </svg>
                     <div>
@@ -477,25 +477,25 @@ export default function InstallationPage() {
                     <h4 className="text-lg font-semibold mb-4">First Steps:</h4>
                     <ul className="space-y-2">
                       <li className="flex items-start">
-                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         Copy some text to see it appear in Pastree
                       </li>
                       <li className="flex items-start">
-                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         Click the Pastree icon to view your clipboard history
                       </li>
                       <li className="flex items-start">
-                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         Try creating your first clipboard list
                       </li>
                       <li className="flex items-start">
-                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         Explore the settings to customize your experience
@@ -506,25 +506,25 @@ export default function InstallationPage() {
                     <h4 className="text-lg font-semibold mb-4">Pro Tips:</h4>
                     <ul className="space-y-2">
                       <li className="flex items-start">
-                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         Use keyboard shortcuts for faster access
                       </li>
                       <li className="flex items-start">
-                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         Organize frequently used text into categories
                       </li>
                       <li className="flex items-start">
-                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         Enable sync to access your clips on any device
                       </li>
                       <li className="flex items-start">
-                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-5 h-5 text-pastree-orange mr-2 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                         Pin important items to keep them at the top
@@ -536,7 +536,7 @@ export default function InstallationPage() {
 
               <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-lg mb-0">
                 <div className="flex items-start">
-                  <svg className="w-6 h-6 text-yellow-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-yellow-500 mr-3 mt-1 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                   </svg>
                   <div>

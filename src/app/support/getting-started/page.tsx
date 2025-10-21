@@ -164,7 +164,7 @@ export default function GettingStartedPage() {
       >
         {/* Background overlay with subtle animation */}
         <div className="absolute inset-0 z-10">
-          <div className={`absolute inset-0 bg-gradient-to-br from-orange-100/20 to-purple-100/20 transition-opacity duration-2000 ${
+          <div className={`absolute inset-0 bg-linear-to-br from-orange-100/20 to-purple-100/20 transition-opacity duration-2000 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`} />
         </div>
@@ -261,7 +261,7 @@ export default function GettingStartedPage() {
                   </li>
                 </ol>
 
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-500 p-5 my-6 rounded-r-lg">
+                <div className="bg-linear-to-r from-blue-50 to-purple-50 border-l-4 border-blue-500 p-5 my-6 rounded-r-lg">
                   <i className="bi bi-info-circle text-blue-500 text-xl mr-3"></i>
                   <strong>Quick Tip:</strong> Pastree automatically saves your clipboard history as you copy text. No manual saving required!
                 </div>
@@ -351,7 +351,7 @@ Basic Clipboard Management
                   </li>
                 </ol>
 
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 p-5 my-6 rounded-r-lg">
+                <div className="bg-linear-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 p-5 my-6 rounded-r-lg">
                   <i className="bi bi-lightbulb text-green-500 text-xl mr-3"></i>
                   <strong>Pro Tip:</strong> Use the preview feature to see the full content of longer text items before copying them.
                 </div>
@@ -417,7 +417,7 @@ Basic Clipboard Management
                   </li>
                 </ol>
 
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-500 p-5 my-6 rounded-r-lg">
+                <div className="bg-linear-to-r from-blue-50 to-purple-50 border-l-4 border-blue-500 p-5 my-6 rounded-r-lg">
                   <i className="bi bi-info-circle text-blue-500 text-xl mr-3"></i>
                   <strong>List Ideas:</strong> Create lists for email signatures, shipping addresses, frequently used passwords, code templates, social media posts, or any text you use regularly.
                 </div>
@@ -488,7 +488,7 @@ Basic Clipboard Management
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-l-4 border-yellow-500 p-5 my-6 rounded-r-lg">
+                <div className="bg-linear-to-r from-yellow-50 to-orange-50 border-l-4 border-yellow-500 p-5 my-6 rounded-r-lg">
                   <i className="bi bi-exclamation-triangle text-yellow-600 text-xl mr-3"></i>
                   <strong>Note:</strong> Some keyboard shortcuts may conflict with other browser extensions or system shortcuts. Choose combinations that don{"'"}t interfere with your existing workflow.
                 </div>
