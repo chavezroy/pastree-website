@@ -1,5 +1,108 @@
 // Post-Test Questionnaire JavaScript - Session-Based Version
 
+// Progress Tracking Functions
+function updateProgressBar() {
+    const sessionId = sessionManager.getSessionFromURL();
+    if (!sessionId) return;
+    
+    const session = sessionManager.getSession(sessionId);
+    if (!session) return;
+    
+    // Count completed sections from session
+    const completedSections = getCompletedSectionsCount(session);
+    
+    // Count current section progress (questions filled in current section)
+    const currentSection = getCurrentSection();
+    const currentSectionProgress = getCurrentSectionProgress(currentSection);
+    
+    // Calculate total progress - Post-test has 3 main sections
+    const totalSections = 3; // SUS, NPS, Feedback
+    const questionsPerSection = 10; // Approximate questions per section
+    const totalQuestions = totalSections * questionsPerSection;
+    
+    // Completed questions = (completed sections * questions per section) + current section progress
+    const completedQuestions = (completedSections * questionsPerSection) + currentSectionProgress;
+    
+    // Ensure we don't exceed 100%
+    const percentage = Math.min(Math.round((completedQuestions / totalQuestions) * 100), 100);
+    
+    // Update progress bar
+    const progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+        progressBar.style.width = percentage + '%';
+    }
+    
+    // Update completion stats
+    const completionStats = document.getElementById('completionStats');
+    if (completionStats) {
+        completionStats.textContent = `${Math.min(completedQuestions, totalQuestions)} of ${totalQuestions} questions completed (${percentage}%)`;
+    }
+    
+    // Update current section name
+    const currentSectionName = document.getElementById('currentSectionName');
+    if (currentSectionName) {
+        const sectionNames = {
+            'sus': 'SUS Questionnaire',
+            'nps': 'NPS Rating',
+            'feedback': 'Final Feedback'
+        };
+        currentSectionName.textContent = sectionNames[currentSection] || 'Unknown Section';
+    }
+}
+
+// Function to count completed sections from session data
+function getCompletedSectionsCount(session) {
+    let completed = 0;
+    if (session.data.posttest) {
+        if (session.data.posttest.sus) completed++;
+        if (session.data.posttest.nps) completed++;
+        if (session.data.posttest.feedback) completed++;
+    }
+    return completed;
+}
+
+// Function to get current active section
+function getCurrentSection() {
+    const activeTab = document.querySelector('.task-tab.active');
+    if (activeTab) {
+        return activeTab.dataset.section || 'sus';
+    }
+    return 'sus'; // Default to SUS
+}
+
+// Function to count completed questions in current section
+function getCurrentSectionProgress(sectionId) {
+    const currentSectionContent = document.querySelector(`.task-form[data-section="${sectionId}"]`);
+    if (!currentSectionContent) return 0;
+    
+    let completedQuestions = 0;
+    
+    // Count required radio button groups that are filled
+    const requiredRadioGroups = currentSectionContent.querySelectorAll('input[type="radio"][required]');
+    const radioGroupNames = new Set();
+    requiredRadioGroups.forEach(input => radioGroupNames.add(input.name));
+    
+    radioGroupNames.forEach(groupName => {
+        const isGroupFilled = currentSectionContent.querySelector(`input[name="${groupName}"]:checked`);
+        if (isGroupFilled) completedQuestions++;
+    });
+    
+    // Count required textareas that have content
+    const requiredTextareas = currentSectionContent.querySelectorAll('textarea[required]');
+    requiredTextareas.forEach(textarea => {
+        if (textarea.value.trim()) completedQuestions++;
+    });
+    
+    // Count optional questions that have content (for more granular progress)
+    const optionalTextareas = currentSectionContent.querySelectorAll('textarea:not([required])');
+    optionalTextareas.forEach(textarea => {
+        if (textarea.value.trim()) completedQuestions += 0.5; // Half point for optional questions
+    });
+    
+    // Cap at 10 questions per section to prevent overflow
+    return Math.min(completedQuestions, 10);
+}
+
 // Custom Modal Functions for Session Errors
 function showSessionError(message) {
     // Create modal overlay
@@ -130,6 +233,9 @@ document.addEventListener('DOMContentLoaded', function () {
         nps: !!session.data.posttest?.nps,
         feedback: !!session.data.posttest?.feedback
     });
+    
+    // Initialize progress bar
+    updateProgressBar();
 });
 
 // Function to show completion message when all parts are completed
@@ -138,7 +244,7 @@ function showCompletionMessage() {
     if (container) {
         container.innerHTML = `
             <div class="header">
-                <img src="../images/pastree-logo.svg" alt="Pastree Logo" class="logo">
+                <img src="../images/PastreeLogo-drk.svg" alt="Pastree Logo" class="logo">
                 <h2>Post-Test Questionnaire</h2>
                 <p class="subtitle">Final Assessment & Feedback</p>
             </div>
@@ -389,6 +495,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Set proper tabindex for all form elements
     setTabIndexOrder();
+    
+    // Add progress bar updates to all form inputs
+    document.querySelectorAll('input, textarea, select').forEach(field => {
+        field.addEventListener('input', updateProgressBar);
+        field.addEventListener('change', updateProgressBar);
+    });
 });
 
 // Function to set proper tabindex order for all forms
@@ -449,6 +561,9 @@ taskTabs.forEach(tab => {
         });
         document.getElementById(`${taskId}-form`).classList.add('active');
 
+        // Update progress bar
+        updateProgressBar();
+
         // Scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -481,6 +596,9 @@ document.getElementById('susForm').addEventListener('submit', function (e) {
     try {
         sessionManager.saveFormData(sessionId, 'posttest-sus', data);
         console.log('✅ SUS data saved to session:', sessionId);
+        
+        // Update progress bar after successful save
+        updateProgressBar();
     } catch (error) {
         console.error('❌ Failed to save to session:', error);
         showNotification('Failed to save data. Please try again.', 'error');
@@ -538,6 +656,9 @@ document.getElementById('npsForm').addEventListener('submit', function (e) {
     try {
         sessionManager.saveFormData(sessionId, 'posttest-nps', data);
         console.log('✅ NPS data saved to session:', sessionId);
+        
+        // Update progress bar after successful save
+        updateProgressBar();
     } catch (error) {
         console.error('❌ Failed to save to session:', error);
         showNotification('Failed to save data. Please try again.', 'error');
@@ -595,6 +716,9 @@ document.getElementById('feedbackForm').addEventListener('submit', function (e) 
     try {
         sessionManager.saveFormData(sessionId, 'posttest-feedback', data);
         console.log('✅ Feedback data saved to session:', sessionId);
+        
+        // Update progress bar after successful save
+        updateProgressBar();
     } catch (error) {
         console.error('❌ Failed to save to session:', error);
         showNotification('Failed to save data. Please try again.', 'error');

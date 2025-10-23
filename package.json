@@ -26,9 +26,12 @@
     "debug:tailwind-build": "npx tailwindcss --input src/app/globals.css --output debug-output/tailwind-build.css"
   },
   "dependencies": {
+    "@types/pg": "^8.15.5",
     "critters": "^0.0.23",
+    "dotenv": "^17.2.3",
     "fuse.js": "^7.1.0",
     "next": "15.5.4",
+    "pg": "^8.16.3",
     "picocolors": "^1.1.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",

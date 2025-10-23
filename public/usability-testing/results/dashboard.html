@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dashboard-page">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pastree - Usability Test Results Dashboard</title>
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="stylesheet" href="../styles/shared.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {
@@ -280,11 +282,104 @@
             font-size: 5em;
             margin-bottom: 20px;
         }
+        
+        /* Print Styles for PDF Export */
+        @media print {
+            /* Hide navigation and UI elements */
+            .header, .nav, .export-btn, .filter-controls, 
+            .file-upload, .no-data, #noData {
+                display: none !important;
+            }
+            
+            /* Optimize layout for print */
+            body {
+                font-size: 12pt;
+                line-height: 1.4;
+                color: #000;
+                background: #fff;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .container {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .section {
+                break-inside: avoid;
+                margin-bottom: 20pt;
+                padding: 10pt;
+                border: 1pt solid #ddd;
+                background: #fff;
+            }
+            
+            .section-title {
+                font-size: 14pt;
+                font-weight: bold;
+                margin-bottom: 10pt;
+                color: #000;
+                border-bottom: 2pt solid #333;
+                padding-bottom: 5pt;
+            }
+            
+            /* Chart containers */
+            .chart-container {
+                break-inside: avoid;
+                margin: 10pt 0;
+                text-align: center;
+            }
+            
+            /* Summary cards */
+            .summary-card {
+                break-inside: avoid;
+                margin: 5pt;
+                padding: 10pt;
+                border: 1pt solid #ccc;
+                background: #f9f9f9;
+            }
+            
+            /* Data tables */
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 10pt 0;
+                font-size: 10pt;
+            }
+            
+            th, td {
+                border: 1pt solid #333;
+                padding: 5pt;
+                text-align: left;
+            }
+            
+            th {
+                background: #f0f0f0;
+                font-weight: bold;
+            }
+            
+            /* Page breaks */
+            .page-break {
+                page-break-before: always;
+            }
+            
+            /* Ensure charts are visible */
+            canvas {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            /* Hide interactive elements */
+            button, input, select, textarea {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="dashboard-container">
-        
+        <div class="dash-logo"><img src="../images/PastreeLogo-drk.svg" alt="Pastree Logo" class="logo" /></div>
         <div class="header">
             <h1>📊 Pastree Usability Test Results</h1>
             <div class="header-info">
@@ -455,9 +550,13 @@
     <!-- Session Manager -->
     <script src="../session-manager.js"></script>
     
+    <!-- Data Processor -->
+    <script src="data-processor.js?v=1.1"></script>
+    
     <script>
-        // Version 3.3 - Fixed NPS display to show raw value instead of calculated score
-        console.log('🚀 Dashboard Script v3.3 loaded');
+        // Version 3.4 - Fixed DataProcessor class name and added export features
+        console.log('🚀 Dashboard Script v3.4 loaded');
+        console.log('🔍 UsabilityDataProcessor available:', typeof UsabilityDataProcessor);
         
         let allData = {
             pretest: [],
@@ -467,6 +566,7 @@
         
         let charts = {};
         let currentFilter = 'all';
+        let dataProcessor = null;
         
         // Auto-load data from localStorage on page load
         document.addEventListener('DOMContentLoaded', function() {
@@ -841,6 +941,10 @@
         function processData() {
             document.getElementById('dashboardContent').style.display = 'block';
             document.getElementById('noData').style.display = 'none';
+            
+            // Initialize DataProcessor with current data
+            dataProcessor = new UsabilityDataProcessor();
+            dataProcessor.data = allData;
             
             // Calculate SUS scores for all post-test data
             allData.posttest.forEach(participant => {
@@ -1488,11 +1592,56 @@
         }
         
         function exportCSV() {
-            alert('CSV export feature coming soon!');
+            if (!dataProcessor) {
+                alert('No data available to export. Please load some session data first.');
+                return;
+            }
+            
+            try {
+                const csvContent = dataProcessor.exportToCSV();
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                
+                if (link.download !== undefined) {
+                    const url = URL.createObjectURL(blob);
+                    link.setAttribute('href', url);
+                    link.setAttribute('download', `pastree-usability-results-${new Date().toISOString().split('T')[0]}.csv`);
+                    link.style.visibility = 'hidden';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                }
+            } catch (error) {
+                console.error('CSV export failed:', error);
+                alert('Failed to export CSV. Please try again.');
+            }
         }
         
         function exportPDF() {
-            alert('PDF export feature coming soon! Use your browser\'s Print to PDF option for now.');
+            // Check if there's data to export
+            if (allData.pretest.length === 0 && allData.posttask.length === 0 && allData.posttest.length === 0) {
+                alert('No data available to export. Please load some session data first.');
+                return;
+            }
+            
+            // Show instructions to user
+            const instructions = `PDF Export Instructions:
+            
+1. Click OK to open the print dialog
+2. In the print dialog:
+   - Select "Save as PDF" as your destination
+   - Choose "More settings" if available
+   - Set margins to "Minimum" for best results
+   - Enable "Background graphics" to include charts
+3. Click "Save" and choose your file location
+
+The PDF will include all dashboard data, charts, and statistics.`;
+            
+            if (confirm(instructions)) {
+                // Trigger print dialog
+                window.print();
+            }
         }
     </script>
 </body>

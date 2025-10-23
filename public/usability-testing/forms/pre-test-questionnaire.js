@@ -134,7 +134,7 @@ function showCompletionMessage() {
     if (container) {
         container.innerHTML = `
             <div class="header">
-                <img src="../images/pastree-logo.svg" alt="Pastree Logo" class="logo">
+                <img src="../images/PastreeLogo-drk.svg" alt="Pastree Logo" class="logo">
                 <h2>Pre-Test Questionnaire</h2>
                 <p class="subtitle">Background Information & Demographics</p>
             </div>

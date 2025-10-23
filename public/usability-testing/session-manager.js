@@ -329,9 +329,10 @@ class SessionManager {
             return `${currentDir}/${basePath}?session=${sessionId}`;
         }
 
-        // For http/https URLs, use proper origin
+        // For http/https URLs, use proper origin with usability-testing prefix
         const origin = window.location.origin || window.location.protocol + '//' + window.location.host;
-        const url = new URL(basePath, origin);
+        const fullPath = `/usability-testing/${basePath}`;
+        const url = new URL(fullPath, origin);
         url.searchParams.set('session', sessionId);
         return url.toString();
     }

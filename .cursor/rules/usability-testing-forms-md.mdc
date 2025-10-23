@@ -1,0 +1,294 @@
+---
+alwaysApply: true
+---
+# Usability Testing Forms - Development Rules
+
+## Overview
+This rule defines best practices for developing and maintaining the usability testing forms in the Pastree project, including form groups, data management, session handling, and progress indicators.
+
+## File Structure
+```
+public/usability-testing/
+├── forms/
+│   ├── index.html                    # Forms portal
+│   ├── pre-test-questionnaire.html   # Background & demographics
+│   ├── pre-test-questionnaire.js     # Pre-test form logic
+│   ├── post-task-questions.html      # Task feedback forms
+│   ├── post-task-questions.js        # Post-task form logic
+│   ├── post-test-questionnaire.html  # Final questionnaire
+│   └── post-test-questionnaire.js    # Post-test form logic
+├── session-manager.js                # Session management system
+└── images/                          # Form assets
+```
+
+## Form Group Implementation
+
+### HTML Structure
+- **Container**: Use `.container` class for main form wrapper
+- **Header**: Include logo, title, and subtitle in `.header` section
+- **Form Groups**: Organize questions in `.question` containers
+- **Required Fields**: Mark with `required` attribute and `*` visual indicator
+- **Validation**: Use `novalidate` on forms for custom validation
+
+### CSS Classes
+```css
+/* Form Structure */
+.container { max-width: 900px; margin: 0 auto; }
+.header { text-align: center; margin-bottom: 40px; }
+.question { margin-bottom: 30px; padding: 20px; }
+.question-label { font-weight: 600; margin-bottom: 12px; }
+.required { color: #e74c3c; font-weight: bold; }
+
+/* Input Types */
+.rating-scale { display: flex; justify-content: space-between; }
+.radio-group { display: flex; flex-direction: column; gap: 10px; }
+.radio-option { padding: 10px; background: #f8f9fa; border-radius: 6px; }
+```
+
+### Form Validation
+- **Client-side**: Custom validation with visual feedback
+- **Error Styling**: Red borders and background highlights
+- **Inline Messages**: Show validation banners above forms
+- **Required Fields**: Clear indication of missing required fields
+
+## Data Management
+
+### Form Data Structure
+```javascript
+const formData = {
+    participantId: 'P1',
+    timestamp: new Date().toISOString(),
+    responses: {
+        // Field name: value pairs
+        'age': '25-34',
+        'task1-ease': '4',
+        'task1-success': 'yes'
+    }
+};
+```
+
+### Data Collection
+- **FormData API**: Use `new FormData(form)` for data collection
+- **Field Mapping**: Map form fields to structured data objects
+- **Validation**: Validate data before submission
+- **Sanitization**: Clean and validate all input data
+
+### Storage Strategy
+- **Session Storage**: Use `sessionManager` for temporary data
+- **Local Storage**: Auto-save drafts every 30 seconds
+- **Data Persistence**: Store completed forms in session data
+- **Export**: Support JSON export for data analysis
+
+## Session Management
+
+### Session Manager Integration
+```javascript
+// Initialize session
+const sessionId = sessionManager.getSessionFromURL();
+const session = sessionManager.getSession(sessionId);
+
+// Save form data
+sessionManager.saveFormData(sessionId, 'pretest', formData);
+
+// Navigate between forms
+sessionManager.navigateToNextForm(sessionId, 'next-form.html');
+```
+
+### Session Lifecycle
+1. **Creation**: Generate unique session ID with timestamp
+2. **Storage**: Store in localStorage with 48-hour expiration
+3. **Retrieval**: Load session data on form initialization
+4. **Updates**: Save form data incrementally
+5. **Cleanup**: Auto-expire sessions after 48 hours
+
+### Error Handling
+- **Session Not Found**: Redirect to admin start page
+- **Expired Session**: Show error and redirect
+- **Storage Errors**: Graceful fallback with user notification
+- **Network Issues**: Offline-capable with local storage
+
+## Progress Indicators
+
+### Fixed Progress Bar
+```css
+.progress-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    z-index: 10000;
+}
+
+.progress-info {
+    position: fixed;
+    top: 8px;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.95);
+    z-index: 9999;
+}
+```
+
+### Progress Calculation
+- **Granular Tracking**: Count individual questions, not just tasks
+- **Real-time Updates**: Update on every form input change
+- **Percentage Display**: Show "X of Y questions completed (Z%)"
+- **Visual Feedback**: Smooth progress bar animations
+
+### Progress Updates
+```javascript
+function updateProgressBar() {
+    const completedTasks = session.data.posttask?.length || 0;
+    const currentTaskProgress = getCurrentTaskProgress(currentTask);
+    const totalQuestions = 6 * 5; // 6 tasks × 5 questions each
+    const completedQuestions = (completedTasks * 5) + currentTaskProgress;
+    const percentage = Math.min(Math.round((completedQuestions / totalQuestions) * 100), 100);
+    
+    // Update UI elements
+    progressBar.style.width = percentage + '%';
+    completionStats.textContent = `${completedQuestions} of ${totalQuestions} questions completed (${percentage}%)`;
+}
+```
+
+## JavaScript Best Practices
+
+### Event Handling
+- **Form Submission**: Prevent default, validate, then submit
+- **Input Changes**: Update progress bar on every change
+- **Tab Switching**: Update progress and current task display
+- **Auto-save**: Save drafts every 30 seconds
+
+### Error Handling
+```javascript
+try {
+    sessionManager.saveFormData(sessionId, 'pretest', data);
+    showNotification('Data saved successfully!', 'success');
+} catch (error) {
+    console.error('Save failed:', error);
+    showNotification('Failed to save data. Please try again.', 'error');
+}
+```
+
+### Performance
+- **Debouncing**: Debounce progress updates to prevent excessive calls
+- **Efficient DOM**: Cache DOM elements and reuse selectors
+- **Memory Management**: Clean up event listeners and timers
+- **Lazy Loading**: Load form sections as needed
+
+## Accessibility
+
+### Form Accessibility
+- **Labels**: All inputs must have associated labels
+- **Tab Order**: Logical tabindex sequence
+- **Focus Management**: Clear focus indicators
+- **Screen Readers**: Proper ARIA labels and descriptions
+
+### Visual Accessibility
+- **Color Contrast**: Meet WCAG AA standards
+- **Font Sizes**: Minimum 16px for body text
+- **Interactive Elements**: Clear hover and focus states
+- **Error Indicators**: Multiple ways to show errors (color, text, icons)
+
+## Testing
+
+### Form Validation Testing
+- **Required Fields**: Test all required field validation
+- **Data Types**: Verify correct data type handling
+- **Edge Cases**: Test empty forms, invalid data, etc.
+- **Cross-browser**: Test in Chrome, Firefox, Safari, Edge
+
+### Session Management Testing
+- **Session Creation**: Verify unique session IDs
+- **Data Persistence**: Test localStorage functionality
+- **Expiration**: Test 48-hour session expiration
+- **Error Recovery**: Test session recovery scenarios
+
+### Progress Indicator Testing
+- **Accuracy**: Verify progress calculations are correct
+- **Real-time Updates**: Test progress updates on input changes
+- **Visual Feedback**: Ensure smooth animations and transitions
+- **Edge Cases**: Test progress at 0%, 100%, and overflow scenarios
+
+## Deployment
+
+### File Organization
+- **Static Assets**: Keep images and CSS organized
+- **Version Control**: Use version parameters for cache busting
+- **CDN**: Consider CDN for external dependencies (Chart.js)
+- **Compression**: Minify CSS and JavaScript for production
+
+### Environment Considerations
+- **Local Development**: Test with file:// protocol
+- **Remote Deployment**: Ensure HTTPS compatibility
+- **Cross-domain**: Handle CORS if needed
+- **Mobile**: Test responsive design on mobile devices
+
+## Maintenance
+
+### Code Organization
+- **Modular Functions**: Keep functions focused and reusable
+- **Clear Naming**: Use descriptive variable and function names
+- **Comments**: Document complex logic and business rules
+- **Consistency**: Follow established patterns across all forms
+
+### Updates and Changes
+- **Backward Compatibility**: Maintain session data compatibility
+- **Migration**: Plan for data structure changes
+- **Versioning**: Track form versions and changes
+- **Documentation**: Keep this rule file updated with changes
+
+## Common Patterns
+
+### Form Initialization
+```javascript
+document.addEventListener('DOMContentLoaded', function() {
+    const sessionId = sessionManager.getSessionFromURL();
+    if (!sessionId) {
+        showSessionError('No session found');
+        return;
+    }
+    
+    const session = sessionManager.getSession(sessionId);
+    if (!session) {
+        showSessionError('Session expired');
+        return;
+    }
+    
+    // Initialize form
+    updateProgressBar();
+    loadFormData(session);
+});
+```
+
+### Form Submission
+```javascript
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+        return;
+    }
+    
+    const formData = collectFormData();
+    
+    try {
+        sessionManager.saveFormData(sessionId, formType, formData);
+        showSuccessMessage();
+        navigateToNextForm();
+    } catch (error) {
+        showErrorMessage(error);
+    }
+});
+```
+
+### Progress Tracking
+```javascript
+// Update progress on any form change
+document.querySelectorAll('input, textarea, select').forEach(field => {
+    field.addEventListener('input', updateProgressBar);
+    field.addEventListener('change', updateProgressBar);
+});
+```
+
+This rule ensures consistent, maintainable, and user-friendly usability testing forms that provide excellent user experience and reliable data collection.
