@@ -2,7 +2,7 @@
 // Handles getting session details and updating session status
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getSession, updateSessionStatus, getSessionSubmissions, getSessionNotifications } from '@/lib/db/usability-testing';
+import { getSession, updateSessionStatus, getSessionSubmissions, getSessionNotifications, deleteSession } from '@/lib/db/usability-testing';
 import { SessionStatus } from '@/types/usability-testing';
 
 // GET /api/usability-testing/sessions/[id] - Get session details
@@ -110,6 +110,57 @@ export async function PATCH(
     console.error('Error updating session:', error);
     return NextResponse.json(
       { error: 'Internal server error', message: 'Failed to update session' },
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE /api/usability-testing/sessions/[id] - Delete session
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id: sessionId } = await params;
+
+    if (!sessionId) {
+      return NextResponse.json(
+        { error: 'Invalid request', message: 'Session ID is required' },
+        { status: 400 }
+      );
+    }
+
+    // Check if session exists
+    const existingSession = await getSession(sessionId);
+    if (!existingSession) {
+      return NextResponse.json(
+        { error: 'Not found', message: 'Session not found' },
+        { status: 404 }
+      );
+    }
+
+    // Delete the session and all related data
+    const deleted = await deleteSession(sessionId);
+    
+    if (!deleted) {
+      return NextResponse.json(
+        { error: 'Internal server error', message: 'Failed to delete session' },
+        { status: 500 }
+      );
+    }
+
+    // Return success response
+    return NextResponse.json({
+      success: true,
+      data: {
+        message: 'Session deleted successfully'
+      }
+    });
+
+  } catch (error) {
+    console.error('Error deleting session:', error);
+    return NextResponse.json(
+      { error: 'Internal server error', message: 'Failed to delete session' },
       { status: 500 }
     );
   }

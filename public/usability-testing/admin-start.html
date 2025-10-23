@@ -1137,12 +1137,27 @@
             
             if (confirmed) {
                 try {
-                    // Note: This would need a DELETE endpoint in the API
-                    console.log('Delete session:', sessionId);
-                    alert('Delete functionality not yet implemented in API.');
+                    console.log('Deleting session via API:', sessionId);
+                    
+                    const response = await fetch(`${window.location.origin}/api/usability-testing/sessions/${sessionId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok && result.success) {
+                        console.log('Session deleted successfully');
+                        await loadActiveSessions(); // Reload the sessions list
+                    } else {
+                        console.error('Failed to delete session:', result);
+                        alert(`Failed to delete session: ${result.message || 'Unknown error'}`);
+                    }
                 } catch (error) {
                     console.error('Failed to delete session:', error);
-                    alert('Failed to delete session.');
+                    alert('Failed to delete session: ' + error.message);
                 }
             }
         }

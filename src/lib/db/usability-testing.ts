@@ -352,6 +352,35 @@ export async function cleanupExpiredSessions(): Promise<number> {
   }
 }
 
+export async function deleteSession(sessionId: string): Promise<boolean> {
+  const client = await getPool().connect();
+  try {
+    // Start a transaction to ensure all related data is deleted
+    await client.query('BEGIN');
+    
+    // Delete form submissions
+    await client.query('DELETE FROM form_submissions WHERE session_id = $1', [sessionId]);
+    
+    // Delete notifications
+    await client.query('DELETE FROM notifications WHERE session_id = $1', [sessionId]);
+    
+    // Delete the session
+    const result = await client.query('DELETE FROM sessions WHERE id = $1', [sessionId]);
+    
+    // Commit the transaction
+    await client.query('COMMIT');
+    
+    return result.rowCount > 0;
+  } catch (error) {
+    // Rollback the transaction on error
+    await client.query('ROLLBACK');
+    console.error('Error deleting session:', error);
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
 export async function healthCheck(): Promise<boolean> {
   try {
     console.log('Attempting database connection...');
