@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastree - Usability Testing Forms</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1C1C1C 0%, #121212 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .logo {
+            width: 400px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .welcome-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .welcome-section h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .welcome-section p {
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 40px;
+        }
+        
+        .instructions h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            color: #856404;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .form-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+        
+        .form-card-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .form-card-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .form-card-description {
+            color: #6c757d;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .form-card-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .timeline {
+            background: #e8f4f8;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #2ecc71;
+            margin-bottom: 30px;
+        }
+        
+        .timeline h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-step {
+            background: #2ecc71;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85em;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .participant-id-section {
+            background: #ffeaa7;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .participant-id-section h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .participant-id-display {
+            font-size: 2em;
+            color: #667eea;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .footer {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+            color: #7f8c8d;
+        }
+        
+        .support-section {
+            background: #d1ecf1;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #17a2b8;
+            margin-bottom: 30px;
+        }
+        
+        .support-section h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+        
+        .support-section p {
+            color: #0c5460;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="../images/Pastree Logo - drk.svg" alt="Pastree Logo" class="logo" />
+            <h1>Usability Testing Forms</h1>
+            <p class="subtitle">Interactive Data Collection Portal</p>
+        </div>
+        
+        <div class="welcome-section">
+            <h2>👋 Welcome, Participant!</h2>
+            <p>Thank you for participating in the Pastree usability test. Your feedback will help us create a better clipboard management experience. This portal contains interactive forms for you to complete throughout your testing session.</p>
+        </div>
+        
+        <div class="participant-id-section">
+            <h3>📋 Your Participant ID</h3>
+            <p>Please use your assigned ID when filling out forms:</p>
+            <div class="participant-id-display" id="participantIdDisplay">P1, P2, P3, P4, or P5</div>
+            <p style="font-size: 0.9em; color: #666;">Your ID was provided to you at the start of the test</p>
+        </div>
+        
+        <div class="timeline">
+            <h3>📅 Testing Timeline</h3>
+            <div class="timeline-item">
+                <div class="timeline-step">1</div>
+                <span><strong>Pre-Test:</strong> Complete the Pre-Test Questionnaire (demographics & background)</span>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-step">2</div>
+                <span><strong>Task Testing:</strong> Complete 6 tasks and answer questions after each task</span>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-step">3</div>
+                <span><strong>Post-Test:</strong> Complete the Post-Test Questionnaire (overall experience)</span>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>📝 How to Use These Forms</h3>
+            <ol>
+                <li>Click on each form card below to open the interactive form</li>
+                <li>Enter your Participant ID at the top of each form</li>
+                <li>Fill out all required fields (marked with *)</li>
+                <li>Your responses are auto-saved every 30 seconds</li>
+                <li>Click "Submit" when complete - your data will download as a JSON file</li>
+                <li>All forms can be completed in your web browser - no special software needed</li>
+            </ol>
+        </div>
+        
+        <h2 style="margin-bottom: 20px; color: #2c3e50;">Interactive Forms</h2>
+        
+        <div class="forms-grid">
+            
+            <!-- Form 1: Pre-Test -->
+            <a href="pre-test-questionnaire.html" class="form-card">
+                <div class="form-card-number">1</div>
+                <div class="form-card-icon">📋</div>
+                <div class="form-card-title">Pre-Test Questionnaire</div>
+                <div class="form-card-description">
+                    Complete this BEFORE starting tasks. Collects demographics, background, and prior experience with clipboard managers.
+                </div>
+            </a>
+            
+            <!-- Form 2: Post-Task -->
+            <a href="post-task-questions.html" class="form-card">
+                <div class="form-card-number">2</div>
+                <div class="form-card-icon">✅</div>
+                <div class="form-card-title">Post-Task Questions</div>
+                <div class="form-card-description">
+                    Complete AFTER each task (1-6). Rate ease of completion and provide immediate feedback on your experience with each task.
+                </div>
+            </a>
+            
+            <!-- Form 3: Post-Test -->
+            <a href="post-test-questionnaire.html" class="form-card">
+                <div class="form-card-number">3</div>
+                <div class="form-card-icon">🎯</div>
+                <div class="form-card-title">Post-Test Questionnaire</div>
+                <div class="form-card-description">
+                    Complete AFTER all tasks. Includes SUS (System Usability Scale), NPS (Net Promoter Score), and overall satisfaction questions.
+                </div>
+            </a>
+            
+        </div>
+        
+        <div class="support-section">
+            <h3>💬 Need Help?</h3>
+            <p>If you encounter any technical issues with the forms or have questions about the test, please contact the test administrator. All your responses are saved automatically.</p>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Pastree Usability Testing</strong></p>
+            <p>All responses are confidential and used only for improving the extension</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Form data is saved locally and downloaded as JSON files</p>
+        </div>
+    </div>
+    
+    <script>
+        // Highlight current form based on localStorage progress
+        window.addEventListener('load', () => {
+            const preTestComplete = localStorage.getItem('pastree-pretest-draft');
+            const postTaskComplete = localStorage.getItem('pastree-posttask-draft');
+            const postTestComplete = localStorage.getItem('pastree-posttest-draft');
+            
+            // Could add visual indicators for completed forms
+            console.log('Test progress loaded');
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastree - Post-Test Questionnaire</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1C1C1C 0%, #121212 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .logo {
+            width: 350px;
+            height: auto;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+        
+        .task-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+        
+        .task-tab {
+            padding: 12px 24px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #495057;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .task-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .task-tab.completed {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            border-color: #2ecc71;
+        }
+        
+        .task-tab.completed::after {
+            content: "✓";
+            font-weight: bold;
+        }
+        
+        .task-form {
+            display: none;
+            margin-bottom: 30px;
+        }
+        
+        .task-form.active {
+            display: block;
+        }
+        
+        .task-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .task-header h3 {
+            color: #2c3e50;
+            font-size: 1.6em;
+            margin-bottom: 10px;
+        }
+        
+        .section-description {
+            color: #6c757d;
+            font-size: 1.1em;
+        }
+        
+        .participant-info {
+            display: flex;
+            gap: 20px;
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 30px;
+        }
+        
+        .participant-info div {
+            flex: 1;
+        }
+        
+        .participant-info strong {
+            color: #856404;
+        }
+        
+        .participant-info input,
+        .participant-info select {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ffc107;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+        
+        .save-timestamp {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #e8f5e8;
+            border-radius: 6px;
+            color: #2d5a2d;
+            font-size: 0.9em;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .question-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 1.05em;
+        }
+        
+        .required {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        /* Ensure required fields start clean - no browser validation styling */
+        /* input:required, textarea:required, select:required {
+            border-color: #ddd !important;
+            background: white !important;
+        }
+        
+        input:invalid, textarea:invalid, select:invalid {
+            border-color: #ddd !important;
+            background: white !important;
+            box-shadow: none !important;
+        } */
+        
+        /* Only apply validation styling when we explicitly add it via JavaScript */
+        .validation-error {
+            border: 2px solid #e74c3c !important;
+            background: rgba(231, 76, 60, 0.1) !important;
+        }
+        
+        .rating-scale {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .rating-option {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .rating-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .rating-option label {
+            display: block;
+            padding: 15px 10px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .rating-option input[type="radio"]:checked + label {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+        
+        .rating-option label:hover {
+            border-color: #667eea;
+            background: #e8ecff;
+        }
+        
+        .rating-option input[type="radio"]:focus + label {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+        }
+        
+        .rating-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .radio-option:hover {
+            background: #e9ecef;
+        }
+        
+        input[type="radio"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .radio-option span {
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block;
+            margin: 30px auto 0;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .intro-text {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .nps-scale {
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .nps-option {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .nps-option input[type="radio"] {
+            margin-bottom: 5px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .nps-option label {
+            display: block;
+            font-weight: 600;
+            color: #495057;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        
+        .nps-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(400px); opacity: 0; }
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="../images/Pastree Logo - drk.svg" alt="Pastree Logo" class="logo" />
+            <h2>Post-Test Questionnaire</h2>
+            <p class="subtitle">Overall Experience & Satisfaction</p>
+        </div>
+<!-- Participant ID -->
+        <div class="participant-info" style="display: none;">
+            <input type="hidden" id="participantId">
+        </div>
+        <!-- Task Tabs -->
+        <div class="task-tabs">
+            <div class="task-tab active" data-task="part1">Part 1: SUS</div>
+            <div class="task-tab" data-task="part2">Part 2: NPS</div>
+            <div class="task-tab" data-task="part3">Part 3: Feedback</div>
+        </div>
+        
+        <!-- Part 1: SUS Questions -->
+        <div class="task-form active" id="part1-form">
+            <div class="task-header">
+                <h3>Part 1: System Usability Scale (SUS)</h3>
+                <p class="section-description">Please rate your agreement with each statement about Pastree.</p>
+            </div>
+            
+            <form id="susForm" novalidate>
+              
+                
+                <div class="save-timestamp" id="sus-timestamp" style="display: none;">
+                    <span class="label">Progress saved:</span> <span class="time">--</span>
+                </div>
+                
+                <div class="intro-text">
+                    <strong>Instructions:</strong> Please rate your agreement with each statement below.<br>
+                    1 = Strongly Disagree, 5 = Strongly Agree
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">1. I think I would like to use Pastree frequently. <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="sus1" value="1" id="sus1-1" required>
+                            <label for="sus1-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus1" value="2" id="sus1-2" required>
+                            <label for="sus1-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus1" value="3" id="sus1-3" required>
+                            <label for="sus1-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus1" value="4" id="sus1-4" required>
+                            <label for="sus1-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus1" value="5" id="sus1-5" required>
+                            <label for="sus1-5">5</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Strongly Disagree</span>
+                        <span>Strongly Agree</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">2. I found Pastree unnecessarily complex. <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="sus2" value="1" id="sus2-1" required>
+                            <label for="sus2-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus2" value="2" id="sus2-2" required>
+                            <label for="sus2-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus2" value="3" id="sus2-3" required>
+                            <label for="sus2-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus2" value="4" id="sus2-4" required>
+                            <label for="sus2-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus2" value="5" id="sus2-5" required>
+                            <label for="sus2-5">5</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Strongly Disagree</span>
+                        <span>Strongly Agree</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">3. I thought Pastree was easy to use. <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="sus3" value="1" id="sus3-1" required>
+                            <label for="sus3-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus3" value="2" id="sus3-2" required>
+                            <label for="sus3-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus3" value="3" id="sus3-3" required>
+                            <label for="sus3-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus3" value="4" id="sus3-4" required>
+                            <label for="sus3-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus3" value="5" id="sus3-5" required>
+                            <label for="sus3-5">5</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Strongly Disagree</span>
+                        <span>Strongly Agree</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">4. I think I would need support from a technical person to be able to use Pastree. <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="sus4" value="1" id="sus4-1" required>
+                            <label for="sus4-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus4" value="2" id="sus4-2" required>
+                            <label for="sus4-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus4" value="3" id="sus4-3" required>
+                            <label for="sus4-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus4" value="4" id="sus4-4" required>
+                            <label for="sus4-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus4" value="5" id="sus4-5" required>
+                            <label for="sus4-5">5</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Strongly Disagree</span>
+                        <span>Strongly Agree</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">5. I found the various functions in Pastree were well integrated. <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="sus5" value="1" id="sus5-1" required>
+                            <label for="sus5-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus5" value="2" id="sus5-2" required>
+                            <label for="sus5-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus5" value="3" id="sus5-3" required>
+                            <label for="sus5-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus5" value="4" id="sus5-4" required>
+                            <label for="sus5-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus5" value="5" id="sus5-5" required>
+                            <label for="sus5-5">5</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Strongly Disagree</span>
+                        <span>Strongly Agree</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">6. I thought there was too much inconsistency in Pastree. <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="sus6" value="1" id="sus6-1" required>
+                            <label for="sus6-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus6" value="2" id="sus6-2" required>
+                            <label for="sus6-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus6" value="3" id="sus6-3" required>
+                            <label for="sus6-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus6" value="4" id="sus6-4" required>
+                            <label for="sus6-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus6" value="5" id="sus6-5" required>
+                            <label for="sus6-5">5</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Strongly Disagree</span>
+                        <span>Strongly Agree</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">7. I would imagine that most people would learn to use Pastree very quickly. <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="sus7" value="1" id="sus7-1" required>
+                            <label for="sus7-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus7" value="2" id="sus7-2" required>
+                            <label for="sus7-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus7" value="3" id="sus7-3" required>
+                            <label for="sus7-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus7" value="4" id="sus7-4" required>
+                            <label for="sus7-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus7" value="5" id="sus7-5" required>
+                            <label for="sus7-5">5</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Strongly Disagree</span>
+                        <span>Strongly Agree</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">8. I found Pastree very cumbersome to use. <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="sus8" value="1" id="sus8-1" required>
+                            <label for="sus8-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus8" value="2" id="sus8-2" required>
+                            <label for="sus8-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus8" value="3" id="sus8-3" required>
+                            <label for="sus8-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus8" value="4" id="sus8-4" required>
+                            <label for="sus8-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus8" value="5" id="sus8-5" required>
+                            <label for="sus8-5">5</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Strongly Disagree</span>
+                        <span>Strongly Agree</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">9. I felt very confident using Pastree. <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="sus9" value="1" id="sus9-1" required>
+                            <label for="sus9-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus9" value="2" id="sus9-2" required>
+                            <label for="sus9-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus9" value="3" id="sus9-3" required>
+                            <label for="sus9-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus9" value="4" id="sus9-4" required>
+                            <label for="sus9-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus9" value="5" id="sus9-5" required>
+                            <label for="sus9-5">5</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Strongly Disagree</span>
+                        <span>Strongly Agree</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">10. I needed to learn a lot of things before I could get going with Pastree. <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="sus10" value="1" id="sus10-1" required>
+                            <label for="sus10-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus10" value="2" id="sus10-2" required>
+                            <label for="sus10-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus10" value="3" id="sus10-3" required>
+                            <label for="sus10-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus10" value="4" id="sus10-4" required>
+                            <label for="sus10-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="sus10" value="5" id="sus10-5" required>
+                            <label for="sus10-5">5</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Strongly Disagree</span>
+                        <span>Strongly Agree</span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn" tabindex="100">Submit Part 1</button>
+            </form>
+        </div>
+        
+        <!-- Part 2: NPS Questions -->
+        <div class="task-form" id="part2-form">
+            <div class="task-header">
+                <h3>Part 2: Net Promoter Score (NPS)</h3>
+                <p class="section-description">Please rate your likelihood to recommend Pastree.</p>
+            </div>
+            
+            <form id="npsForm" novalidate>
+                <!-- Participant ID -->
+                <div class="participant-id" style="display: none;">
+                    <input type="hidden" id="participantId2">
+                </div>
+                
+                <div class="save-timestamp" id="nps-timestamp" style="display: none;">
+                    <span class="label">Progress saved:</span> <span class="time">--</span>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">How likely are you to recommend Pastree to a friend or colleague? <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="nps" value="0" id="nps-0" required>
+                            <label for="nps-0">0</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="nps" value="1" id="nps-1" required>
+                            <label for="nps-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="nps" value="2" id="nps-2" required>
+                            <label for="nps-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="nps" value="3" id="nps-3" required>
+                            <label for="nps-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="nps" value="4" id="nps-4" required>
+                            <label for="nps-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="nps" value="5" id="nps-5" required>
+                            <label for="nps-5">5</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="nps" value="6" id="nps-6" required>
+                            <label for="nps-6">6</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="nps" value="7" id="nps-7" required>
+                            <label for="nps-7">7</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="nps" value="8" id="nps-8" required>
+                            <label for="nps-8">8</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="nps" value="9" id="nps-9" required>
+                            <label for="nps-9">9</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="nps" value="10" id="nps-10" required>
+                            <label for="nps-10">10</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Not at all likely</span>
+                        <span>Extremely likely</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">Overall, how satisfied are you with Pastree? <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="satisfaction" value="1" id="sat-1" required>
+                            <label for="sat-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="satisfaction" value="2" id="sat-2" required>
+                            <label for="sat-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="satisfaction" value="3" id="sat-3" required>
+                            <label for="sat-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="satisfaction" value="4" id="sat-4" required>
+                            <label for="sat-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="satisfaction" value="5" id="sat-5" required>
+                            <label for="sat-5">5</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Very Dissatisfied</span>
+                        <span>Very Satisfied</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">How likely are you to continue using Pastree? <span class="required">*</span></label>
+                    <div class="rating-scale">
+                        <div class="rating-option">
+                            <input type="radio" name="continue-use" value="1" id="use-1" required>
+                            <label for="use-1">1</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="continue-use" value="2" id="use-2" required>
+                            <label for="use-2">2</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="continue-use" value="3" id="use-3" required>
+                            <label for="use-3">3</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="continue-use" value="4" id="use-4" required>
+                            <label for="use-4">4</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="continue-use" value="5" id="use-5" required>
+                            <label for="use-5">5</label>
+                        </div>
+                    </div>
+                    <div class="scale-labels">
+                        <span>Very Unlikely</span>
+                        <span>Very Likely</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">Which feature was most valuable to you? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="most-valuable" value="clipboard-history" id="val-1" required>
+                            <span>Clipboard History</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="most-valuable" value="custom-lists" id="val-2" required>
+                            <span>Custom Lists</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="most-valuable" value="search-function" id="val-3" required>
+                            <span>Search Function</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="most-valuable" value="keyboard-shortcuts" id="val-4" required>
+                            <span>Keyboard Shortcuts</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="most-valuable" value="other" id="val-5" required>
+                            <span>Other</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn" tabindex="100">Submit Part 2</button>
+            </form>
+        </div>
+        
+        <!-- Part 3: Feedback Questions -->
+        <div class="task-form" id="part3-form">
+            <div class="task-header">
+                <h3>Part 3: Open Feedback</h3>
+                <p class="section-description">Please share your thoughts and suggestions about Pastree.</p>
+            </div>
+            
+            <form id="feedbackForm" novalidate>
+                <!-- Participant ID -->
+                <div class="participant-id" style="display: none;">
+                    <input type="hidden" id="participantId3">
+                </div>
+                
+                <div class="save-timestamp" id="feedback-timestamp" style="display: none;">
+                    <span class="label">Progress saved:</span> <span class="time">--</span>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">What did you like most about Pastree? <span class="required">*</span></label>
+                    <textarea name="liked-most" placeholder="Please share what you found most useful or enjoyable about using Pastree..." required></textarea>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">What would you improve about Pastree? <span class="required">*</span></label>
+                    <textarea name="improvements" placeholder="Please share any suggestions for improvement or features you'd like to see..." required></textarea>
+                </div>
+                
+                <div class="question">
+                    <label class="question-label">Any additional comments or feedback? <span class="required">*</span></label>
+                    <textarea name="additional-feedback" placeholder="Any other thoughts, suggestions, or comments about your experience with Pastree..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn" tabindex="100">Submit Part 3</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Session Manager -->
+    <script src="../session-manager.js?v=3.0"></script>
+    <script src="post-test-questionnaire.js?v=7.0"></script>
+</body>
+</html>

@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastree - Usability Test Results Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .card-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        
+        .card-label {
+            font-size: 0.95em;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .card-subtitle {
+            font-size: 0.9em;
+            color: #95a5a6;
+            margin-top: 5px;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-top: 20px;
+        }
+        
+        .chart-container-small {
+            position: relative;
+            height: 300px;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .sus-gauge {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .sus-score-display {
+            font-size: 5em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .sus-grade {
+            font-size: 2em;
+            margin-top: 10px;
+        }
+        
+        .nps-score-display {
+            font-size: 4em;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .nps-breakdown {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        
+        .nps-category {
+            text-align: center;
+        }
+        
+        .nps-category-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .nps-category-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .data-upload {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 30px;
+        }
+        
+        .upload-btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        
+        .upload-btn:hover {
+            background: #764ba2;
+        }
+        
+        .file-list {
+            margin-top: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+        }
+        
+        .file-item {
+            padding: 8px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .insight-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .insight-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .insight-value {
+            font-size: 1.5em;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .quote-box {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #2ecc71;
+            margin: 10px 0;
+            font-style: italic;
+        }
+        
+        .export-btn {
+            background: #2ecc71;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+        
+        .export-btn:hover {
+            background: #27ae60;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 60px;
+            color: #95a5a6;
+        }
+        
+        .no-data-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        
+        <div class="header">
+            <h1>📊 Pastree Usability Test Results</h1>
+            <div class="header-info">
+                <span id="testDate">📅 Test Date: Loading...</span>
+                <span id="participantCount">👥 Participants: 0</span>
+            </div>
+            <div class="participant-selector" style="margin-top: 20px;">
+                <label for="participantFilter" style="color: white; margin-right: 10px;">View Data For:</label>
+                <select id="participantFilter" style="padding: 8px 12px; border-radius: 6px; border: none; font-size: 1em;">
+                    <option value="all">All Participants</option>
+                </select>
+                <button id="exportAllBtn" class="export-btn" style="margin-left: 15px; background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);">Export All Data</button>
+            </div>
+        </div>
+        
+        <div class="data-upload">
+            <h3>📁 Load Test Data</h3>
+            <p>Upload JSON files from participant testing sessions (supports multiple file selection)</p>
+            <input type="file" id="fileUpload" accept=".json" multiple style="display: none;">
+            <button class="upload-btn" onclick="document.getElementById('fileUpload').click()">
+                Choose Files
+            </button>
+            <div class="file-list" id="fileList"></div>
+        </div>
+        
+        <div id="dashboardContent" style="display: none;">
+            
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="card">
+                    <div class="card-icon">👥</div>
+                    <div class="card-value" id="totalParticipants">0</div>
+                    <div class="card-label">Total Participants</div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-value" id="avgSUS">--</div>
+                    <div class="card-label">Average SUS Score</div>
+                    <div class="card-subtitle" id="susGrade">--</div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">⭐</div>
+                    <div class="card-value" id="npsScore">--</div>
+                    <div class="card-label">NPS Score</div>
+                    <div class="card-subtitle" id="npsCategory">--</div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">✅</div>
+                    <div class="card-value" id="avgTaskSuccess">--</div>
+                    <div class="card-label">Avg Task Success</div>
+                    <div class="card-subtitle">Completion Rate</div>
+                </div>
+            </div>
+            
+            <!-- Demographics -->
+            <div class="grid-2">
+                <div class="section">
+                    <h2 class="section-title">👤 Demographics</h2>
+                    <div class="chart-container-small">
+                        <canvas id="demographicsChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">💻 Experience Levels</h2>
+                    <div class="chart-container-small">
+                        <canvas id="experienceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Task Performance -->
+            <div class="section">
+                <h2 class="section-title">📋 Task Performance Analysis</h2>
+                <div class="chart-container">
+                    <canvas id="taskPerformanceChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">✅ Task Success Rates</h2>
+                <div class="chart-container">
+                    <canvas id="taskSuccessChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- SUS & NPS -->
+            <div class="grid-2">
+                <div class="section">
+                    <h2 class="section-title">📊 System Usability Scale (SUS)</h2>
+                    <div class="sus-gauge">
+                        <div class="sus-score-display" id="susScoreDisplay">--</div>
+                        <div class="sus-grade" id="susGradeDisplay">--</div>
+                    </div>
+                    <div class="chart-container-small">
+                        <canvas id="susDistributionChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">⭐ Net Promoter Score (NPS)</h2>
+                    <div class="nps-score-display" id="npsScoreDisplay">--</div>
+                    <div class="nps-breakdown">
+                        <div class="nps-category">
+                            <div class="nps-category-value" id="promoters" style="color: #2ecc71;">0</div>
+                            <div class="nps-category-label">Promoters (9-10)</div>
+                        </div>
+                        <div class="nps-category">
+                            <div class="nps-category-value" id="passives" style="color: #f39c12;">0</div>
+                            <div class="nps-category-label">Passives (7-8)</div>
+                        </div>
+                        <div class="nps-category">
+                            <div class="nps-category-value" id="detractors" style="color: #e74c3c;">0</div>
+                            <div class="nps-category-label">Detractors (0-6)</div>
+                        </div>
+                    </div>
+                    <div class="chart-container-small">
+                        <canvas id="npsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature Preferences -->
+            <div class="section">
+                <h2 class="section-title">🎯 Feature Preferences</h2>
+                <div class="chart-container">
+                    <canvas id="featurePreferencesChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Key Insights -->
+            <div class="section">
+                <h2 class="section-title">💡 Key Insights</h2>
+                <div class="insights-grid" id="insightsGrid">
+                    <!-- Dynamic insights will be inserted here -->
+                </div>
+            </div>
+            
+            <!-- Qualitative Feedback -->
+            <div class="section">
+                <h2 class="section-title">💬 Participant Feedback Highlights</h2>
+                <div id="feedbackSection">
+                    <!-- Dynamic quotes will be inserted here -->
+                </div>
+            </div>
+            
+            <!-- Export Options -->
+            <div class="section">
+                <h2 class="section-title">📥 Export Results</h2>
+                <button class="export-btn" onclick="exportPDF()">📄 Export as PDF</button>
+                <button class="export-btn" onclick="exportCSV()">📊 Export as CSV</button>
+                <button class="export-btn" onclick="exportJSON()">💾 Export Raw JSON</button>
+            </div>
+            
+        </div>
+        
+        <div id="noData" class="section no-data">
+            <div class="no-data-icon">📂</div>
+            <h2>No Data Loaded</h2>
+            <p>Please upload participant JSON files to view the dashboard</p>
+        </div>
+        
+    </div>
+    
+    <!-- Session Manager -->
+    <script src="../session-manager.js"></script>
+    
+    <script>
+        // Version 3.3 - Fixed NPS display to show raw value instead of calculated score
+        console.log('🚀 Dashboard Script v3.3 loaded');
+        
+        let allData = {
+            pretest: [],
+            posttask: [],
+            posttest: []
+        };
+        
+        let charts = {};
+        let currentFilter = 'all';
+        
+        // Auto-load data from localStorage on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Dashboard loading...');
+            console.log('🔍 Current URL:', window.location.href);
+            console.log('🔍 localStorage keys:', Object.keys(localStorage));
+            console.log('🔍 Session-related keys:', Object.keys(localStorage).filter(key => key.includes('session')));
+            
+            // Check for session ID in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session');
+            console.log('🔍 Session ID from URL:', sessionId);
+            
+            if (sessionId) {
+                // Load specific session data
+                loadSessionData(sessionId);
+            } else {
+                // Load all session data
+                loadAllSessionData();
+            }
+            
+            // Setup participant filter
+            document.getElementById('participantFilter').addEventListener('change', function() {
+                currentFilter = this.value;
+                updateDashboard();
+            });
+            
+            // Setup export all button
+            document.getElementById('exportAllBtn').addEventListener('click', function() {
+                exportAllData();
+            });
+        });
+        
+        // Load specific session data
+        function loadSessionData(sessionId) {
+            const session = sessionManager.getSession(sessionId);
+            if (session) {
+                console.log('📊 Loading session data:', sessionId);
+                
+                // Convert session data to dashboard format
+                if (session.data.pretest) {
+                    allData.pretest = [session.data.pretest];
+                }
+                if (session.data.posttask && session.data.posttask.length > 0) {
+                    allData.posttask = session.data.posttask;
+                }
+                if (session.data.posttest) {
+                    // Combine SUS, NPS, and Feedback into posttest array
+                    const posttestData = [];
+                    if (session.data.posttest.sus) posttestData.push(session.data.posttest.sus);
+                    if (session.data.posttest.nps) posttestData.push(session.data.posttest.nps);
+                    if (session.data.posttest.feedback) posttestData.push(session.data.posttest.feedback);
+                    allData.posttest = posttestData;
+                }
+                
+                processData();
+                updateDashboard();
+            } else {
+                console.log('❌ Session not found:', sessionId);
+                loadAllSessionData();
+            }
+        }
+        
+        // Load all session data
+        function loadAllSessionData() {
+            console.log('🔍 Attempting to load all session data...');
+            console.log('🔍 SessionManager instance:', sessionManager);
+            console.log('🔍 Calling sessionManager.getAllSessions()...');
+            
+            const sessions = sessionManager.getAllSessions();
+            console.log('📊 Loading all session data:', sessions.length, 'sessions');
+            console.log('📊 Sessions found:', sessions);
+            
+            if (sessions.length === 0) {
+                console.log('📭 No sessions found');
+                console.log('🔍 Checking localStorage directly...');
+                console.log('🔍 All localStorage keys:', Object.keys(localStorage));
+                console.log('🔍 Sessions list key:', localStorage.getItem('usability-sessions'));
+                return;
+            }
+            
+            // Reset data
+            allData = { pretest: [], posttask: [], posttest: [] };
+            
+            // Process each session
+            sessions.forEach(session => {
+                if (session.data.pretest) {
+                    allData.pretest.push(session.data.pretest);
+                }
+                if (session.data.posttask && session.data.posttask.length > 0) {
+                    allData.posttask.push(...session.data.posttask);
+                }
+                if (session.data.posttest) {
+                    // Merge all post-test parts into a single participant entry
+                    const mergedPostTest = {
+                        participantId: session.participantId,
+                        timestamp: new Date().toISOString(),
+                        responses: {}
+                    };
+                    
+                    if (session.data.posttest.sus && session.data.posttest.sus.responses) {
+                        Object.assign(mergedPostTest.responses, session.data.posttest.sus.responses);
+                    }
+                    if (session.data.posttest.nps && session.data.posttest.nps.responses) {
+                        Object.assign(mergedPostTest.responses, session.data.posttest.nps.responses);
+                    }
+                    if (session.data.posttest.feedback && session.data.posttest.feedback.responses) {
+                        Object.assign(mergedPostTest.responses, session.data.posttest.feedback.responses);
+                    }
+                    
+                    if (Object.keys(mergedPostTest.responses).length > 0) {
+                        allData.posttest.push(mergedPostTest);
+                    }
+                }
+            });
+            
+            // Update participant filter
+            updateParticipantFilter();
+            
+            processData();
+            updateDashboard();
+        }
+        
+        // Update participant filter dropdown
+        function updateParticipantFilter() {
+            const filter = document.getElementById('participantFilter');
+            const participants = [...new Set(allData.pretest.map(p => p.participantId))];
+            
+            filter.innerHTML = '<option value="all">All Participants (' + participants.length + ')</option>';
+            participants.forEach(participantId => {
+                const option = document.createElement('option');
+                option.value = participantId;
+                option.textContent = participantId;
+                filter.appendChild(option);
+            });
+        }
+        
+        // Export all data
+        function exportAllData() {
+            const exportData = sessionManager.exportAllSessions();
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `pastree-usability-test-data-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Get filtered data based on current filter
+        function getFilteredData() {
+            if (currentFilter === 'all') {
+                return allData;
+            }
+            
+            return {
+                pretest: allData.pretest.filter(p => p.participantId === currentFilter),
+                posttask: allData.posttask.filter(p => p.participantId === currentFilter),
+                posttest: allData.posttest.filter(p => p.participantId === currentFilter)
+            };
+        }
+        
+        // Update dashboard with filtered data
+        function updateDashboard() {
+            const filteredData = getFilteredData();
+            
+            // Update participant count
+            const participantCount = currentFilter === 'all' ? 
+                [...new Set(allData.pretest.map(p => p.participantId))].length : 1;
+            document.getElementById('participantCount').textContent = `👥 Participants: ${participantCount}`;
+            
+            // Update data status
+            const dataStatus = document.getElementById('dataStatus');
+            if (dataStatus) {
+                dataStatus.innerHTML = `
+                    <div><strong>${filteredData.pretest.length}</strong><br><small>Pre-Test Files</small></div>
+                    <div><strong>${filteredData.posttask.length}</strong><br><small>Post-Task Files</small></div>
+                    <div><strong>${filteredData.posttest.length}</strong><br><small>Post-Test Files</small></div>
+                `;
+            }
+            
+            // Update summary cards with filtered data
+            updateSummaryCards(filteredData);
+            
+            // Update charts with filtered data
+            updateCharts(filteredData);
+            
+            // Update insights with filtered data
+            generateInsights(filteredData);
+            generateFeedbackHighlights(filteredData);
+        }
+        
+        // Update charts with filtered data
+        function updateCharts(data = allData) {
+            // Destroy existing charts
+            Object.values(charts).forEach(chart => {
+                if (chart) chart.destroy();
+            });
+            charts = {};
+            
+            // Recreate charts with filtered data
+            createDemographicsChart(data);
+            createExperienceChart(data);
+            createTaskPerformanceChart(data);
+            createTaskSuccessChart(data);
+            createSUSChart(data);
+            createNPSChart(data);
+            createFeaturePreferencesChart(data);
+        }
+        
+        // File upload handling
+        document.getElementById('fileUpload').addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            const fileListDiv = document.getElementById('fileList');
+            fileListDiv.innerHTML = '';
+            
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        console.log('📁 Processing file:', file.name);
+                        const data = JSON.parse(event.target.result);
+                        console.log('📄 Parsed JSON successfully:', data);
+                        categorizeData(data);
+                        
+                        const fileItem = document.createElement('div');
+                        fileItem.className = 'file-item';
+                        fileItem.innerHTML = `
+                            <span>✅ ${file.name}</span>
+                            <span style="color: #2ecc71;">Loaded</span>
+                        `;
+                        fileListDiv.appendChild(fileItem);
+                    } catch (error) {
+                        console.error('❌ Error parsing file:', file.name, error);
+                        const fileItem = document.createElement('div');
+                        fileItem.className = 'file-item';
+                        fileItem.innerHTML = `
+                            <span>❌ ${file.name}</span>
+                            <span style="color: #e74c3c;">Error: ${error.message}</span>
+                        `;
+                        fileListDiv.appendChild(fileItem);
+                    }
+                };
+                reader.readAsText(file);
+            });
+            
+            setTimeout(() => {
+                if (hasData()) {
+                    processData();
+                }
+            }, 500);
+        });
+        
+        function categorizeData(data) {
+            console.log('=== CATEGORIZING DATA ===');
+            console.log('File data:', data);
+            console.log('Has responses?', !!data.responses);
+            console.log('Response keys:', data.responses ? Object.keys(data.responses) : 'No responses');
+            
+            // Clean NaN values from responses
+            if (data.responses) {
+                for (let key in data.responses) {
+                    if (data.responses[key] === 'NaN' || data.responses[key] === NaN || 
+                        (typeof data.responses[key] === 'string' && data.responses[key].toLowerCase() === 'nan')) {
+                        console.log('🧹 Cleaning NaN value for field:', key);
+                        data.responses[key] = null; // or '' for empty string
+                    }
+                }
+            }
+            
+            // Check for SUS questions (post-test)
+            if (data.responses && data.responses.sus1) {
+                console.log('✅ Categorized as POST-TEST (found sus1)');
+                allData.posttest.push(data);
+            } 
+            // Check for NPS questions (post-test)
+            else if (data.responses && data.responses.nps) {
+                console.log('✅ Categorized as POST-TEST (found nps)');
+                allData.posttest.push(data);
+            }
+            // Check for feedback questions (post-test)
+            else if (data.responses && (data.responses['liked-most'] || data.responses['improvements'] || data.responses['additional-feedback'])) {
+                console.log('✅ Categorized as POST-TEST (found feedback fields)');
+                allData.posttest.push(data);
+            }
+            // Check for task questions (post-task) - look for any task-related fields
+            else if (data.responses && (data.responses.task1Ease || data.responses['task1-ease'] || data.responses.task1ease || 
+                     data.responses.task2Ease || data.responses['task2-ease'] || 
+                     data.responses.task3Ease || data.responses['task3-ease'] || 
+                     data.responses.task4Ease || data.responses['task4-ease'] || 
+                     data.responses.task5Ease || data.responses['task5-ease'] || 
+                     data.responses.task6Ease || data.responses['task6-ease'])) {
+                console.log('✅ Categorized as POST-TASK (found task ease fields)');
+                // Normalize field names to camelCase for consistency
+                if (data.responses['task1-ease'] || data.responses['task2-ease'] || data.responses['task3-ease'] || 
+                    data.responses['task4-ease'] || data.responses['task5-ease'] || data.responses['task6-ease']) {
+                    const normalized = {};
+                    for (let key in data.responses) {
+                        // Convert task1-ease to task1Ease, etc.
+                        const newKey = key.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+                        normalized[newKey] = data.responses[key];
+                    }
+                    data.responses = normalized;
+                    console.log('🔄 Normalized field names:', Object.keys(normalized));
+                }
+                allData.posttask.push(data);
+            } 
+            // Check for pre-test questions (demographics)
+            else if (data.responses && data.responses.age) {
+                console.log('✅ Categorized as PRE-TEST (found age)');
+                allData.pretest.push(data);
+            } 
+            // Check for pre-test by filename pattern as fallback
+            else if (data.participantId && (data.participantId.startsWith('P') || data.participantId.match(/^\d+$/))) {
+                console.log('✅ Categorized as PRE-TEST (by participant ID pattern)');
+                allData.pretest.push(data);
+            } else {
+                console.log('❌ UNKNOWN DATA TYPE - Could not categorize');
+                console.log('Available response fields:', data.responses ? Object.keys(data.responses) : 'No responses object');
+            }
+        }
+        
+        function hasData() {
+            return allData.pretest.length > 0 || allData.posttask.length > 0 || allData.posttest.length > 0;
+        }
+        
+        // Utility function to safely parse numeric values and handle NaN
+        function safeParseNumber(value) {
+            if (value === null || value === undefined || value === '' || value === 'NaN') {
+                return null;
+            }
+            const parsed = parseFloat(value);
+            return isNaN(parsed) ? null : parsed;
+        }
+        
+        // Utility function to get numeric value from responses with fallback
+        function getNumericValue(responses, fieldName, fallback = null) {
+            const value = responses[fieldName];
+            const parsed = safeParseNumber(value);
+            return parsed !== null ? parsed : fallback;
+        }
+        
+        // Calculate SUS score from individual responses
+        function calculateSUSScore(responses) {
+            const susQuestions = ['sus1', 'sus2', 'sus3', 'sus4', 'sus5', 'sus6', 'sus7', 'sus8', 'sus9', 'sus10'];
+            let totalScore = 0;
+            let validResponses = 0;
+            
+            susQuestions.forEach((question, index) => {
+                const value = getNumericValue(responses, question);
+                if (value !== null && value >= 1 && value <= 5) {
+                    // SUS scoring: odd questions (1,3,5,7,9) are positive, even questions (2,4,6,8,10) are negative
+                    if ((index + 1) % 2 === 1) {
+                        // Odd questions: score = value - 1
+                        totalScore += (value - 1);
+                    } else {
+                        // Even questions: score = 5 - value
+                        totalScore += (5 - value);
+                    }
+                    validResponses++;
+                }
+            });
+            
+            if (validResponses === 0) return null;
+            
+            // SUS score = (sum of scores) * 2.5
+            return (totalScore * 2.5);
+        }
+        
+        function processData() {
+            document.getElementById('dashboardContent').style.display = 'block';
+            document.getElementById('noData').style.display = 'none';
+            
+            // Calculate SUS scores for all post-test data
+            allData.posttest.forEach(participant => {
+                if (participant.responses) {
+                    participant.susScore = calculateSUSScore(participant.responses);
+                    console.log(`📊 Calculated SUS score for ${participant.participantId}: ${participant.susScore}`);
+                }
+            });
+            
+            // Log data status
+            console.log('=== Dashboard Data Status ===');
+            console.log('Pre-test files:', allData.pretest.length);
+            console.log('Post-task files:', allData.posttask.length);
+            console.log('Post-test files:', allData.posttest.length);
+            console.log('Total participants:', Math.max(allData.pretest.length, allData.posttask.length, allData.posttest.length));
+            
+            // Show data summary
+            const dataStatus = document.createElement('div');
+            dataStatus.style.cssText = 'background: #e8f4f8; padding: 15px; border-radius: 6px; border-left: 4px solid #2ecc71; margin-bottom: 20px; display: flex; justify-content: space-around; text-align: center;';
+            dataStatus.innerHTML = `
+                <div><strong>${allData.pretest.length}</strong><br><small>Pre-Test Files</small></div>
+                <div><strong>${allData.posttask.length}</strong><br><small>Post-Task Files</small></div>
+                <div><strong>${allData.posttest.length}</strong><br><small>Post-Test Files</small></div>
+            `;
+            const dashboardContent = document.getElementById('dashboardContent');
+            dashboardContent.insertBefore(dataStatus, dashboardContent.firstChild);
+            
+            // Update summary cards
+            updateSummaryCards();
+            
+            // Create charts
+            createDemographicsChart();
+            createExperienceChart();
+            createTaskPerformanceChart();
+            createTaskSuccessChart();
+            createSUSChart();
+            createNPSChart();
+            createFeaturePreferencesChart();
+            
+            // Generate insights
+            generateInsights();
+            generateFeedbackHighlights();
+        }
+        
+        function updateSummaryCards(data = allData) {
+            console.log('🔍 updateSummaryCards called with data:', data);
+            console.log('🔍 updateSummaryCards posttest data:', data.posttest);
+            const participants = data.posttest.length;
+            document.getElementById('totalParticipants').textContent = participants;
+            
+            // Average SUS
+            if (data.posttest.length > 0) {
+                const validSUSScores = data.posttest.map(p => p.susScore).filter(s => s !== null);
+                const avgSUS = validSUSScores.length > 0 ? validSUSScores.reduce((sum, s) => sum + s, 0) / validSUSScores.length : 0;
+                document.getElementById('avgSUS').textContent = avgSUS.toFixed(1);
+                document.getElementById('susGrade').textContent = getSUSGrade(avgSUS);
+                
+                document.getElementById('susScoreDisplay').textContent = avgSUS.toFixed(1);
+                document.getElementById('susGradeDisplay').textContent = getSUSGrade(avgSUS);
+                document.getElementById('susScoreDisplay').style.color = getSUSColor(avgSUS);
+            }
+            
+            // NPS
+            if (data.posttest.length > 0) {
+                const nps = calculateNPS(data);
+                // Get the raw NPS value (not the calculated score)
+                const rawNPS = data.posttest.map(p => getNumericValue(p.responses, 'nps')).filter(s => s !== null);
+                const avgRawNPS = rawNPS.length > 0 ? rawNPS.reduce((a, b) => a + b) / rawNPS.length : 0;
+                
+                console.log('🔍 NPS Display Debug - Raw NPS values:', rawNPS);
+                console.log('🔍 NPS Display Debug - Average raw NPS:', avgRawNPS);
+                console.log('🔍 NPS Display Debug - Calculated NPS score:', nps.score);
+                
+                document.getElementById('npsScore').textContent = avgRawNPS.toFixed(1);
+                document.getElementById('npsCategory').textContent = nps.category;
+                document.getElementById('npsScoreDisplay').textContent = avgRawNPS.toFixed(1);
+                document.getElementById('npsScoreDisplay').style.color = getNPSColor(avgRawNPS);
+                
+                document.getElementById('promoters').textContent = nps.promoters;
+                document.getElementById('passives').textContent = nps.passives;
+                document.getElementById('detractors').textContent = nps.detractors;
+            }
+            
+            // Task Success
+            if (allData.posttask.length > 0) {
+                const avgSuccess = calculateAvgTaskSuccess();
+                document.getElementById('avgTaskSuccess').textContent = avgSuccess + '%';
+            }
+        }
+        
+        function getSUSGrade(score) {
+            if (score >= 80.3) return '🌟 Excellent';
+            if (score >= 68) return '✅ Good';
+            if (score >= 51) return '⚠️ OK';
+            return '❌ Poor';
+        }
+        
+        function getSUSColor(score) {
+            if (score >= 80.3) return '#27ae60';
+            if (score >= 68) return '#2ecc71';
+            if (score >= 51) return '#f39c12';
+            return '#e74c3c';
+        }
+        
+        function calculateNPS(data = allData) {
+            const scores = data.posttest.map(p => getNumericValue(p.responses, 'nps')).filter(s => s !== null);
+            console.log('🔍 NPS Debug - Raw scores:', data.posttest.map(p => p.responses.nps));
+            console.log('🔍 NPS Debug - Processed scores:', scores);
+            const promoters = scores.filter(s => s >= 9).length;
+            const passives = scores.filter(s => s >= 7 && s <= 8).length;
+            const detractors = scores.filter(s => s <= 6).length;
+            const total = scores.length;
+            console.log('🔍 NPS Debug - Promoters:', promoters, 'Passives:', passives, 'Detractors:', detractors, 'Total:', total);
+            
+            if (total === 0) return { score: 0, category: 'No Data' };
+            
+            const npsScore = Math.round(((promoters - detractors) / total) * 100);
+            
+            let category = 'Needs Improvement';
+            if (npsScore > 70) category = 'Excellent';
+            else if (npsScore > 50) category = 'Great';
+            else if (npsScore > 30) category = 'Good';
+            else if (npsScore > 0) category = 'Fair';
+            
+            return { score: npsScore, category, promoters, passives, detractors };
+        }
+        
+        function getNPSColor(score) {
+            if (score > 70) return '#27ae60';
+            if (score > 50) return '#2ecc71';
+            if (score > 30) return '#f39c12';
+            if (score > 0) return '#e67e22';
+            return '#e74c3c';
+        }
+        
+        function calculateAvgTaskSuccess() {
+            let totalSuccess = 0;
+            let totalTasks = 0;
+            
+            allData.posttask.forEach(p => {
+                for (let i = 1; i <= 6; i++) {
+                    const success = p.responses[`task${i}-success`] || p.responses[`task${i}Success`];
+                    if (success) {
+                        totalTasks++;
+                        if (success === 'yes' || success === 'partial') totalSuccess++;
+                    }
+                }
+            });
+            
+            return totalTasks > 0 ? Math.round((totalSuccess / totalTasks) * 100) : 0;
+        }
+        
+        function createDemographicsChart() {
+            const ctx = document.getElementById('demographicsChart');
+            const ageData = {};
+            
+            allData.pretest.forEach(p => {
+                const age = p.responses.age;
+                ageData[age] = (ageData[age] || 0) + 1;
+            });
+            
+            charts.demographics = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(ageData),
+                    datasets: [{
+                        data: Object.values(ageData),
+                        backgroundColor: [
+                            '#667eea', '#764ba2', '#f093fb', '#4facfe',
+                            '#43e97b', '#fa709a'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Age Distribution'
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createExperienceChart() {
+            const ctx = document.getElementById('experienceChart');
+            const expData = {
+                'Beginner': 0,
+                'Intermediate': 0,
+                'Advanced': 0,
+                'Expert': 0
+            };
+            
+            allData.pretest.forEach(p => {
+                const level = p.responses['techProficiency'] || p.responses['tech-proficiency'];
+                if (level) {
+                    // Capitalize first letter to match chart labels
+                    const capitalizedLevel = level.charAt(0).toUpperCase() + level.slice(1);
+                    if (expData.hasOwnProperty(capitalizedLevel)) {
+                        expData[capitalizedLevel]++;
+                    }
+                }
+            });
+            
+            charts.experience = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(expData),
+                    datasets: [{
+                        label: 'Participants',
+                        data: Object.values(expData),
+                        backgroundColor: '#667eea'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Technical Proficiency'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createTaskPerformanceChart() {
+            const ctx = document.getElementById('taskPerformanceChart');
+            const taskData = {};
+            
+            for (let i = 1; i <= 6; i++) {
+                taskData[`Task ${i}`] = [];
+            }
+            
+            allData.posttask.forEach(p => {
+                for (let i = 1; i <= 6; i++) {
+                    const ease = p.responses[`task${i}-ease`] || p.responses[`task${i}Ease`];
+                    if (ease) {
+                        taskData[`Task ${i}`].push(parseInt(ease));
+                    }
+                }
+            });
+            
+            const avgData = Object.keys(taskData).map(task => {
+                const scores = taskData[task];
+                return scores.length > 0 ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
+            });
+            
+            charts.taskPerformance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Object.keys(taskData),
+                    datasets: [{
+                        label: 'Average Ease Rating',
+                        data: avgData,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#667eea'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Task Ease Ratings (1=Very Difficult, 5=Very Easy)'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createTaskSuccessChart() {
+            const ctx = document.getElementById('taskSuccessChart');
+            const successData = [];
+            
+            for (let i = 1; i <= 6; i++) {
+                let success = 0;
+                let total = 0;
+                
+                allData.posttask.forEach(p => {
+                    const result = p.responses[`task${i}-success`] || p.responses[`task${i}Success`];
+                    if (result) {
+                        total++;
+                        if (result === 'yes' || result === 'partial') success++;
+                        if (i === 5) {
+                            console.log(`🔍 Task 5 Debug - Participant: ${p.participantId}, Result: ${result}, Total: ${total}, Success: ${success}`);
+                        }
+                    }
+                });
+                
+                successData.push(total > 0 ? (success / total) * 100 : 0);
+            }
+            
+            charts.taskSuccess = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Task 1', 'Task 2', 'Task 3', 'Task 4', 'Task 5', 'Task 6'],
+                    datasets: [{
+                        label: 'Success Rate (%)',
+                        data: successData,
+                        backgroundColor: successData.map(val => 
+                            val >= 80 ? '#2ecc71' : val >= 60 ? '#f39c12' : '#e74c3c'
+                        )
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Task Completion Success Rates'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createSUSChart(data = allData) {
+            const ctx = document.getElementById('susDistributionChart');
+            const scores = data.posttest.map(p => p.susScore).filter(s => s !== null);
+            
+            charts.sus = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.posttest.map((p, i) => p.participantId || `P${i+1}`),
+                    datasets: [{
+                        label: 'SUS Score',
+                        data: scores,
+                        backgroundColor: scores.map(s => getSUSColor(s))
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Individual SUS Scores'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createNPSChart() {
+            const ctx = document.getElementById('npsChart');
+            const nps = calculateNPS();
+            
+            charts.nps = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Promoters', 'Passives', 'Detractors'],
+                    datasets: [{
+                        data: [nps.promoters, nps.passives, nps.detractors],
+                        backgroundColor: ['#2ecc71', '#f39c12', '#e74c3c']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        title: {
+                            display: true,
+                            text: 'NPS Distribution'
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createFeaturePreferencesChart() {
+            const ctx = document.getElementById('featurePreferencesChart');
+            const features = {};
+            
+            allData.posttest.forEach(p => {
+                const feature = p.responses['most-valuable'];
+                if (feature) {
+                    features[feature] = (features[feature] || 0) + 1;
+                }
+            });
+            
+            const labels = Object.keys(features).map(f => 
+                f.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+            );
+            
+            charts.features = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Votes',
+                        data: Object.values(features),
+                        backgroundColor: '#667eea'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Most Valuable Features'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function generateInsights(data = allData) {
+            const grid = document.getElementById('insightsGrid');
+            grid.innerHTML = '';
+            
+            const insights = [];
+            
+            // Debug: Log available data
+            console.log('🔍 Generating insights with data:');
+            console.log('  - Pre-test participants:', data.pretest.length);
+            console.log('  - Post-task participants:', data.posttask.length);
+            console.log('  - Post-test participants:', data.posttest.length);
+            
+            if (data.pretest.length > 0) {
+                console.log('  - Pre-test fields:', Object.keys(data.pretest[0].responses || {}));
+            }
+            if (data.posttest.length > 0) {
+                console.log('  - Post-test fields:', Object.keys(data.posttest[0].responses || {}));
+            }
+            
+            // Easiest task
+            const taskEaseScores = [];
+            for (let i = 1; i <= 6; i++) {
+                const scores = data.posttask.flatMap(p => {
+                    const ease = getNumericValue(p.responses, `task${i}-ease`) || getNumericValue(p.responses, `task${i}Ease`);
+                    return ease !== null ? [ease] : [];
+                });
+                const avg = scores.length > 0 ? scores.reduce((a, b) => a + b) / scores.length : null;
+                if (avg !== null) {
+                    taskEaseScores.push({ task: i, score: avg });
+                }
+            }
+            taskEaseScores.sort((a, b) => b.score - a.score);
+            
+            if (taskEaseScores.length > 0) {
+                insights.push({
+                    title: 'Easiest Task',
+                    value: `Task ${taskEaseScores[0].task}`,
+                    subtitle: `Avg ease: ${taskEaseScores[0].score.toFixed(1)}/5`
+                });
+                
+                insights.push({
+                    title: 'Most Challenging Task',
+                    value: `Task ${taskEaseScores[taskEaseScores.length - 1].task}`,
+                    subtitle: `Avg ease: ${taskEaseScores[taskEaseScores.length - 1].score.toFixed(1)}/5`
+                });
+            }
+            
+            // Average satisfaction
+            if (data.posttest.length > 0) {
+                const satisfactionScores = data.posttest.map(p => getNumericValue(p.responses, 'satisfaction')).filter(s => s !== null);
+                if (satisfactionScores.length > 0) {
+                    const avgSat = satisfactionScores.reduce((sum, s) => sum + s, 0) / satisfactionScores.length;
+                    insights.push({
+                        title: 'Overall Satisfaction',
+                        value: `${avgSat.toFixed(1)}/5`,
+                        subtitle: avgSat >= 4 ? '😊 Very Satisfied' : avgSat >= 3 ? '😐 Satisfied' : '😞 Needs Work'
+                    });
+                }
+            }
+            
+            // Likelihood to continue
+            if (data.posttest.length > 0) {
+                const continueScores = data.posttest.map(p => getNumericValue(p.responses, 'continue-use')).filter(s => s !== null);
+                if (continueScores.length > 0) {
+                    const avgContinue = continueScores.reduce((sum, s) => sum + s, 0) / continueScores.length;
+                    insights.push({
+                        title: 'Likelihood to Continue',
+                        value: `${avgContinue.toFixed(1)}/5`,
+                        subtitle: avgContinue >= 4 ? '🎉 Very Likely' : avgContinue >= 3 ? '👍 Likely' : '⚠️ Unlikely'
+                    });
+                }
+            }
+            
+            insights.forEach(insight => {
+                const card = document.createElement('div');
+                card.className = 'insight-card';
+                card.innerHTML = `
+                    <div class="insight-title">${insight.title}</div>
+                    <div class="insight-value">${insight.value}</div>
+                    <div style="color: #7f8c8d; font-size: 0.9em; margin-top: 5px;">${insight.subtitle}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        function generateFeedbackHighlights(data = allData) {
+            const section = document.getElementById('feedbackSection');
+            section.innerHTML = '';
+            
+            // Debug: Log available feedback data
+            console.log('💬 Generating feedback highlights:');
+            console.log('  - Post-test participants:', data.posttest.length);
+            
+            if (data.posttest.length > 0) {
+                data.posttest.forEach((p, i) => {
+                    console.log(`  - Participant ${p.participantId} feedback fields:`, {
+                        'liked-most': p.responses['liked-most'] ? '✅' : '❌',
+                        'improvements': p.responses['improvements'] ? '✅' : '❌',
+                        'additional-feedback': p.responses['additional-feedback'] ? '✅' : '❌'
+                    });
+                });
+            }
+            
+            // Collect key feedback
+            const likes = [];
+            const frustrations = [];
+            
+            data.posttest.forEach(p => {
+                // Check for liked-most (positive feedback)
+                if (p.responses['liked-most']) {
+                    likes.push({
+                        text: p.responses['liked-most'],
+                        participant: p.participantId
+                    });
+                }
+                // Check for improvements (negative feedback)
+                if (p.responses['improvements']) {
+                    frustrations.push({
+                        text: p.responses['improvements'],
+                        participant: p.participantId
+                    });
+                }
+                // Also check for additional feedback
+                if (p.responses['additional-feedback']) {
+                    likes.push({
+                        text: p.responses['additional-feedback'],
+                        participant: p.participantId
+                    });
+                }
+            });
+            
+            if (likes.length > 0) {
+                const likesTitle = document.createElement('h3');
+                likesTitle.textContent = '😊 What Users Loved';
+                likesTitle.style.marginTop = '20px';
+                likesTitle.style.marginBottom = '15px';
+                section.appendChild(likesTitle);
+                
+                likes.forEach(item => {
+                    const quote = document.createElement('div');
+                    quote.className = 'quote-box';
+                    quote.innerHTML = `
+                        <p>"${item.text}"</p>
+                        <p style="text-align: right; font-size: 0.9em; color: #7f8c8d; margin-top: 10px;">— ${item.participant}</p>
+                    `;
+                    section.appendChild(quote);
+                });
+            }
+            
+            if (frustrations.length > 0) {
+                const frustrationsTitle = document.createElement('h3');
+                frustrationsTitle.textContent = '⚠️ Pain Points';
+                frustrationsTitle.style.marginTop = '30px';
+                frustrationsTitle.style.marginBottom = '15px';
+                section.appendChild(frustrationsTitle);
+                
+                frustrations.forEach(item => {
+                    const quote = document.createElement('div');
+                    quote.className = 'quote-box';
+                    quote.style.borderLeftColor = '#e74c3c';
+                    quote.style.background = '#fee';
+                    quote.innerHTML = `
+                        <p>"${item.text}"</p>
+                        <p style="text-align: right; font-size: 0.9em; color: #7f8c8d; margin-top: 10px;">— ${item.participant}</p>
+                    `;
+                    section.appendChild(quote);
+                });
+            }
+        }
+        
+        function exportJSON() {
+            const dataStr = JSON.stringify(allData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `pastree-results-${Date.now()}.json`;
+            link.click();
+        }
+        
+        function exportCSV() {
+            alert('CSV export feature coming soon!');
+        }
+        
+        function exportPDF() {
+            alert('PDF export feature coming soon! Use your browser\'s Print to PDF option for now.');
+        }
+    </script>
+</body>
+</html>
+

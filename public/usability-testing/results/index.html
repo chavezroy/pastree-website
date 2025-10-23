@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastree - Test Results Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1C1C1C 0%, #121212 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .logo {
+            width: 400px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.3em;
+        }
+        
+        .welcome-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .welcome-banner h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .welcome-banner p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .report-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .report-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        
+        .report-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .report-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            border-color: #667eea;
+        }
+        
+        .report-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        
+        .report-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .report-description {
+            color: #6c757d;
+            font-size: 1.05em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .report-features {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .report-features li {
+            padding: 8px 0;
+            color: #495057;
+            display: flex;
+            align-items: center;
+        }
+        
+        .report-features li::before {
+            content: '✓';
+            color: #2ecc71;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        .info-section {
+            background: #e8f4f8;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #2ecc71;
+        }
+        
+        .info-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .info-section p {
+            color: #495057;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        
+        .data-requirements {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 30px;
+        }
+        
+        .data-requirements h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+        
+        .data-requirements ul {
+            color: #856404;
+            margin-left: 20px;
+        }
+        
+        .data-requirements li {
+            margin-bottom: 8px;
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .quick-link {
+            background: white;
+            border: 2px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .quick-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .footer {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+            color: #7f8c8d;
+            margin-top: 40px;
+        }
+        
+        .stats-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="header">
+            <img src="../images/Pastree Logo - drk.svg" alt="Pastree Logo" class="logo" onerror="this.style.display='none'"/>
+            <h1>Test Results Portal</h1>
+            <p class="subtitle">Comprehensive Data Analysis & Insights</p>
+        </div>
+        
+        <div class="welcome-banner">
+            <h2>📊 Welcome to Your Analytics Hub</h2>
+            <p>Transform raw usability test data into actionable insights with our interactive dashboards and reports</p>
+        </div>
+        
+        <div class="data-requirements">
+            <h3>📁 Before You Begin</h3>
+            <p><strong>You'll need:</strong></p>
+            <ul>
+                <li>Participant JSON files from completed testing sessions</li>
+                <li>Files can be from: Pre-Test Questionnaire, Post-Task Questions, or Post-Test Questionnaire</li>
+                <li>Multiple files can be uploaded at once for aggregated analysis</li>
+                <li>All data is processed locally in your browser - nothing is uploaded to servers</li>
+            </ul>
+        </div>
+        
+        <div class="reports-grid">
+            
+            <!-- Dashboard Card -->
+            <a href="dashboard.html" class="report-card">
+                <div class="report-icon">📊</div>
+                <div class="report-title">Aggregate Dashboard</div>
+                <div class="report-description">
+                    View comprehensive analytics across all participants with interactive charts and visualizations.
+                </div>
+                <ul class="report-features">
+                    <li>Average SUS & NPS scores</li>
+                    <li>Task success rates</li>
+                    <li>Demographics breakdown</li>
+                    <li>Feature preferences</li>
+                    <li>Qualitative insights</li>
+                    <li>Export to PDF/CSV/JSON</li>
+                </ul>
+                <span class="cta-button">Open Dashboard →</span>
+            </a>
+            
+            <!-- Participant Report Card -->
+            <a href="participant-report.html" class="report-card">
+                <div class="report-icon">👤</div>
+                <div class="report-title">Individual Reports</div>
+                <div class="report-description">
+                    Deep dive into a single participant's complete testing journey and detailed feedback.
+                </div>
+                <ul class="report-features">
+                    <li>Task-by-task performance</li>
+                    <li>SUS score breakdown</li>
+                    <li>Personal feedback quotes</li>
+                    <li>Feature assessment</li>
+                    <li>Comparison to average</li>
+                    <li>Print & export options</li>
+                </ul>
+                <span class="cta-button">Generate Report →</span>
+            </a>
+            
+        </div>
+        
+        <div class="info-section">
+            <h3>🎯 What You'll Discover</h3>
+            <div class="stats-preview">
+                <div class="stat-box">
+                    <div class="stat-value">📈</div>
+                    <div class="stat-label">Usability Trends</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">💡</div>
+                    <div class="stat-label">Key Insights</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">⚠️</div>
+                    <div class="stat-label">Pain Points</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">🌟</div>
+                    <div class="stat-label">Success Stories</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h3>📚 How to Use This Portal</h3>
+            <p>
+                <strong>Step 1:</strong> Choose between the Aggregate Dashboard (for all participants) or Individual Reports (for detailed single-participant analysis).
+            </p>
+            <p>
+                <strong>Step 2:</strong> Upload the JSON files generated from your usability testing forms. You can drag-and-drop or use the file selector.
+            </p>
+            <p>
+                <strong>Step 3:</strong> Explore interactive visualizations, review qualitative feedback, and identify patterns in user behavior.
+            </p>
+            <p>
+                <strong>Step 4:</strong> Export your findings as PDF reports, CSV data files, or raw JSON for further analysis.
+            </p>
+        </div>
+        
+        <div class="info-section" style="border-left-color: #667eea; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+            <h3>🔒 Privacy & Security</h3>
+            <p>
+                All data processing happens entirely in your browser. No files are uploaded to external servers. 
+                Your participant data remains completely private and under your control.
+            </p>
+        </div>
+        
+        <div class="quick-links">
+            <a href="../forms/index.html" class="quick-link">← Back to Forms</a>
+            <a href="../README.md" class="quick-link">📖 Documentation</a>
+            <a href="dashboard.html" class="quick-link">📊 Dashboard</a>
+            <a href="participant-report.html" class="quick-link">👤 Reports</a>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Pastree Usability Testing Analytics</strong></p>
+            <p>Built with Chart.js for interactive data visualization</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">
+                For questions or support, refer to the testing documentation
+            </p>
+        </div>
+        
+    </div>
+</body>
+</html>
+

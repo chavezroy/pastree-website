@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastree Usability Testing - Start Here</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #555;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .instructions h2 {
+            color: #333;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .instructions li {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .instructions strong {
+            color: #667eea;
+        }
+
+        .form-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px 30px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .form-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .form-button:active {
+            transform: translateY(0);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            line-height: 30px;
+            text-align: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 30px;
+            text-align: left;
+            border-radius: 4px;
+        }
+
+        .note strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg class="logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r="90" fill="url(#grad1)"/>
+            <path d="M70 80 L130 80 L130 140 Q130 150 120 150 L80 150 Q70 150 70 140 Z" fill="white"/>
+            <rect x="85" y="95" width="30" height="8" rx="4" fill="url(#grad1)"/>
+            <rect x="85" y="110" width="40" height="8" rx="4" fill="url(#grad1)"/>
+            <rect x="85" y="125" width="35" height="8" rx="4" fill="url(#grad1)"/>
+        </svg>
+
+        <h1>🌳 Pastree Usability Testing</h1>
+        <p class="subtitle">Thank you for participating!</p>
+
+        <div class="instructions">
+            <h2>📋 Before You Begin</h2>
+            <ol>
+                <li>
+                    <strong>Make sure the Pastree extension is installed</strong><br>
+                    <small>You should see the Pastree icon (🌳) in your browser's extension toolbar</small>
+                </li>
+                <li>
+                    <strong>Keep this page open</strong> throughout the testing session
+                </li>
+                <li>
+                    <strong>Start with the Pre-Test Questionnaire</strong> below
+                </li>
+                <li>
+                    <strong>Use the actual Pastree extension</strong> during tasks<br>
+                    <small>Click the Pastree icon in your toolbar to use it while testing</small>
+                </li>
+            </ol>
+        </div>
+
+        <div class="form-buttons">
+            <a href="forms/pre-test-questionnaire.html" class="form-button" target="_blank">
+                📝 Start: Pre-Test Questionnaire
+            </a>
+            <a href="forms/post-task-questions.html" class="form-button" target="_blank">
+                ✅ Post-Task Questions
+            </a>
+            <a href="forms/post-test-questionnaire.html" class="form-button" target="_blank">
+                🎯 Post-Test Questionnaire
+            </a>
+        </div>
+
+        <div class="note">
+            <strong>💡 Tip:</strong> Each form will open in a new tab. You can switch between the forms and the Pastree extension freely during testing.
+        </div>
+    </div>
+</body>
+</html>
+
