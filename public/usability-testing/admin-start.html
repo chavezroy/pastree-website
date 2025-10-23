@@ -1116,9 +1116,10 @@
             try {
                 const response = await window.usabilityAPI.getSession(sessionId);
                 if (response.success) {
-                    // Open session details in new tab or modal
                     console.log('Session details:', response.data);
-                    alert(`Session details loaded. Check console for full data.`);
+                    // Navigate to the session like the regular viewSession function
+                    const url = sessionManager.createSessionURL(sessionId, 'forms/pre-test-questionnaire.html');
+                    window.open(url, '_blank');
                 }
             } catch (error) {
                 console.error('Failed to load session details:', error);
