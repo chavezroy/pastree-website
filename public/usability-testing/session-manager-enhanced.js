@@ -343,20 +343,38 @@ class EnhancedSessionManager {
      */
     removeSession(sessionId) {
         try {
+            console.log('removeSession called with sessionId:', sessionId);
+            console.log('sessionId type:', typeof sessionId);
+            
             const storageKey = `${this.SESSION_PREFIX}${sessionId}`;
+            console.log('Storage key:', storageKey);
+            
+            // Check if session exists before removing
+            const existingSession = localStorage.getItem(storageKey);
+            console.log('Existing session data:', existingSession ? 'Found' : 'Not found');
+            
             localStorage.removeItem(storageKey);
+            console.log('Session data removed from localStorage');
 
             // Remove from sessions list
             const sessionsList = localStorage.getItem(this.SESSIONS_LIST_KEY);
+            console.log('Current sessions list:', sessionsList);
+            
             if (sessionsList) {
                 const sessionIds = JSON.parse(sessionsList);
+                console.log('Session IDs before removal:', sessionIds);
+                
                 const updatedIds = sessionIds.filter(id => id !== sessionId);
+                console.log('Session IDs after removal:', updatedIds);
+                
                 localStorage.setItem(this.SESSIONS_LIST_KEY, JSON.stringify(updatedIds));
+                console.log('Updated sessions list saved');
             }
 
             console.log(`🗑️ Removed session: ${sessionId}`);
         } catch (error) {
             console.error('Error removing session:', error);
+            throw error; // Re-throw to be caught by the calling function
         }
     }
 
