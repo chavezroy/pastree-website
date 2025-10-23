@@ -511,17 +511,17 @@
             });
 
             // Setup Start Test button event listener
-            document.getElementById('startTestBtn').addEventListener('click', function () {
+            document.getElementById('startTestBtn').addEventListener('click', async function () {
                 const sessionId = this.dataset.sessionId;
                 console.log('Start Test button clicked, sessionId:', sessionId);
 
                 if (sessionId) {
                     // Debug: Check all sessions in storage
-                    const allSessions = sessionManager.getAllSessions();
+                    const allSessions = await sessionManager.getAllSessions();
                     console.log('All sessions in storage:', allSessions);
 
                     // Verify session exists before navigating
-                    const session = sessionManager.getSession(sessionId);
+                    const session = await sessionManager.getSession(sessionId);
                     console.log('Retrieved session:', session);
 
                     if (session) {
@@ -628,7 +628,7 @@
             modalCallback = null;
         }
 
-        function createNewSession() {
+        async function createNewSession() {
             const participantId = document.getElementById('participantId').value.trim();
             const createBtn = document.getElementById('createBtn');
             const errorMessage = document.getElementById('errorMessage');
@@ -646,7 +646,7 @@
             }
 
             // Check if participant already has an active session
-            const existingSessions = sessionManager.getAllSessions();
+            const existingSessions = await sessionManager.getAllSessions();
             const existingSession = existingSessions.find(s => s.participantId === participantId);
 
             if (existingSession) {
@@ -672,12 +672,12 @@
                     console.error('localStorage test failed:', error);
                 }
 
-                // Create new session
-                const sessionId = sessionManager.createSession(participantId);
+                // Create new session (now properly awaited)
+                const sessionId = await sessionManager.createSession(participantId);
                 console.log('Created session with ID:', sessionId);
 
                 // Debug: Check if session was actually created
-                const createdSession = sessionManager.getSession(sessionId);
+                const createdSession = await sessionManager.getSession(sessionId);
                 console.log('Verification - created session:', createdSession);
 
                 // Debug: Check localStorage after creating session
@@ -685,7 +685,7 @@
                 console.log('Session-related keys after creation:', Object.keys(localStorage).filter(key => key.startsWith('session')));
 
                 // Debug: Verify session was saved
-                const savedSession = sessionManager.getSession(sessionId);
+                const savedSession = await sessionManager.getSession(sessionId);
                 console.log('Saved session verification:', savedSession);
 
                 // Debug: Log current location info
@@ -719,7 +719,7 @@
                 document.getElementById('participantId').value = '';
 
                 // Reload active sessions
-                loadActiveSessions();
+                await loadActiveSessions();
 
             } catch (error) {
                 showError('Failed to create session: ' + error.message);
@@ -776,9 +776,9 @@
             });
         }
 
-        function loadActiveSessions() {
+        async function loadActiveSessions() {
             const sessionsList = document.getElementById('sessionsList');
-            const sessions = sessionManager.getAllSessions();
+            const sessions = await sessionManager.getAllSessions();
 
             if (sessions.length === 0) {
                 sessionsList.innerHTML = '<div class="empty-state"><p>No active sessions found</p></div>';
@@ -814,8 +814,8 @@
             }).join('');
         }
 
-        function viewSession(sessionId) {
-            const session = sessionManager.getSession(sessionId);
+        async function viewSession(sessionId) {
+            const session = await sessionManager.getSession(sessionId);
             if (session) {
                 const url = sessionManager.createSessionURL(sessionId, 'forms/pre-test-questionnaire.html');
                 window.open(url, '_blank');
@@ -830,8 +830,8 @@
             );
 
             if (confirmed) {
-                sessionManager.removeSession(sessionId);
-                loadActiveSessions();
+                await sessionManager.removeSession(sessionId);
+                await loadActiveSessions();
             }
         }
 
@@ -909,7 +909,7 @@
             }
             
             // Fallback to local sessions
-            loadLocalSessions();
+            await loadLocalSessions();
         }
 
         // Display API sessions
@@ -945,8 +945,8 @@
         }
 
         // Load local sessions (fallback)
-        function loadLocalSessions() {
-            const sessions = sessionManager.getAllSessions();
+        async function loadLocalSessions() {
+            const sessions = await sessionManager.getAllSessions();
             const sessionsList = document.getElementById('sessionsList');
             
             if (sessions.length === 0) {
@@ -1000,7 +1000,7 @@
         }
 
         // Filter sessions
-        function filterSessions() {
+        async function filterSessions() {
             const status = document.getElementById('statusFilter').value;
             const participant = document.getElementById('participantFilter').value;
             const date = document.getElementById('dateFilter').value;
@@ -1011,27 +1011,27 @@
             if (date) currentFilters.start_date = date;
             
             currentPage = 1;
-            loadActiveSessions();
+            await loadActiveSessions();
         }
 
         // Pagination functions
-        function loadPreviousPage() {
+        async function loadPreviousPage() {
             if (currentPage > 1) {
                 currentPage--;
-                loadActiveSessions();
+                await loadActiveSessions();
             }
         }
 
-        function loadNextPage() {
+        async function loadNextPage() {
             if (currentPage < totalPages) {
                 currentPage++;
-                loadActiveSessions();
+                await loadActiveSessions();
             }
         }
 
         // Refresh sessions
-        function refreshSessions() {
-            loadActiveSessions();
+        async function refreshSessions() {
+            await loadActiveSessions();
         }
 
         // Export sessions
@@ -1041,7 +1041,7 @@
                     await window.usabilityAPI.downloadExport('csv', currentFilters);
                 } else {
                     // Export local sessions
-                    const sessions = sessionManager.getAllSessions();
+                    const sessions = await sessionManager.getAllSessions();
                     const csvData = generateLocalCSV(sessions);
                     downloadCSV(csvData, 'local-sessions-export.csv');
                 }
