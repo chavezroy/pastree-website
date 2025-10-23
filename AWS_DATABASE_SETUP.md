@@ -49,7 +49,7 @@ Complete step-by-step guide to set up PostgreSQL database on AWS RDS for the Usa
 
 2. **Master Username**
    ```
-   admin
+   adminime
    ```
 
 3. **Master Password**

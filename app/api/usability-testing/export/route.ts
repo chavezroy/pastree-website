@@ -136,7 +136,7 @@ function generateCSV(sessions: any[], submissions: any[]): string {
       rows.push(row);
     } else {
       // Session with submissions
-      sessionSubmissions.forEach(submission => {
+      sessionSubmissions.forEach((submission: any) => {
         const row = [
           session.id,
           session.participant_id,
