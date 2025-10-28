@@ -1,0 +1,90 @@
+---
+alwaysApply: true
+---
+
+# Debugging Best Practices - Systematic Approach
+
+## Core Principle
+**Always perform comprehensive system-wide diagnosis before attempting any fixes.** Partial fixes waste time and create inconsistent states.
+
+## Systematic Debugging Workflow
+
+### 1. Immediate Comprehensive Audit
+When any issue is reported:
+```bash
+# Search entire codebase for related references
+grep -r "keyword" . --include="*.{js,ts,tsx,json,md,yml,yaml}"
+grep -r "dependency-name" . --include="*.{json,lock}"
+```
+
+### 2. Identify ALL Related Components
+- Source code files
+- Configuration files (package.json, config files)
+- Documentation files
+- Test files
+- Environment files
+- Lock files (package-lock.json, yarn.lock)
+
+### 3. One Complete Cleanup Operation
+- Remove ALL related files/dependencies in single operation
+- Regenerate clean dependencies
+- Verify zero references remain
+- Test build/functionality
+
+### 4. Verify Clean State
+```bash
+# Confirm no references remain
+grep -r "removed-keyword" . --include="*.{js,ts,tsx,json}"
+npm run build  # Verify clean build
+```
+
+## Anti-Patterns to Avoid
+
+### ❌ Piecemeal Fixes
+- Fixing one file at a time
+- Assuming "network issues" without verifying codebase state
+- Partial cleanup that leaves inconsistent state
+
+### ❌ Incomplete Diagnosis
+- Not searching entire codebase for related references
+- Missing configuration files or documentation
+- Not checking lock files for old dependencies
+
+### ❌ Repeated Partial Solutions
+- Saying "there are still references" multiple times
+- Not learning from previous incomplete attempts
+- Not doing comprehensive cleanup from start
+
+## Efficient Debugging Checklist
+
+- [ ] **Comprehensive Search**: Find ALL references across entire codebase
+- [ ] **Complete Removal**: Remove ALL related files/dependencies in one operation
+- [ ] **Clean Regeneration**: Regenerate dependencies/lock files
+- [ ] **Verification**: Confirm zero references remain
+- [ ] **Testing**: Verify build and functionality work
+- [ ] **Deployment**: Test deployment works
+
+## Time Management
+- **Target**: 15-30 minutes for most debugging sessions
+- **Red Flag**: If debugging takes >1 hour, step back and do comprehensive audit
+- **Escalation**: If systematic approach doesn't work, consider different root cause
+
+## Example: Database Dependency Cleanup
+```bash
+# 1. Find ALL references
+grep -r "pg\|@types/pg\|DATABASE_URL" . --include="*.{js,ts,tsx,json,md,yml}"
+
+# 2. Remove ALL related files
+rm -rf src/app/api/usability-testing/ src/lib/db/ src/types/usability-testing.ts
+rm -f .env.local test-api.js AWS_DATABASE_SETUP.md package-lock.json
+
+# 3. Regenerate clean state
+npm install
+npm run build
+
+# 4. Verify clean
+grep -r "pg\|@types/pg" . --include="*.{js,ts,tsx,json}"
+```
+
+## Key Takeaway
+**Systematic approach prevents 2.5-hour debugging sessions. Do comprehensive diagnosis first, complete cleanup second, verification third.**
