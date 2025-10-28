@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="admin-page">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start New Test Session - Pastree Usability Testing</title>
-    <link rel="icon" href="/favicon.png" type="image/png">
-    <link rel="stylesheet" href="styles/shared.css">
     <style>
         * {
             margin: 0;
@@ -16,61 +13,54 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #40505c 0%, #261835 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-
 
         .container {
             max-width: 800px;
             margin: 0 auto;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #0f1323 0%, #160e1e 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 15px;
+            padding: 30px;
             text-align: center;
-            position: relative;
-            margin-bottom: 0;
         }
 
-        .header h2 {
-            font-size: 1.65rem;
-            font-weight: 100;
-            margin-bottom: 0;
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
         }
 
         .header p {
             font-size: 1.1rem;
             opacity: 0.9;
         }
-
+        
         .header-nav {
             margin-top: 20px;
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
         }
-
+        
         .header-nav a {
             color: white;
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,0.2);
             padding: 8px 16px;
             border-radius: 6px;
             margin: 0 5px;
             transition: background 0.3s;
-            font-size: 12px;
         }
-
+        
         .header-nav a:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255,255,255,0.3);
         }
 
         .content {
@@ -378,13 +368,11 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="header">
-            <img src="images/PastreeLogo-lite.svg" alt="Logo" class="logo">
-            <h2>🎯 Usability Sessions</h2>
-            <!-- <p>Create a new usability testing session for a participant</p> -->
+            <h1>🎯 Start New Test Session</h1>
+            <p>Create a new usability testing session for a participant</p>
             <div class="header-nav">
                 <a href="dashboard.html">📊 Dashboard</a>
                 <a href="results/dashboard.html">📈 Results</a>
@@ -413,7 +401,7 @@
                     <p><strong>Session URL:</strong></p>
                     <div class="url-display" id="sessionUrl"></div>
                     <button class="copy-btn" onclick="copySessionUrl()">Copy URL</button>
-
+                    
                     <div class="qr-section">
                         <p><strong>Session URL for Sharing:</strong></p>
                         <div class="qr-code" id="qrCode"></div>
@@ -426,49 +414,10 @@
             </div>
 
             <div class="active-sessions">
-                <div class="sessions-header">
-                    <h2>Active Sessions</h2>
-                    <div class="sessions-controls">
-                        <button class="btn btn-small" onclick="refreshSessions()">🔄 Refresh</button>
-                        <button class="btn btn-small" onclick="exportSessions()">📊 Export</button>
-                        <button class="btn btn-small" onclick="toggleApiMode()">🌐 API Mode</button>
-                    </div>
-                </div>
-                
-                <div class="api-status" id="apiStatus">
-                    <span class="status-indicator" id="statusIndicator">●</span>
-                    <span id="statusText">Checking API status...</span>
-                </div>
-                
-                <div class="sessions-filters">
-                    <select id="statusFilter" onchange="filterSessions()">
-                        <option value="">All Status</option>
-                        <option value="in_progress">In Progress</option>
-                        <option value="completed">Completed</option>
-                        <option value="abandoned">Abandoned</option>
-                    </select>
-                    <input type="text" id="participantFilter" placeholder="Filter by participant..." onkeyup="filterSessions()">
-                    <input type="date" id="dateFilter" onchange="filterSessions()">
-                </div>
-                
+                <h2>Active Sessions</h2>
                 <div id="sessionsList">
                     <div class="empty-state">
                         <p>No active sessions found</p>
-                    </div>
-                </div>
-                
-                <div class="sessions-pagination" id="sessionsPagination" style="display: none;">
-                    <button class="btn btn-small" onclick="loadPreviousPage()">← Previous</button>
-                    <span id="paginationInfo">Page 1 of 1</span>
-                    <button class="btn btn-small" onclick="loadNextPage()">Next →</button>
-                </div>
-            </div>
-            
-            <div class="notifications-panel">
-                <h2>Recent Notifications</h2>
-                <div id="notificationsList">
-                    <div class="empty-state">
-                        <p>No notifications yet</p>
                     </div>
                 </div>
             </div>
@@ -495,35 +444,29 @@
     <!-- Session Manager -->
     <script src="session-manager.js"></script>
     
-    <!-- Enhanced Session Manager -->
-    <script src="session-manager-enhanced.js"></script>
-    
-    <!-- API Client -->
-    <script src="api-client.js"></script>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             loadActiveSessions();
-
-            document.getElementById('createSessionForm').addEventListener('submit', function (e) {
+            
+            document.getElementById('createSessionForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 createNewSession();
             });
-
+            
             // Setup Start Test button event listener
-            document.getElementById('startTestBtn').addEventListener('click', async function () {
+            document.getElementById('startTestBtn').addEventListener('click', function() {
                 const sessionId = this.dataset.sessionId;
                 console.log('Start Test button clicked, sessionId:', sessionId);
-
+                
                 if (sessionId) {
                     // Debug: Check all sessions in storage
-                    const allSessions = await sessionManager.getAllSessions();
+                    const allSessions = sessionManager.getAllSessions();
                     console.log('All sessions in storage:', allSessions);
-
+                    
                     // Verify session exists before navigating
-                    const session = await sessionManager.getSession(sessionId);
+                    const session = sessionManager.getSession(sessionId);
                     console.log('Retrieved session:', session);
-
+                    
                     if (session) {
                         console.log('Starting test for session:', sessionId);
                         const targetUrl = sessionManager.createSessionURL(sessionId, 'forms/pre-test-questionnaire.html');
@@ -538,37 +481,37 @@
                     showModal('Session Error', 'No session ID found. Please create a new session.', '❌');
                 }
             });
-
+            
             // Setup modal event listeners
             setupModal();
         });
 
         // Custom Modal Functions
         let modalCallback = null;
-
+        
         function setupModal() {
             const modal = document.getElementById('customModal');
             const okBtn = document.getElementById('modalOkBtn');
             const cancelBtn = document.getElementById('modalCancelBtn');
-
+            
             // Close modal when clicking OK
-            okBtn.addEventListener('click', function () {
+            okBtn.addEventListener('click', function() {
                 if (modalCallback) {
                     modalCallback(true);
                 }
                 hideModal();
             });
-
+            
             // Close modal when clicking Cancel
-            cancelBtn.addEventListener('click', function () {
+            cancelBtn.addEventListener('click', function() {
                 if (modalCallback) {
                     modalCallback(false);
                 }
                 hideModal();
             });
-
+            
             // Close modal when clicking overlay
-            modal.addEventListener('click', function (e) {
+            modal.addEventListener('click', function(e) {
                 if (e.target === modal) {
                     if (modalCallback) {
                         modalCallback(false);
@@ -576,9 +519,9 @@
                     hideModal();
                 }
             });
-
+            
             // Close modal with Escape key
-            document.addEventListener('keydown', function (e) {
+            document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && modal.classList.contains('show')) {
                     if (modalCallback) {
                         modalCallback(false);
@@ -592,10 +535,10 @@
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalContent').textContent = content;
             document.getElementById('modalIcon').textContent = icon;
-
+            
             const okBtn = document.getElementById('modalOkBtn');
             const cancelBtn = document.getElementById('modalCancelBtn');
-
+            
             if (isConfirmation) {
                 cancelBtn.style.display = 'inline-block';
                 okBtn.textContent = 'Yes';
@@ -605,10 +548,10 @@
                 okBtn.textContent = 'OK';
                 okBtn.className = 'modal-btn modal-btn-primary';
             }
-
+            
             const modal = document.getElementById('customModal');
             modal.classList.add('show');
-
+            
             // Focus the OK button for accessibility
             setTimeout(() => {
                 okBtn.focus();
@@ -628,7 +571,7 @@
             modalCallback = null;
         }
 
-        async function createNewSession() {
+        function createNewSession() {
             const participantId = document.getElementById('participantId').value.trim();
             const createBtn = document.getElementById('createBtn');
             const errorMessage = document.getElementById('errorMessage');
@@ -646,9 +589,9 @@
             }
 
             // Check if participant already has an active session
-            const existingSessions = await sessionManager.getAllSessions();
+            const existingSessions = sessionManager.getAllSessions();
             const existingSession = existingSessions.find(s => s.participantId === participantId);
-
+            
             if (existingSession) {
                 showError(`Participant ${participantId} already has an active session. Please use the existing session or wait for it to expire.`);
                 return;
@@ -660,7 +603,7 @@
             try {
                 // Debug: Check localStorage before creating session
                 console.log('localStorage before session creation:', Object.keys(localStorage));
-
+                
                 // Debug: Test localStorage functionality
                 console.log('localStorage test - setting test key...');
                 try {
@@ -671,23 +614,23 @@
                 } catch (error) {
                     console.error('localStorage test failed:', error);
                 }
-
-                // Create new session (now properly awaited)
-                const sessionId = await sessionManager.createSession(participantId);
+                
+                // Create new session
+                const sessionId = sessionManager.createSession(participantId);
                 console.log('Created session with ID:', sessionId);
-
+                
                 // Debug: Check if session was actually created
-                const createdSession = await sessionManager.getSession(sessionId);
+                const createdSession = sessionManager.getSession(sessionId);
                 console.log('Verification - created session:', createdSession);
-
+                
                 // Debug: Check localStorage after creating session
                 console.log('localStorage after session creation:', Object.keys(localStorage));
                 console.log('Session-related keys after creation:', Object.keys(localStorage).filter(key => key.startsWith('session')));
-
+                
                 // Debug: Verify session was saved
-                const savedSession = await sessionManager.getSession(sessionId);
+                const savedSession = sessionManager.getSession(sessionId);
                 console.log('Saved session verification:', savedSession);
-
+                
                 // Debug: Log current location info
                 console.log('Current location info:', {
                     origin: window.location.origin,
@@ -695,32 +638,32 @@
                     host: window.location.host,
                     href: window.location.href
                 });
-
+                
                 // Generate session URL
                 console.log('About to generate session URL for sessionId:', sessionId);
                 const sessionUrl = sessionManager.createSessionURL(sessionId);
                 console.log('Generated session URL:', sessionUrl);
                 console.log('URL length:', sessionUrl.length);
-
+                
                 // Display results
                 document.getElementById('participantDisplay').textContent = participantId;
                 document.getElementById('sessionUrl').textContent = sessionUrl;
-
+                
                 // Show and setup the Start Test button
                 const startTestBtn = document.getElementById('startTestBtn');
                 startTestBtn.style.display = 'inline-block';
                 startTestBtn.dataset.sessionId = sessionId; // Store session ID in data attribute
-
+                
                 // Show session URL (QR code removed for now)
                 showSessionUrl(sessionUrl);
-
+                
                 // Show success
                 sessionResult.style.display = 'block';
                 document.getElementById('participantId').value = '';
-
+                
                 // Reload active sessions
-                await loadActiveSessions();
-
+                loadActiveSessions();
+                
             } catch (error) {
                 showError('Failed to create session: ' + error.message);
             } finally {
@@ -740,9 +683,9 @@
                 </div>
             `;
         }
-
+        
         function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(function () {
+            navigator.clipboard.writeText(text).then(function() {
                 // Show temporary success message
                 const button = event.target;
                 const originalText = button.textContent;
@@ -752,7 +695,7 @@
                     button.textContent = originalText;
                     button.style.background = '#667eea';
                 }, 2000);
-            }).catch(function (err) {
+            }).catch(function(err) {
                 console.error('Failed to copy: ', err);
                 showModal('Copy Failed', 'Failed to copy URL. Please copy manually.', '📋');
             });
@@ -760,26 +703,26 @@
 
         function copySessionUrl() {
             const urlText = document.getElementById('sessionUrl').textContent;
-            navigator.clipboard.writeText(urlText).then(function () {
+            navigator.clipboard.writeText(urlText).then(function() {
                 const copyBtn = document.querySelector('.copy-btn');
                 const originalText = copyBtn.textContent;
                 copyBtn.textContent = 'Copied!';
                 copyBtn.style.background = '#28a745';
-
+                
                 setTimeout(() => {
                     copyBtn.textContent = originalText;
                     copyBtn.style.background = '#4caf50';
                 }, 2000);
-            }).catch(function (err) {
+            }).catch(function(err) {
                 console.error('Failed to copy URL:', err);
                 showModal('Copy Failed', 'Failed to copy URL. Please copy manually.', '📋');
             });
         }
 
-        async function loadActiveSessions() {
+        function loadActiveSessions() {
             const sessionsList = document.getElementById('sessionsList');
-            const sessions = await sessionManager.getAllSessions();
-
+            const sessions = sessionManager.getAllSessions();
+            
             if (sessions.length === 0) {
                 sessionsList.innerHTML = '<div class="empty-state"><p>No active sessions found</p></div>';
                 return;
@@ -789,7 +732,7 @@
                 const progress = sessionManager.getSessionProgress(session);
                 const timeRemaining = sessionManager.getTimeRemaining(session);
                 const isExpiringSoon = sessionManager.isSessionExpiringSoon(session);
-
+                
                 return `
                     <div class="session-item">
                         <div class="session-info">
@@ -814,8 +757,8 @@
             }).join('');
         }
 
-        async function viewSession(sessionId) {
-            const session = await sessionManager.getSession(sessionId);
+        function viewSession(sessionId) {
+            const session = sessionManager.getSession(sessionId);
             if (session) {
                 const url = sessionManager.createSessionURL(sessionId, 'forms/pre-test-questionnaire.html');
                 window.open(url, '_blank');
@@ -823,28 +766,15 @@
         }
 
         async function deleteSession(sessionId) {
-            console.log('deleteSession called with sessionId:', sessionId);
-            console.log('sessionId type:', typeof sessionId);
-            
             const confirmed = await showConfirmModal(
-                'Delete Session',
-                'Are you sure you want to delete this session? This action cannot be undone.',
+                'Delete Session', 
+                'Are you sure you want to delete this session? This action cannot be undone.', 
                 '🗑️'
             );
-
+            
             if (confirmed) {
-                console.log('User confirmed deletion, removing session:', sessionId);
-                try {
-                    await sessionManager.removeSession(sessionId);
-                    console.log('Session removed successfully');
-                    await loadActiveSessions();
-                    console.log('Active sessions reloaded');
-                } catch (error) {
-                    console.error('Error removing session:', error);
-                    alert('Failed to delete session: ' + error.message);
-                }
-            } else {
-                console.log('User cancelled deletion');
+                sessionManager.removeSession(sessionId);
+                loadActiveSessions();
             }
         }
 
@@ -862,323 +792,6 @@
 
         // Auto-refresh sessions every 30 seconds
         setInterval(loadActiveSessions, 30000);
-
-        // Enhanced functionality for API integration
-        let currentPage = 1;
-        let totalPages = 1;
-        let currentFilters = {};
-        let apiMode = true;
-
-        // Initialize enhanced features
-        document.addEventListener('DOMContentLoaded', function() {
-            checkApiStatus();
-            loadNotifications();
-            
-            // Set up real-time updates
-            setInterval(checkApiStatus, 60000); // Check API status every minute
-            setInterval(loadNotifications, 30000); // Load notifications every 30 seconds
-        });
-
-        // Check API status
-        async function checkApiStatus() {
-            try {
-                const status = await window.usabilityAPI?.healthCheck();
-                const indicator = document.getElementById('statusIndicator');
-                const statusText = document.getElementById('statusText');
-                
-                if (status && status.success) {
-                    indicator.style.color = '#27ae60';
-                    statusText.textContent = `API Online (${status.data.stats?.total_sessions || 0} sessions)`;
-                } else {
-                    indicator.style.color = '#e74c3c';
-                    statusText.textContent = 'API Offline - Using Local Storage';
-                }
-            } catch (error) {
-                const indicator = document.getElementById('statusIndicator');
-                const statusText = document.getElementById('statusText');
-                indicator.style.color = '#e74c3c';
-                statusText.textContent = 'API Offline - Using Local Storage';
-            }
-        }
-
-        // Load sessions with API integration
-        async function loadActiveSessions() {
-            if (apiMode && window.usabilityAPI) {
-                try {
-                    const response = await window.usabilityAPI.getSessions({
-                        page: currentPage,
-                        limit: 10,
-                        ...currentFilters
-                    });
-                    
-                    if (response.success) {
-                        displayApiSessions(response.data.sessions);
-                        updatePagination(response.data.pagination);
-                        return;
-                    }
-                } catch (error) {
-                    console.warn('Failed to load sessions from API, falling back to local:', error);
-                }
-            }
-            
-            // Fallback to local sessions
-            await loadLocalSessions();
-        }
-
-        // Display API sessions
-        function displayApiSessions(sessions) {
-            const sessionsList = document.getElementById('sessionsList');
-            
-            if (sessions.length === 0) {
-                sessionsList.innerHTML = '<div class="empty-state"><p>No sessions found</p></div>';
-                return;
-            }
-
-            sessionsList.innerHTML = sessions.map(session => {
-                const createdDate = new Date(session.created_at).toLocaleDateString();
-                const completedDate = session.completed_at ? new Date(session.completed_at).toLocaleDateString() : 'Not completed';
-                const statusClass = session.status === 'completed' ? 'completed' : session.status === 'abandoned' ? 'abandoned' : 'in-progress';
-                
-                return `
-                    <div class="session-item ${statusClass}">
-                        <div class="session-info">
-                            <h4>${session.participant_id}</h4>
-                            <p><strong>Status:</strong> ${session.status}</p>
-                            <p><strong>Created:</strong> ${createdDate}</p>
-                            <p><strong>Completed:</strong> ${completedDate}</p>
-                            <p><strong>Forms:</strong> ${session.form_count || 0} completed</p>
-                        </div>
-                        <div class="session-actions">
-                            <button class="btn btn-small" onclick="viewApiSession('${session.id}')">View</button>
-                            <button class="btn btn-small btn-secondary" onclick="deleteApiSession('${session.id}')">Delete</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Load local sessions (fallback)
-        async function loadLocalSessions() {
-            const sessions = await sessionManager.getAllSessions();
-            const sessionsList = document.getElementById('sessionsList');
-            
-            if (sessions.length === 0) {
-                sessionsList.innerHTML = '<div class="empty-state"><p>No active sessions found</p></div>';
-                return;
-            }
-
-            sessionsList.innerHTML = sessions.map(session => {
-                const progress = calculateProgress(session);
-                const timeRemaining = sessionManager.getTimeRemaining(session.sessionId);
-                const isExpiringSoon = sessionManager.isSessionNearExpiry(session.sessionId);
-                
-                return `
-                    <div class="session-item">
-                        <div class="session-info">
-                            <h4>${session.participantId}</h4>
-                            <p><strong>Created:</strong> ${new Date(session.createdAt).toLocaleDateString()}</p>
-                            <div class="session-progress">
-                                ${progress.pretest} Pre-test | 
-                                ${progress.posttask.length}/6 Tasks | 
-                                ${progress.posttest.sus} SUS | 
-                                ${progress.posttest.nps} NPS | 
-                                ${progress.posttest.feedback} Feedback
-                            </div>
-                            <div class="session-expires" style="color: ${isExpiringSoon ? '#e74c3c' : '#999'}">
-                                Expires in ${timeRemaining}
-                            </div>
-                        </div>
-                        <div class="session-actions">
-                            <button class="btn btn-small" onclick="viewSession('${session.sessionId}')">View</button>
-                            <button class="btn btn-small btn-secondary" onclick="deleteSession('${session.sessionId}')">Delete</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Update pagination
-        function updatePagination(pagination) {
-            const paginationDiv = document.getElementById('sessionsPagination');
-            const paginationInfo = document.getElementById('paginationInfo');
-            
-            if (pagination.total_pages > 1) {
-                paginationDiv.style.display = 'flex';
-                paginationInfo.textContent = `Page ${pagination.page} of ${pagination.total_pages}`;
-                currentPage = pagination.page;
-                totalPages = pagination.total_pages;
-            } else {
-                paginationDiv.style.display = 'none';
-            }
-        }
-
-        // Filter sessions
-        async function filterSessions() {
-            const status = document.getElementById('statusFilter').value;
-            const participant = document.getElementById('participantFilter').value;
-            const date = document.getElementById('dateFilter').value;
-            
-            currentFilters = {};
-            if (status) currentFilters.status = status;
-            if (participant) currentFilters.participant_id = participant;
-            if (date) currentFilters.start_date = date;
-            
-            currentPage = 1;
-            await loadActiveSessions();
-        }
-
-        // Pagination functions
-        async function loadPreviousPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                await loadActiveSessions();
-            }
-        }
-
-        async function loadNextPage() {
-            if (currentPage < totalPages) {
-                currentPage++;
-                await loadActiveSessions();
-            }
-        }
-
-        // Refresh sessions
-        async function refreshSessions() {
-            await loadActiveSessions();
-        }
-
-        // Export sessions
-        async function exportSessions() {
-            try {
-                if (apiMode && window.usabilityAPI) {
-                    await window.usabilityAPI.downloadExport('csv', currentFilters);
-                } else {
-                    // Export local sessions
-                    const sessions = await sessionManager.getAllSessions();
-                    const csvData = generateLocalCSV(sessions);
-                    downloadCSV(csvData, 'local-sessions-export.csv');
-                }
-            } catch (error) {
-                console.error('Export failed:', error);
-                alert('Export failed. Please try again.');
-            }
-        }
-
-        // Generate CSV for local sessions
-        function generateLocalCSV(sessions) {
-            const headers = ['Participant ID', 'Session ID', 'Created', 'Status', 'Pre-test', 'Tasks', 'SUS', 'NPS', 'Feedback'];
-            const rows = [headers.join(',')];
-            
-            sessions.forEach(session => {
-                const progress = calculateProgress(session);
-                const row = [
-                    session.participantId,
-                    session.sessionId,
-                    new Date(session.createdAt).toLocaleDateString(),
-                    'in_progress',
-                    progress.pretest ? 'Yes' : 'No',
-                    `${progress.posttask.length}/6`,
-                    progress.posttest.sus ? 'Yes' : 'No',
-                    progress.posttest.nps ? 'Yes' : 'No',
-                    progress.posttest.feedback ? 'Yes' : 'No'
-                ].map(field => `"${field}"`).join(',');
-                rows.push(row);
-            });
-            
-            return rows.join('\n');
-        }
-
-        // Download CSV
-        function downloadCSV(csvData, filename) {
-            const blob = new Blob([csvData], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = filename;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        }
-
-        // Toggle API mode
-        function toggleApiMode() {
-            apiMode = !apiMode;
-            const button = event.target;
-            button.textContent = apiMode ? '🌐 API Mode' : '💾 Local Mode';
-            button.style.backgroundColor = apiMode ? '#667eea' : '#95a5a6';
-            
-            loadActiveSessions();
-        }
-
-        // View API session
-        async function viewApiSession(sessionId) {
-            try {
-                const response = await window.usabilityAPI.getSession(sessionId);
-                if (response.success) {
-                    console.log('Session details:', response.data);
-                    // Navigate to the session like the regular viewSession function
-                    const url = sessionManager.createSessionURL(sessionId, 'forms/pre-test-questionnaire.html');
-                    window.open(url, '_blank');
-                }
-            } catch (error) {
-                console.error('Failed to load session details:', error);
-                alert('Failed to load session details.');
-            }
-        }
-
-        // Delete API session
-        async function deleteApiSession(sessionId) {
-            const confirmed = await showConfirmModal(
-                'Delete Session',
-                'Are you sure you want to delete this session? This action cannot be undone.',
-                '🗑️'
-            );
-            
-            if (confirmed) {
-                try {
-                    console.log('Deleting session via API:', sessionId);
-                    
-                    const response = await fetch(`${window.location.origin}/api/usability-testing/sessions/${sessionId}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (response.ok && result.success) {
-                        console.log('Session deleted successfully');
-                        await loadActiveSessions(); // Reload the sessions list
-                    } else {
-                        console.error('Failed to delete session:', result);
-                        alert(`Failed to delete session: ${result.message || 'Unknown error'}`);
-                    }
-                } catch (error) {
-                    console.error('Failed to delete session:', error);
-                    alert('Failed to delete session: ' + error.message);
-                }
-            }
-        }
-
-        // Load notifications
-        async function loadNotifications() {
-            // This would load recent notifications from the API
-            // For now, we'll show a placeholder
-            const notificationsList = document.getElementById('notificationsList');
-            notificationsList.innerHTML = `
-                <div class="notification-item">
-                    <div class="notification-icon">📊</div>
-                    <div class="notification-content">
-                        <p><strong>System Status</strong></p>
-                        <p>API integration is active and monitoring sessions.</p>
-                        <small>${new Date().toLocaleTimeString()}</small>
-                    </div>
-                </div>
-            `;
-        }
     </script>
 </body>
-
 </html>

@@ -1,15 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" class="form-page">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pastree - Post-Test Questionnaire</title>
-    <link rel="icon" href="/favicon.png" type="image/png">
-    <link rel="stylesheet" href="../styles/shared.css">
     <style>
-        /* Form page specific styles - background gradient */
-        body.form-page {
-            background: linear-gradient(135deg, #40505c 0%, #261835 50%);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1C1C1C 0%, #121212 100%);
+            padding: 20px;
+            min-height: 100vh;
         }
         
         .container {
@@ -29,14 +37,13 @@
         }
         
         .logo {
-            width: 300px;
+            width: 350px;
             height: auto;
         }
         
         h2 {
             color: #2c3e50;
-            font-size: 1.65rem;
-            font-weight: 100;
+            font-size: 1.8em;
             margin-bottom: 10px;
         }
         
@@ -378,25 +385,12 @@
             from { transform: translateY(-20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-
-        /* Progress bar styles now handled by shared.css */
     </style>
 </head>
 <body>
-    <!-- Fixed Progress Bar -->
-    <div class="progress-bar-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-    
-    <!-- Progress Info Bar -->
-    <div class="progress-info" id="progressInfo">
-        <!-- <span class="current-section" id="currentSectionName">SUS Questionnaire</span> -->
-        <span class="completion-stats" id="completionStats">0 of 3 sections completed (0%)</span>
-    </div>
-
     <div class="container">
         <div class="header">
-            <img src="../images/PastreeLogo-drk.svg" alt="Pastree Logo" class="logo" />
+            <img src="../images/Pastree Logo - drk.svg" alt="Pastree Logo" class="logo" />
             <h2>Post-Test Questionnaire</h2>
             <p class="subtitle">Overall Experience & Satisfaction</p>
         </div>

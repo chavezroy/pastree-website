@@ -1,91 +1,5 @@
 // Post-Task Questions JavaScript - Session-Based Version
 
-// Progress Tracking Functions
-function updateProgressBar() {
-    const sessionId = sessionManager.getSessionFromURL();
-    if (!sessionId) return;
-    
-    const session = sessionManager.getSession(sessionId);
-    if (!session) return;
-    
-    // Count completed tasks from session
-    const completedTasks = session.data.posttask ? session.data.posttask.length : 0;
-    
-    // Count current task progress (questions filled in current task)
-    const currentTask = document.getElementById('currentTask').value;
-    const currentTaskProgress = getCurrentTaskProgress(currentTask);
-    
-    // Calculate total progress - let's be more accurate about the actual questions
-    const totalTasks = 6;
-    const questionsPerTask = 5; // Each task has 5 main questions
-    const totalQuestions = totalTasks * questionsPerTask;
-    
-    // Completed questions = (completed tasks * questions per task) + current task progress
-    const completedQuestions = (completedTasks * questionsPerTask) + currentTaskProgress;
-    
-    // Ensure we don't exceed 100%
-    const percentage = Math.min(Math.round((completedQuestions / totalQuestions) * 100), 100);
-    
-    // Update progress bar
-    const progressBar = document.getElementById('progressBar');
-    if (progressBar) {
-        progressBar.style.width = percentage + '%';
-    }
-    
-    // Update completion stats
-    const completionStats = document.getElementById('completionStats');
-    if (completionStats) {
-        completionStats.textContent = `${Math.min(completedQuestions, totalQuestions)} of ${totalQuestions} questions completed (${percentage}%)`;
-    }
-    
-    // Update current task name
-    const currentTaskName = document.getElementById('currentTaskName');
-    if (currentTaskName) {
-        const taskNames = {
-            'task1': 'Task 1: Installation & First Use',
-            'task2': 'Task 2: Core Clipboard Operations',
-            'task3': 'Task 3: List Management',
-            'task4': 'Task 4: Search & Discovery',
-            'task5': 'Task 5: Settings & Customization',
-            'task6': 'Task 6: Context Menu & Shortcuts'
-        };
-        currentTaskName.textContent = taskNames[currentTask] || 'Unknown Task';
-    }
-}
-
-// Function to count completed questions in current task
-function getCurrentTaskProgress(taskId) {
-    const currentTaskContent = document.querySelector(`.task-content[data-task="${taskId}"]`);
-    if (!currentTaskContent) return 0;
-    
-    let completedQuestions = 0;
-    
-    // Count required radio button groups that are filled
-    const requiredRadioGroups = currentTaskContent.querySelectorAll('input[type="radio"][required]');
-    const radioGroupNames = new Set();
-    requiredRadioGroups.forEach(input => radioGroupNames.add(input.name));
-    
-    radioGroupNames.forEach(groupName => {
-        const isGroupFilled = currentTaskContent.querySelector(`input[name="${groupName}"]:checked`);
-        if (isGroupFilled) completedQuestions++;
-    });
-    
-    // Count required textareas that have content
-    const requiredTextareas = currentTaskContent.querySelectorAll('textarea[required]');
-    requiredTextareas.forEach(textarea => {
-        if (textarea.value.trim()) completedQuestions++;
-    });
-    
-    // Count optional questions that have content (for more granular progress)
-    const optionalTextareas = currentTaskContent.querySelectorAll('textarea:not([required])');
-    optionalTextareas.forEach(textarea => {
-        if (textarea.value.trim()) completedQuestions += 0.5; // Half point for optional questions
-    });
-    
-    // Cap at 5 questions per task to prevent overflow
-    return Math.min(completedQuestions, 5);
-}
-
 // Custom Modal Functions for Session Errors
 function showSessionError(message) {
     // Create modal overlay
@@ -210,9 +124,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log('✅ Session loaded:', sessionId, 'for participant:', session.participantId);
     console.log('📊 Completed tasks:', session.data.posttask ? session.data.posttask.length : 0);
-    
-    // Initialize progress bar
-    updateProgressBar();
 });
 
 // Function to show completion message when all tasks are completed
@@ -221,7 +132,7 @@ function showCompletionMessage() {
     if (container) {
         container.innerHTML = `
             <div class="header">
-                <img src="../images/PastreeLogo-drk.svg" alt="Pastree Logo" class="logo">
+                <img src="../images/pastree-logo.svg" alt="Pastree Logo" class="logo">
                 <h2>Post-Task Questions</h2>
                 <p class="subtitle">Task Performance & Feedback</p>
             </div>
@@ -491,9 +402,6 @@ tabs.forEach(tab => {
         // Update select
         currentTaskSelect.value = taskId;
 
-        // Update progress bar
-        updateProgressBar();
-
         // Scroll to top of page smoothly
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -508,7 +416,7 @@ currentTaskSelect.addEventListener('change', function () {
 });
 
 
-// Clear error styling on all form inputs and update progress
+// Clear error styling on all form inputs
 document.querySelectorAll('input, textarea, select').forEach(field => {
     field.addEventListener('input', function () {
         this.style.borderColor = '';
@@ -524,9 +432,6 @@ document.querySelectorAll('input, textarea, select').forEach(field => {
         // Remove validation banner when user starts fixing the form
         const validationBanner = document.getElementById('validationBanner');
         if (validationBanner) validationBanner.remove();
-        
-        // Update progress bar on input change
-        updateProgressBar();
     });
 
     // For radio buttons and checkboxes, use 'change' event
@@ -540,9 +445,6 @@ document.querySelectorAll('input, textarea, select').forEach(field => {
             // Remove validation banner when user starts fixing the form
             const validationBanner = document.getElementById('validationBanner');
             if (validationBanner) validationBanner.remove();
-            
-            // Update progress bar on radio/checkbox change
-            updateProgressBar();
         });
     }
 });
@@ -625,9 +527,6 @@ postTaskForm.addEventListener('submit', function (e) {
     try {
         sessionManager.saveFormData(sessionId, 'posttask', data);
         console.log('✅ Post-task data saved to session:', sessionId);
-        
-        // Update progress bar after successful save
-        updateProgressBar();
     } catch (error) {
         console.error('❌ Failed to save to session:', error);
         showNotification('Failed to save data. Please try again.', 'error');
