@@ -1,0 +1,29 @@
+---
+alwaysApply: true
+priority: high
+---
+
+# Debugging Best Practices - Systematic Approach
+
+## Core Principle
+Always perform comprehensive system-wide diagnosis before attempting any fixes. Partial fixes waste time and create inconsistent states.
+
+## Systematic Debugging Workflow
+1) Audit entire codebase (grep/search all related terms across code, config, docs, tests, env, lockfiles)
+2) Identify all related components to change together
+3) Perform one complete cleanup operation (not piecemeal)
+4) Verify clean state (no references remain), then build and run locally
+
+## Critical Technology Rules
+- NEVER downgrade Tailwind CSS from v4
+- Fix Tailwind v4 deployment issues via configuration, not downgrades
+- Ensure PostCSS uses `@tailwindcss/postcss` plugin for v4
+- Keep `tailwindcss: ^4` and `@tailwindcss/postcss: ^4` in devDependencies
+
+## Deployment Hygiene
+- For Amplify/CI: ensure `postcss.config.mjs` exists and includes `@tailwindcss/postcss`
+- If Linux build misses lightningcss binary, install it in preBuild (amplify.yml)
+
+## Time Management
+- Target 15–30 minutes; if >1 hour, re-run comprehensive audit before continuing
+
