@@ -91,7 +91,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-pastree-orange transition-colors">
+                <Link href="https://addons.mozilla.org/en-US/firefox/addon/pastree/" className="hover:text-pastree-orange transition-colors" target="_blank" rel="noopener noreferrer">
                   Firefox
                 </Link>
               </li>

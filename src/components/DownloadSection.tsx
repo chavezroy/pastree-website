@@ -6,7 +6,7 @@ export default function DownloadSection() {
   };
 
   const handleFirefoxDownload = () => {
-    alert('Redirecting to Firefox Add-ons to download Pastree...');
+    window.open('https://addons.mozilla.org/en-US/firefox/addon/pastree/', '_blank', 'noopener,noreferrer');
   };
 
   return (
