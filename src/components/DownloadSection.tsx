@@ -2,7 +2,7 @@
 
 export default function DownloadSection() {
   const handleChromeDownload = () => {
-    alert('Redirecting to Chrome Web Store to download Pastree...');
+    window.open('https://chromewebstore.google.com/detail/pastree/klilbjinhibiinhlljddhdjhmnkmmiil?authuser=2&hl=en', '_blank', 'noopener,noreferrer');
   };
 
   const handleFirefoxDownload = () => {

@@ -247,7 +247,7 @@ export default function InstallationPage() {
 
                 <div className="text-center mb-8">
                   <div className="inline-block hover:cursor-pointer p-4 bg-gray-100 rounded-lg hover:scale-105 transition-transform duration-200">
-                    <a href='https://chromewebstore.google.com/detail/pastree/hmpkhdecieajldekfckmgoeiodfipfdd' target='_blank'>
+                    <a href='https://chromewebstore.google.com/detail/pastree/klilbjinhibiinhlljddhdjhmnkmmiil?authuser=2&hl=en' target='_blank' rel="noopener noreferrer">
                     <img
                       src="/chrome-badge.png"
                       alt="Available in the Chrome Web Store"
@@ -343,7 +343,7 @@ export default function InstallationPage() {
 
                 <div className="text-center mb-8">
                   <div className="inline-block hover:cursor-pointer p-4 bg-gray-100 rounded-lg hover:scale-105 transition-transform duration-200">
-                    <a href='https://addons.mozilla.org/en-US/firefox/addon/pastree/' target='_blank'>  
+                    <a href='https://addons.mozilla.org/en-US/firefox/addon/pastree/' target='_blank' rel="noopener noreferrer">  
                     <img
                       src="https://blog.mozilla.org/addons/files/2015/11/get-the-addon.png"
                       alt="Get the Add-on for Firefox"

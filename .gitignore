@@ -49,3 +49,6 @@ DEBUG-README.md
 tailwindcss-*.log
 debug-output/
 
+# Backup and temporary files
+backup-temp/
+

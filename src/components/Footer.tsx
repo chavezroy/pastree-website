@@ -86,7 +86,7 @@ export default function Footer() {
             <h6 className="text-white font-semibold mb-4">Browser Extensions</h6>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="#" className="hover:text-pastree-orange transition-colors">
+                <Link href="https://chromewebstore.google.com/detail/pastree/klilbjinhibiinhlljddhdjhmnkmmiil?authuser=2&hl=en" className="hover:text-pastree-orange transition-colors" target="_blank" rel="noopener noreferrer">
                   Chrome
                 </Link>
               </li>
