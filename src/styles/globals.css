@@ -619,3 +619,14 @@ button:not(:disabled) {
   z-index: -1;
 }
 
+
+@layer base {
+  :root {
+    /* Metadata Editor Colors */
+    --color-background: #ffffff;
+    --color-surface: #f9fafb;
+    --color-font: #111827;
+    --color-secondary: #6b7280;
+    --color-highlight: #3b82f6;
+  }
+}
